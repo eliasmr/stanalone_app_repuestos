@@ -60,7 +60,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Menu");
+        jMenu1.setText("Maestros");
 
         mnuProductos.setText("Productos");
         mnuProductos.addActionListener(new java.awt.event.ActionListener() {
