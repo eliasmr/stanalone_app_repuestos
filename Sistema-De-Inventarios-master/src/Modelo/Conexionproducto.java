@@ -16,10 +16,10 @@ import java.util.logging.Logger;
  * @author Julito
  */
 public class Conexionproducto {
-    private final String base = "SistemaDeInventarios";
-    private final String user = "root";
-    private final String password = "";
-    private final String url = "jdbc:mysql://localhost:3306/"+base;
+    private final String base = "repuestos";
+    private final String user = "admin";
+    private final String password = "3HEDWl20";
+    private final String url = "jdbc:mysql://mysql-58329-0.cloudclusters.net:12049/" + base;
     private Connection con = null;
     
     public Connection getConexion()

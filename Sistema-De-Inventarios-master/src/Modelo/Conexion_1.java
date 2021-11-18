@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 
 
 public class Conexion_1 {
-     private final String base = "inventarios";
-    private final String user = "root";
-    private final String password = "root";
-    private final String url = "jdbc:mysql://localhost:3306/" + base;
-    private com.mysql.jdbc.Connection con = null;
+    private final String base = "repuestos";
+    private final String user = "admin";
+    private final String password = "3HEDWl20";
+    private final String url = "jdbc:mysql://mysql-58329-0.cloudclusters.net:12049/" + base;
+    private Connection con = null;
     
     public com.mysql.jdbc.Connection getConexion()
     {
