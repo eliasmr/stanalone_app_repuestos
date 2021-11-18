@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import java.io.File;
+
+import javax.swing.ImageIcon;
+
 import Controlador.CtrlProveedor;
 import Controlador.CtrlTiposDeMovimiento;
 import Controlador.CtrlUnidadDeMedida;
@@ -57,7 +61,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MnuSalir = new javax.swing.JMenu();
 
         jMenuItem2.setText("jMenuItem2");
+      //Creamos el objeto(JPG de cualquier tamaño)
+        ImageIcon imagen1=new ImageIcon("imagenes"+File.separator+"prueba.png");
+        //El metodo necesita un objeto Image, invocamos el metodo getImage
+        setIconImage(imagen1.getImage());
 
+        jMenu1.setIcon(imagen1);
+ 
+       
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Menu");
