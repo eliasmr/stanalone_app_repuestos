@@ -5,9 +5,15 @@
  */
 package Vista;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import Controlador.CtrlProveedor;
 import Controlador.CtrlTiposDeMovimiento;
@@ -31,14 +37,22 @@ import Controlador.Ctrlproducto;
  * @author ialonzo
  */
 public class FrmPrincipal extends javax.swing.JFrame {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+        PanelImage fondo = new PanelImage();
+
 
     /**
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
+        this.setContentPane(fondo);
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
-    }
+       
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +64,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem2 = new javax.swing.JMenuItem();
+        jPanel2 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuProductos = new javax.swing.JMenuItem();
@@ -61,15 +80,67 @@ public class FrmPrincipal extends javax.swing.JFrame {
         MnuSalir = new javax.swing.JMenu();
 
         jMenuItem2.setText("jMenuItem2");
-      //Creamos el objeto(JPG de cualquier tamaño)
-        ImageIcon imagen1=new ImageIcon("imagenes"+File.separator+"prueba.png");
-        //El metodo necesita un objeto Image, invocamos el metodo getImage
-        setIconImage(imagen1.getImage());
 
-        jMenu1.setIcon(imagen1);
- 
-       
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconmitsubishi.png"))); // NOI18N
+        jButton4.setText("jButton3");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icontoyota.png"))); // NOI18N
+        jButton5.setText("jButton3");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icondaihatsu.png"))); // NOI18N
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DCBR_NISSAN.jpg"))); // NOI18N
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("Maestros");
 
@@ -137,11 +208,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(387, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,6 +283,47 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuTransportistaActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        producto prod = new producto();
+        Consultaproducto modC = new Consultaproducto();
+        Frmproducto frm = new Frmproducto();
+        
+        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        ctrl.iniciar();
+        frm.setVisible(true);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        producto prod = new producto();
+        Consultaproducto modC = new Consultaproducto();
+        Frmproducto frm = new Frmproducto();
+        
+        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        ctrl.iniciar();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        producto prod = new producto();
+        Consultaproducto modC = new Consultaproducto();
+        Frmproducto frm = new Frmproducto();
+        
+        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        ctrl.iniciar();
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      producto prod = new producto();
+        Consultaproducto modC = new Consultaproducto();
+        Frmproducto frm = new Frmproducto();
+        
+        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        ctrl.iniciar();
+        frm.setVisible(true);    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -246,9 +364,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MnuProveedores;
     private javax.swing.JMenu MnuSalir;
     private javax.swing.JMenuItem MnuTiposdeMovimiento;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem mnuProductos;
     private javax.swing.JMenuItem mnuTransportista;
     private javax.swing.JMenuItem mnuUnidadesDeMedida;
