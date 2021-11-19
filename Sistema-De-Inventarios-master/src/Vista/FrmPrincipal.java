@@ -30,6 +30,9 @@ import Modelo.proveedor;
 import Modelo.producto;
 import Modelo.Consultaproducto;
 import Controlador.Ctrlproducto;
+import Dtos.ModeloDto;
+import Modelo.TBL_Modelo;
+import java.sql.Date;
 
 
 /**
@@ -288,6 +291,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Consultaproducto modC = new Consultaproducto();
         Frmproducto frm = new Frmproducto();
         
+                 TBL_Modelo tbl = new TBL_Modelo();
+                tbl.insertaModelo(ModeloDto.builder()
+                .nombre("prueba")
+                .descripcion("prueba")
+                .pathImagen("ruta")
+                .estado(true)
+                .fechaModelo(new Date(12112L))
+                .build());
         Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
         ctrl.iniciar();
         frm.setVisible(true);

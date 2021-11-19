@@ -12,7 +12,7 @@ public class Conexion {
     private final String base = "repuestos";
     private final String user = "admin";
     private final String password = "3HEDWl20";
-    private final String url = "jdbc:mysql://mysql-58329-0.cloudclusters.net:12049/" + base;
+    private final String url = "jdbc:mysql://mysql-58329-0.cloudclusters.net:12049/" + base+"?characterEncoding=latin1";
     private Connection con = null;
     
     public Connection getConexion()

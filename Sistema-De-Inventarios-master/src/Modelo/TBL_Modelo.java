@@ -20,6 +20,7 @@ public class TBL_Modelo extends  Conexion{
     private static final Logger LOGGER = Logger.getLogger("TBL_Modelo");
     private Connection connection = getConexion();
     private ResultSet rs = null;
+    public TBL_Modelo(){}
     public TBL_Modelo(Connection connection){
         this.connection = connection;
     }

@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Dtos.ModeloDto;
+import Modelo.TBL_Modelo;
+import java.sql.Date;
+
 /**
  *
  * @author Julito
@@ -160,6 +164,14 @@ public class Frmproducto extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         System.out.println("Vista.Frmproducto.btnGuardarActionPerformed()");
+        TBL_Modelo tbl = new TBL_Modelo();
+        tbl.insertaModelo(ModeloDto.builder()
+                .nombre("prueba")
+                .descripcion("prueba")
+                .pathImagen("ruta")
+                .estado(true)
+                .fechaModelo(new Date(12112L))
+                .build());
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
