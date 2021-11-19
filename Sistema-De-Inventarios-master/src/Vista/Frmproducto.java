@@ -73,6 +73,11 @@ public class Frmproducto extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,6 +157,10 @@ public class Frmproducto extends javax.swing.JFrame {
     private void txtUnidaddeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidaddeMedidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUnidaddeMedidaActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        System.out.println("Vista.Frmproducto.btnGuardarActionPerformed()");
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
