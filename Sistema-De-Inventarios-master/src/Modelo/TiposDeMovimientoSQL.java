@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import Dtos.ModeloDto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ public class TiposDeMovimientoSQL extends Conexion{
         
         public boolean Registrar(TiposDeMovimiento tdm)
     {
+        
         PreparedStatement ps = null;
         com.mysql.jdbc.Connection con = getConexion();
         
