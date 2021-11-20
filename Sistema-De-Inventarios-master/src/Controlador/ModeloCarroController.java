@@ -29,7 +29,7 @@ public class ModeloCarroController implements ActionListener{
     this.impl = impl;
     this.model = model;
     this.frm = frm;
-    this.frm.btnGuardar.addActionListener(this);
+    this.frm.btnGuardarModelo.addActionListener(this);
     }
     
     public void iniciar ()
@@ -41,11 +41,10 @@ public class ModeloCarroController implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(frm.btnGuardar)){
+        if(e.getSource().equals(frm.btnGuardarModelo)){
          impl.insertaModelo(gurdarModelo(frm.txtNombre.getText(),frm.txtDescripcion.getText(),frm.Ruta,Boolean.TRUE, new Date(10102L)));
          this.loadData(frm.tbGetDatosModelo);
-        }    
-            
+        }        
         
     }
     
@@ -77,6 +76,7 @@ public class ModeloCarroController implements ActionListener{
     private void limpiarCampos(){
          frm.txtNombre.setText("");
          frm.txtDescripcion.setText("");
+         frm.imgProducto.setIcon(null);
          
     }
     private TBLModelo gurdarModelo(String nombre,String descripcion,String ruta, Boolean estado, Date fecha){

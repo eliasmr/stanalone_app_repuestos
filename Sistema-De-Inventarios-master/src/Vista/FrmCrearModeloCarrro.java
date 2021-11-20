@@ -47,14 +47,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
-        btnGuardar = new javax.swing.JButton();
+        btnGuardarModelo = new javax.swing.JButton();
         ExaminarImagen = new javax.swing.JButton();
         PanelImagen = new javax.swing.JPanel();
         imgProducto = new javax.swing.JLabel();
+        btnActualizarModelo = new javax.swing.JButton();
+        btnEliminarModelo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbGetDatosModelo = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLimpiarCampos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -87,10 +88,10 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDescripcion);
         txtDescripcion.getAccessibleContext().setAccessibleParent(this);
 
-        btnGuardar.setText("Guardar Modelo");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarModelo.setText("Guardar Modelo");
+        btnGuardarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnGuardarModeloActionPerformed(evt);
             }
         });
 
@@ -108,7 +109,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         PanelImagenLayout.setHorizontalGroup(
             PanelImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelImagenLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -119,6 +120,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                 .addComponent(imgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        btnActualizarModelo.setText("Actualizar Modelo");
+        btnActualizarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarModeloActionPerformed(evt);
+            }
+        });
+
+        btnEliminarModelo.setText("Eliminar Modelo");
 
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
@@ -145,11 +155,17 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addComponent(btnGuardarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnActualizarModelo)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarModelo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpanelModeloCarroLayout.setVerticalGroup(
@@ -169,18 +185,23 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     .addComponent(ExaminarImagen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel2))
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         txtNombre.getAccessibleContext().setAccessibleParent(this);
         txtModelo.getAccessibleContext().setAccessibleParent(this);
-        btnGuardar.getAccessibleContext().setAccessibleParent(this);
+        btnGuardarModelo.getAccessibleContext().setAccessibleParent(this);
 
         tbGetDatosModelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -201,14 +222,12 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             tbGetDatosModelo.getColumnModel().getColumn(3).setHeaderValue("Title 4");
         }
 
-        jButton1.setText("Actualizar Modelo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiarCampos.setText("Limpiar Campos");
+        btnLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLimpiarCamposActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Eliminar Modelo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,11 +239,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jpanelModeloCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addGap(160, 160, 160)
+                        .addComponent(btnLimpiarCampos)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -235,10 +252,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jpanelModeloCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addGap(7, 7, 7))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -254,13 +270,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnGuardarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModeloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarModeloActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnActualizarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModeloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnActualizarModeloActionPerformed
 
     private void ExaminarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExaminarImagenActionPerformed
         JFileChooser jFileChooser = new JFileChooser();
@@ -274,6 +290,11 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             imgProducto.setIcon(mIcono);
         }
     }//GEN-LAST:event_ExaminarImagenActionPerformed
+
+    private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
+          txtNombre.setText("");
+         txtDescripcion.setText("");
+        imgProducto.setIcon(null);    }//GEN-LAST:event_btnLimpiarCamposActionPerformed
 
     
         private byte[] getImagen(String ruta) {
@@ -326,10 +347,11 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExaminarImagen;
     private javax.swing.JPanel PanelImagen;
-    public javax.swing.JButton btnGuardar;
-    private javax.swing.JLabel imgProducto;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public javax.swing.JButton btnActualizarModelo;
+    public javax.swing.JButton btnEliminarModelo;
+    public javax.swing.JButton btnGuardarModelo;
+    public javax.swing.JButton btnLimpiarCampos;
+    public javax.swing.JLabel imgProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
