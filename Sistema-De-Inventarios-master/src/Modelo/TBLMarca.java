@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Dtos;
+package Modelo;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,12 +19,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ModeloDto {
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private String pathImagen;
-    private Boolean estado;
-    private Date fechaModelo;
-    
+public class TBLMarca {
+  private int idMarca;
+  private String nombre;
+  private String codigo;
+  private String descripcion;
+  private String pathImagen;
+  private Boolean estado;
+  private TBLModelo idModelo;
+  
 }

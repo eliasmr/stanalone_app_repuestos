@@ -2,12 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Modelo;
+package Modelo.impl;
 
-import Dtos.ModeloDto;
+import Modelo.Conexion;
+import Modelo.ConsultasSQL;
+import Modelo.TBLModelo;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import util.MensajesSistema;
 
@@ -15,18 +20,18 @@ import util.MensajesSistema;
  *
  * @author Elias
  */
-public class TBL_Modelo extends  Conexion{
+public class TBLModeloImpl extends  Conexion{
     
-    private static final Logger LOGGER = Logger.getLogger("TBL_Modelo");
+    private static final Logger LOGGER = Logger.getLogger("TBLModeloImpl");
     private Connection connection = getConexion();
     private ResultSet rs = null;
-    public TBL_Modelo(){}
-    public TBL_Modelo(Connection connection){
+    public TBLModeloImpl(){}
+    public TBLModeloImpl(Connection connection){
         this.connection = connection;
     }
     
-    public Boolean insertaModelo(final ModeloDto dto){
-        LOGGER.info(String.format(MensajesSistema.INFO_CLASS, "Insertar","TBL_Modelo"));
+    public Boolean insertaModelo(final TBLModelo dto){
+        LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "Insertar","TBL_Modelo"));
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_MODELO)){
             pstmt.setString(1, dto.getNombre());
             pstmt.setString(2, dto.getDescripcion());
@@ -36,18 +41,18 @@ public class TBL_Modelo extends  Conexion{
             pstmt.execute();
             return true;
         } catch (Exception e) {
-         LOGGER.severe(String.format(MensajesSistema.ERROR__SQL_DBA, "TBL_MODELO","TBL_Modelo","insertaModelo","27",e));
+         LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","insertaModelo","27",e));
         }
         return false;
     }
     
-    public ModeloDto getModelo(final String nombre){
-    LOGGER.info(String.format(MensajesSistema.INFO_CLASS, "GET","TBL_Modelo"));
+    public TBLModelo getModelo(final String nombre){
+    LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "obtener datos","TBL_Modelo"));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO)) {
             pstmt.setString(0, nombre);
             rs = pstmt.executeQuery();
             if (rs.next()){
-             return ModeloDto.builder()
+             return TBLModelo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
@@ -58,13 +63,13 @@ public class TBL_Modelo extends  Conexion{
                                          
             }
         } catch (Exception e) {
-            LOGGER.severe(String.format(MensajesSistema.ERROR__SQL_DBA, "TBL_MODELO","TBL_Modelo","getModelo","43",e));
+            LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","getModelo","43",e));
         }
         return null;
     }
     
-    public ModeloDto update(final ModeloDto dto){
-    LOGGER.info(String.format(MensajesSistema.INFO_CLASS, "update","TBL_Modelo"));
+    public TBLModelo update(final TBLModelo dto){
+    LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "update","TBL_Modelo"));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.UPDATE_MODELO)) {
             pstmt.setString(0, dto.getNombre());
             pstmt.setString(1, dto.getDescripcion());
@@ -74,7 +79,7 @@ public class TBL_Modelo extends  Conexion{
             pstmt.setInt(5, dto.getId());
             rs = pstmt.executeQuery();
                         if (rs.next()){
-             return ModeloDto.builder()
+             return TBLModelo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
@@ -85,17 +90,17 @@ public class TBL_Modelo extends  Conexion{
                                          
             }
         } catch (Exception e) {
-        LOGGER.severe(String.format(MensajesSistema.ERROR__SQL_DBA, "TBL_MODELO","TBL_Modelo","update","65",e));
+        LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","update","65",e));
         }
         return null;
     }
-    public ModeloDto delete(final ModeloDto dto){
-        LOGGER.info(String.format(MensajesSistema.INFO_CLASS, "delete","TBL_Modelo"));
+    public TBLModelo delete(final TBLModelo dto){
+        LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "borrado del registro","TBL_Modelo"));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.DELETE_MODELO)) {
             pstmt.setInt(0, dto.getId());
             rs = pstmt.executeQuery();
                         if (rs.next()){
-             return ModeloDto.builder()
+             return TBLModelo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
@@ -106,9 +111,29 @@ public class TBL_Modelo extends  Conexion{
                                          
             }
         } catch (Exception e) {
-        LOGGER.severe(String.format(MensajesSistema.ERROR__SQL_DBA, "TBL_MODELO","TBL_Modelo","delete","91",e));
+        LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","delete","91",e));
         }
         return null;
     }
-    
+    public List<TBLModelo> allModelo(){
+         LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "todo los modelos de vehiculos","TBL_Modelo"));
+        List<TBLModelo>  lts = new ArrayList<>();
+         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_MODELO)){
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+            TBLModelo tbl = TBLModelo.builder()
+                             .id(rs.getInt("ID_MODELO"))
+                             .nombre(rs.getString("NOMBRE"))
+                             .descripcion(rs.getString("DESCRIPCION"))
+                             .pathImagen(rs.getString("RUTA_IMAGEN"))
+                             .estado(rs.getBoolean("ESTADO"))
+                             .fechaModelo(rs.getDate("FECHA_MODELO"))
+                             .build();
+            lts.add(tbl);
+            }
+        } catch (Exception e) {
+            LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","all","118",e));
+        }
+         return lts;
+    }
 }

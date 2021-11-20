@@ -5,15 +5,6 @@
  */
 package Vista;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.io.File;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import Controlador.CtrlProveedor;
 import Controlador.CtrlTiposDeMovimiento;
@@ -27,12 +18,10 @@ import Modelo.UnidadDeMedida;
 import Modelo.UnidadDeMedidaSQL;
 import Modelo.clientes;
 import Modelo.proveedor;
-import Modelo.producto;
-import Modelo.Consultaproducto;
-import Controlador.Ctrlproducto;
-import Dtos.ModeloDto;
-import Modelo.TBL_Modelo;
-import java.sql.Date;
+import Controlador.MarcasCarrosController;
+import Controlador.ModeloCarroController;
+import Modelo.TBLModelo;
+import Modelo.impl.TBLModeloImpl;
 
 
 /**
@@ -75,7 +64,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuProductos = new javax.swing.JMenuItem();
-        mnuUnidadesDeMedida = new javax.swing.JMenuItem();
+        opcionCrearModelo = new javax.swing.JMenuItem();
         MnuClientes = new javax.swing.JMenuItem();
         MnuProveedores = new javax.swing.JMenuItem();
         MnuTiposdeMovimiento = new javax.swing.JMenuItem();
@@ -145,9 +134,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Maestros");
+        jMenu1.setText("Menu");
 
-        mnuProductos.setText("Productos");
+        mnuProductos.setText("Crear Marca");
         mnuProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuProductosActionPerformed(evt);
@@ -155,13 +144,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(mnuProductos);
 
-        mnuUnidadesDeMedida.setText("Unidades De Medida");
-        mnuUnidadesDeMedida.addActionListener(new java.awt.event.ActionListener() {
+        opcionCrearModelo.setLabel("Crear Modelo");
+        opcionCrearModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuUnidadesDeMedidaActionPerformed(evt);
+                opcionCrearModeloActionPerformed(evt);
             }
         });
-        jMenu1.add(mnuUnidadesDeMedida);
+        jMenu1.add(opcionCrearModelo);
+        opcionCrearModelo.getAccessibleContext().setAccessibleName("Crear Modelo");
 
         MnuClientes.setText("Clientes");
         MnuClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -227,15 +217,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnuUnidadesDeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuUnidadesDeMedidaActionPerformed
-       UnidadDeMedida um = new UnidadDeMedida();
-        UnidadDeMedidaSQL modC = new UnidadDeMedidaSQL();
-        FrmUnidadDeMedida frm = new FrmUnidadDeMedida();
-        
-        CtrlUnidadDeMedida ctrl = new CtrlUnidadDeMedida(um, modC, frm);
-        ctrl.Iniciar();
+    private void opcionCrearModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearModeloActionPerformed
+        TBLModeloImpl impl = new TBLModeloImpl();
+        TBLModelo model = new TBLModelo();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
+        ctr.iniciar();
         frm.setVisible(true);
-    }//GEN-LAST:event_mnuUnidadesDeMedidaActionPerformed
+    }//GEN-LAST:event_opcionCrearModeloActionPerformed
 
     private void MnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnuSalirMouseClicked
         System.exit(0);
@@ -262,12 +251,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_MnuTiposdeMovimientoActionPerformed
 
+    /**
+     menu desplegable
+     **/
     private void mnuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProductosActionPerformed
-        producto prod = new producto();
-        Consultaproducto modC = new Consultaproducto();
-        Frmproducto frm = new Frmproducto();
-        
-        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
+        MarcasCarrosController ctrl = new MarcasCarrosController();
         ctrl.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_mnuProductosActionPerformed
@@ -287,19 +276,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuTransportistaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        producto prod = new producto();
-        Consultaproducto modC = new Consultaproducto();
-        Frmproducto frm = new Frmproducto();
+        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
         
-                 TBL_Modelo tbl = new TBL_Modelo();
-                tbl.insertaModelo(ModeloDto.builder()
+               /*  TBLModeloImpl tbl = new TBLModeloImpl();
+                tbl.insertaModelo(TBLModelo.builder()
                 .nombre("prueba")
                 .descripcion("prueba")
                 .pathImagen("ruta")
                 .estado(true)
                 .fechaModelo(new Date(12112L))
-                .build());
-        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+                .build());*/
+        MarcasCarrosController ctrl = new MarcasCarrosController();
         ctrl.iniciar();
         frm.setVisible(true);
 
@@ -307,31 +294,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        producto prod = new producto();
-        Consultaproducto modC = new Consultaproducto();
-        Frmproducto frm = new Frmproducto();
+        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
         
-        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        MarcasCarrosController ctrl = new MarcasCarrosController();
         ctrl.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        producto prod = new producto();
-        Consultaproducto modC = new Consultaproducto();
-        Frmproducto frm = new Frmproducto();
+        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
         
-        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        MarcasCarrosController ctrl = new MarcasCarrosController();
         ctrl.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      producto prod = new producto();
-        Consultaproducto modC = new Consultaproducto();
-        Frmproducto frm = new Frmproducto();
+        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
         
-        Ctrlproducto ctrl = new Ctrlproducto(prod, modC, frm);
+        MarcasCarrosController ctrl = new MarcasCarrosController();
         ctrl.iniciar();
         frm.setVisible(true);    }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -385,6 +366,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuItem mnuProductos;
     private javax.swing.JMenuItem mnuTransportista;
-    private javax.swing.JMenuItem mnuUnidadesDeMedida;
+    private javax.swing.JMenuItem opcionCrearModelo;
     // End of variables declaration//GEN-END:variables
 }

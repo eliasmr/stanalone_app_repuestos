@@ -5,7 +5,6 @@
  */
 package Modelo;
 
-import Dtos.ModeloDto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

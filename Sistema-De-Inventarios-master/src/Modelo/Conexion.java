@@ -3,12 +3,13 @@ package Modelo;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Level;
+import java.text.MessageFormat;
 import java.util.logging.Logger;
+import util.MensajesSistema;
 
 public class Conexion {
     
+    private static Logger LOGGER = Logger.getLogger("Conexion");
     private final String base = "repuestos";
     private final String user = "admin";
     private final String password = "3HEDWl20";
@@ -17,16 +18,13 @@ public class Conexion {
     
     public Connection getConexion()
     {
-        
+      LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "inicia conexion a dba ",base));
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             
-        } catch(SQLException e)
-        {
-            System.err.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception e) {
+           LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_CONEXION_DBA, base,e));
         }
       return con;  
     }

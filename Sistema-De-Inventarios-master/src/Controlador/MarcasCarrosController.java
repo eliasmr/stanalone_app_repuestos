@@ -6,8 +6,9 @@
 package Controlador;
 
 import Modelo.Consultaproducto;
+import Modelo.impl.TBLMarcaImpl;
 import Modelo.producto;
-import Vista.Frmproducto;
+import Vista.FrmCrearMarcaCarro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -16,17 +17,18 @@ import javax.swing.JOptionPane;
  *
  * @author Julito
  */
-public class Ctrlproducto implements ActionListener {
+public class MarcasCarrosController implements ActionListener {
     
     private producto mod;
     private Consultaproducto modC;
-    private Frmproducto frm;
     
-    public Ctrlproducto (producto mod, Consultaproducto modC, Frmproducto frm)
+    
+    private FrmCrearMarcaCarro frm;
+    private TBLMarcaImpl impl;
+    public MarcasCarrosController ()
     {
-        this.mod = mod;
-        this.modC = modC;
-        this.frm = frm;
+        this.impl = new TBLMarcaImpl();
+        this.frm = new FrmCrearMarcaCarro();
         this.frm.btnGuardar.addActionListener(this);
         this.frm.btnModificar.addActionListener(this);
         this.frm.btnEliminar.addActionListener(this);
@@ -39,7 +41,6 @@ public class Ctrlproducto implements ActionListener {
     {
      frm.setTitle("Producto");
      frm.setLocale(null);
-   
      }
     
     @Override
@@ -50,7 +51,7 @@ public class Ctrlproducto implements ActionListener {
            mod.setIdproducto(frm.txtIdProducto.getText());
            mod.setNombre(frm.txtNombre.getText());
            mod.setPrecio(Double.parseDouble(frm.txtPrecio.getText()));
-           mod.setUnidadDeMedida(frm.txtUnidaddeMedida.getText());
+           //mod.setUnidadDeMedida(frm.txtUnidaddeMedida.getText());
            
            if (modC.Registrar(mod))
            {
@@ -69,6 +70,6 @@ public class Ctrlproducto implements ActionListener {
         frm.txtIdProducto.setText(null);
         frm.txtNombre.setText(null);
         frm.txtPrecio.setText(null);
-        frm.txtUnidaddeMedida.setText(null);
+        //frm.txtUnidaddeMedida.setText(null);
     }
 }
