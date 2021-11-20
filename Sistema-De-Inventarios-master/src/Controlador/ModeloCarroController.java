@@ -44,7 +44,8 @@ public class ModeloCarroController implements ActionListener{
         if(e.getSource().equals(frm.btnGuardar)){
          impl.insertaModelo(gurdarModelo(frm.txtNombre.getText(),frm.txtDescripcion.getText(),"",Boolean.TRUE, new Date(10102L)));
          this.loadData(frm.tbGetDatosModelo);
-        }
+        }    
+            
         
     }
     
