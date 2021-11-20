@@ -20,6 +20,7 @@ public class FrmCrearMarcaCarro extends javax.swing.JFrame {
      */
     public FrmCrearMarcaCarro() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
