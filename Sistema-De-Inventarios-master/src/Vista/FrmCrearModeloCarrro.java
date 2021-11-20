@@ -5,6 +5,9 @@
 package Vista;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -18,7 +21,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     /**
      * Creates new form FrmCrearModeloCarrro
      */
-    private String Ruta = "";
+    public String Ruta = "";
     
     public FrmCrearModeloCarrro() {
         initComponents();
@@ -260,7 +263,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ExaminarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExaminarImagenActionPerformed
-           JFileChooser jFileChooser = new JFileChooser();
+        JFileChooser jFileChooser = new JFileChooser();
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
         jFileChooser.setFileFilter(fileNameExtensionFilter);
 
@@ -272,6 +275,19 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ExaminarImagenActionPerformed
 
+    
+        private byte[] getImagen(String ruta) {
+        File imagen = new File(ruta);
+        try {
+            byte[] icono = new byte[(int) imagen.length()];
+            InputStream inputStream = new FileInputStream(imagen);
+            inputStream.read(icono);
+            return icono;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
     /**
      * @param args the command line arguments
      */

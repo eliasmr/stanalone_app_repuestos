@@ -42,7 +42,7 @@ public class ModeloCarroController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(frm.btnGuardar)){
-         impl.insertaModelo(gurdarModelo(frm.txtNombre.getText(),frm.txtDescripcion.getText(),"",Boolean.TRUE, new Date(10102L)));
+         impl.insertaModelo(gurdarModelo(frm.txtNombre.getText(),frm.txtDescripcion.getText(),frm.Ruta,Boolean.TRUE, new Date(10102L)));
          this.loadData(frm.tbGetDatosModelo);
         }    
             
@@ -73,7 +73,14 @@ public class ModeloCarroController implements ActionListener{
     });
         
      }
+    
+    private void limpiarCampos(){
+         frm.txtNombre.setText("");
+         frm.txtDescripcion.setText("");
+         
+    }
     private TBLModelo gurdarModelo(String nombre,String descripcion,String ruta, Boolean estado, Date fecha){
+       limpiarCampos();
     return TBLModelo.builder()
             .nombre(nombre)
             .descripcion(descripcion)
@@ -82,4 +89,5 @@ public class ModeloCarroController implements ActionListener{
             .fechaModelo(fecha)
             .build();
     }
+    
 }
