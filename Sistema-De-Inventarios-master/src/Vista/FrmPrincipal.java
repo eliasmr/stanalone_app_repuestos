@@ -246,7 +246,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         TBLModelo model = new TBLModelo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
-        ctr.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_opcionCrearModeloActionPerformed
 
@@ -318,7 +317,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         TBLModelo model = new TBLModelo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
-        ctr.iniciar();
         frm.setVisible(true);
 
     }//GEN-LAST:event_BotonToyotaActionPerformed
