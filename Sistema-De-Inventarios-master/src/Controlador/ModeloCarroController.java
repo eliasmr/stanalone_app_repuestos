@@ -39,8 +39,8 @@ public class ModeloCarroController{
     
     
 
-    public void save(String nombre,String descripcion,String ruta, Boolean estado, Date fecha) {      
-        impl.insertaModelo(setModelo(nombre,descripcion,ruta,estado, new Date(10102L),0));
+    public void save(String nombre,String descripcion,String ruta, String estado, String modelo,String fecha) {      
+        impl.insertaModelo(setModelo(nombre,descripcion,ruta,estado,modelo,fecha,0));
     }
     
     public void loadData(JTable jt, String param){
@@ -50,37 +50,60 @@ public class ModeloCarroController{
     modeloT.addColumn("Nombre");
     modeloT.addColumn("Descripcion");
     modeloT.addColumn("Imagen");
+    modeloT.addColumn("Estado");
+    modeloT.addColumn("Modelo");
     modeloT.addColumn("Fecha Modelo");
     modeloT.addColumn("Codigo Registo");
     
-    Object[] columna = new Object [6];
+    Object[] columna = new Object [8];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     impl.allModelo(param).stream().forEach(obj ->{
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();
       columna[3] = obj.getPathImagen();
-      columna[4] = obj.getFechaModelo();
-      columna[5] = obj.getId();
+      columna[4] = obj.getEstado();
+      columna[5] = obj.getEstado();
+      columna[6] = obj.getFechaModelo();
+      columna[7] = obj.getId();
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
    }
-    public void updateModel(String nombre,String descripcion,String ruta, Boolean estado, Date fecha, String id){
-    impl.update(setModelo(nombre,descripcion,ruta,estado,fecha,Integer.parseInt(id)));
+    public void updateModel(String nombre,String descripcion,String ruta, String estado,String modelo, String fecha, String id){
+    impl.update(setModelo(nombre,descripcion,ruta,estado,modelo,fecha,Integer.parseInt(id)));
     }
      public void deleteModelo(String text) {
         impl.delete(Integer.parseInt(text));
     }
-    public TBLModelo setModelo(String nombre,String descripcion,String ruta, Boolean estado, Date fecha,int id){
+    public TBLModelo setModelo(String nombre,String descripcion,String ruta, String estado,String modelo, String fecha,int id){
     return TBLModelo.builder()
             .nombre(nombre)
             .descripcion(descripcion)
             .pathImagen(ruta)
             .estado(estado)
+            .modelo(modelo)
             .id(id)
             .fechaModelo(fecha)
             .build();
     }
  
+    public int mes(String mes){
+     int mesT = 0;
+    switch(mes){
+        case "enero": mesT =1; break;
+        case "febrero": mesT =2; break;
+        case "marzo": mesT =3; break;
+        case "abril": mesT =4; break;
+        case "mayo": mesT =5; break;
+        case "junio": mesT =6; break;
+        case "julio": mesT =7; break;
+        case "agosto": mesT =8; break;
+        case "septiembre": mesT =9; break;
+        case "octubre": mesT =10; break;
+        case "noviembre": mesT =11; break;
+        case "diciembre": mesT =12; break;
+    }
+    return mesT;
+    }
 }

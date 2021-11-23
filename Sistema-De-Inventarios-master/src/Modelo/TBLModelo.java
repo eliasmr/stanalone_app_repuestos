@@ -4,7 +4,6 @@
  */
 package Modelo;
 
-import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +24,8 @@ public class TBLModelo {
     private String nombre;
     private String descripcion;
     private String pathImagen;
-    private Boolean estado;
-    private Date fechaModelo;
+    private String estado;
+    private String fechaModelo;
+    private String modelo;
     
 }

@@ -36,8 +36,9 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.setString(1, dto.getNombre());
             pstmt.setString(2, dto.getDescripcion());
             pstmt.setString(3, dto.getPathImagen());
-            pstmt.setBoolean(4, true);
-            pstmt.setDate(5, dto.getFechaModelo());
+            pstmt.setString(4, dto.getEstado());
+             pstmt.setString(5, dto.getModelo());
+            pstmt.setString(6, dto.getFechaModelo());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -57,8 +58,8 @@ public class TBLModeloImpl extends  Conexion{
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             .estado(rs.getBoolean("ESTADO"))
-                             .fechaModelo(rs.getDate("FECHA_MODELO"))
+                             .estado(rs.getString("ESTADO"))
+                             .fechaModelo(rs.getString("FECHA_MODELO"))
                              .build();
                                          
             }
@@ -74,9 +75,10 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.setString(1, dto.getNombre());
             pstmt.setString(2, dto.getDescripcion());
             pstmt.setString(3, dto.getPathImagen());
-            pstmt.setBoolean(4, dto.getEstado());
-            pstmt.setDate(5, dto.getFechaModelo());
-            pstmt.setInt(6, dto.getId());
+            pstmt.setString(4, dto.getEstado());
+            pstmt.setString(5, dto.getModelo());
+            pstmt.setString(6, dto.getFechaModelo());
+            pstmt.setInt(7, dto.getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -110,8 +112,9 @@ public class TBLModeloImpl extends  Conexion{
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             .estado(rs.getBoolean("ESTADO"))
-                             .fechaModelo(rs.getDate("FECHA_MODELO"))
+                             .estado(rs.getString("ESTADO"))
+                             .modelo(rs.getString("MODELO"))
+                             .fechaModelo(rs.getString("FECHA_MODELO"))
                              .build();
             lts.add(tbl);
             }
