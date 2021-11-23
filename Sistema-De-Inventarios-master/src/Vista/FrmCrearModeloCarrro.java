@@ -131,7 +131,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         btnGuardarModelo.setBackground(new java.awt.Color(209, 37, 29));
         btnGuardarModelo.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         btnGuardarModelo.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarModelo.setText("Guardar Modelo");
+        btnGuardarModelo.setText("Crear Modelo");
         btnGuardarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarModeloActionPerformed(evt);
@@ -251,11 +251,12 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addComponent(imgProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
-                                .addComponent(btnGuardarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
+                                .addGap(21, 21, 21)
+                                .addComponent(btnGuardarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnActualizarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -428,9 +429,16 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
   
     private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
         txtNombre.setText("");
-        txtDescripcion.setText("");
+         txtModelo.setText("");
+         txtDescripcion.setText("");
+         imgProducto.setIcon(null);
     }//GEN-LAST:event_btnLimpiarCamposActionPerformed
-
+  private void limpiarCampos(){
+         txtNombre.setText("");
+         txtModelo.setText("");
+         txtDescripcion.setText("");
+         imgProducto.setIcon(null);
+    }
     private void btnEliminarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModeloActionPerformed
            if (!labelIdRegistro.getText().isEmpty()) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
@@ -467,13 +475,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     }             
                     JOptionPane.showMessageDialog(this,"Modelo actualizado correctamente", "Modelo Actualizado",JOptionPane.INFORMATION_MESSAGE);
                 }
-                    model.loadData(tbGetDatosModelo,"");
                     
             }else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
         model.loadData(tbGetDatosModelo,"");
+        limpiarCampos();
         
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
 
@@ -509,6 +517,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(), estado,txtModelo.getText(), date);
         model.loadData(tbGetDatosModelo,"");
         JOptionPane.showMessageDialog(null,"Modelo creaco correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
+        limpiarCampos();
         }else {
             JOptionPane.showMessageDialog(this, "Todos los campos son requeridos", "Error", JOptionPane.ERROR_MESSAGE);
         }
