@@ -39,7 +39,10 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         setTitle("Modelo");
         model.loadData(tbGetDatosModelo, "");
         this.setLocationRelativeTo(null);//centrar formulario
-        listAno();
+        this.listAno(0);
+        this.listEstado("");
+        this.listMes("");
+        this.listDias(0);
     }
 
     /**
@@ -198,19 +201,16 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jLabel7.setText("Estado");
 
         listEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        listEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bueno", "Dañado", "Averiado" }));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("mes");
 
         listDia.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        listDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Año");
 
         ListMes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        ListMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Dia");
@@ -412,7 +412,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         calndr.set(Calendar.DAY_OF_MONTH, Integer.parseInt(listDia.getSelectedItem().toString())); 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(calndr.getTime());
-        String estado = listEstado.getSelectedItem().toString().equals("Danado") ? "Danado" : listEstado.getSelectedItem().toString();
+        String estado = listEstado.getSelectedItem().toString().equals("Dañado") ? "Danado" : listEstado.getSelectedItem().toString();
         model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(), estado,txtModelo.getText(), date,labelIdRegistro.getText());
         model.loadData(tbGetDatosModelo,"");
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
@@ -444,7 +444,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         calndr.set(Calendar.DAY_OF_MONTH, Integer.parseInt(listDia.getSelectedItem().toString())); 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(calndr.getTime());
-        String estado = listEstado.getSelectedItem().toString().equals("Danado") ? "Danado" : listEstado.getSelectedItem().toString();
+        String estado = listEstado.getSelectedItem().toString().equals("Dañado") ? "Danado" : listEstado.getSelectedItem().toString();
         model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(), estado,txtModelo.getText(), date);
         model.loadData(tbGetDatosModelo,"");
     }//GEN-LAST:event_btnGuardarModeloActionPerformed
@@ -515,30 +515,64 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     
    public void modificar(){
      int fila =tbGetDatosModelo.getSelectedRow();
-     listEstado.removeAllItems();
      if(fila >=0){
+       listEstado.removeAllItems();
+       listAno.removeAllItems();
+       ListMes.removeAllItems();
+       listDia.removeAllItems();
+       
        txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
        txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
        labelRutaImagen.setText(tbGetDatosModelo.getValueAt(fila, 3).toString());
-       
-       txtModelo.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());
-       ListMes.addItem(tbGetDatosModelo.getValueAt(fila, 6).toString());
+       txtModelo.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());   
        labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 7).toString());
-        
        listEstado.addItem(tbGetDatosModelo.getValueAt(fila, 4).toString());
-        listEstado.addItem("Bueno");
-        listEstado.addItem("Dañado");
+ 
+       String fecha[] = tbGetDatosModelo.getValueAt(fila, 6).toString().split("-");
+       listAno.addItem(fecha[0]);
+       ListMes.addItem(model.mesStr(Integer.parseInt(fecha[1])));
+       listDia.addItem(fecha[2]);
        
+       this.listAno(Integer.parseInt(fecha[0]));
+       this.listMes(fecha[1]);
+       this.listDias(Integer.parseInt(fecha[2]));
+       this.listEstado(tbGetDatosModelo.getValueAt(fila, 4).toString());
        
      }
  } 
- public void listAno(){
+ public void listDias(int dia){
+  for(int i=1; i<=31;i++){
+    if(dia != i){
+     listDia.addItem(String.valueOf(i));
+    }
+  }
+ }
+ public void listMes(String mesP){
+ String meses[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+  for(String mes: meses)
+      if(!mesP.equals(mes)){
+          ListMes.addItem(mes);
+      }
+    }
+ public void listAno(int ano){
      
-     for(int i=1000;i<=100000;i++){
+     for(int i=1900;i<=3000;i++){
+       if(ano != i){
        listAno.addItem(String.valueOf(i));
+       }
+       
      }
  }
+public void listEstado(String estado){
+ String ltsEstado[] = {"Bueno","Dañado","Regular","Averiado"};
+  for(String est: ltsEstado){
+    if(!estado.equals(est)){
+      listEstado.addItem(est);
+    }
 
+ }
+
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExaminarImagen;
     private javax.swing.JComboBox<String> ListMes;
