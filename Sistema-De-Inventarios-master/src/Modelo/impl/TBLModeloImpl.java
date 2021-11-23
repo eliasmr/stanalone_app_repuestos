@@ -82,7 +82,7 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.execute();
             return true;
         } catch (Exception e) {
-        LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","update","65",e));
+        LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","update","72",e));
         }
         return false;
     }

@@ -138,7 +138,6 @@
                                   <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="listAno" min="-2" max="-2" attributes="0"/>
@@ -368,15 +367,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="imgProducto">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder>
-                  <Value PropertyName="color" id=""/>
-                </LineBorder>
-              </Border>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -483,7 +473,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="Bueno"/>
-                <StringItem index="1" value="Da&#xf1;o"/>
+                <StringItem index="1" value="Da&#xf1;ado"/>
                 <StringItem index="2" value="Averiado"/>
               </StringArray>
             </Property>
@@ -623,7 +613,7 @@
           </Border>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
         <Property name="doubleBuffered" type="boolean" value="true"/>
         <Property name="focusCycleRoot" type="boolean" value="true"/>

@@ -62,8 +62,8 @@ public class ModeloCarroController{
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();
       columna[3] = obj.getPathImagen();
-      columna[4] = obj.getEstado();
-      columna[5] = obj.getEstado();
+      columna[4] = obj.getEstado().equals("Danado") ? "Dañado" : obj.getEstado();
+      columna[5] = obj.getModelo();
       columna[6] = obj.getFechaModelo();
       columna[7] = obj.getId();
       counter.getAndUpdate(value -> value + 1);
@@ -104,6 +104,6 @@ public class ModeloCarroController{
         case "noviembre": mesT =11; break;
         case "diciembre": mesT =12; break;
     }
-    return mesT;
+    return mesT-1;
     }
 }

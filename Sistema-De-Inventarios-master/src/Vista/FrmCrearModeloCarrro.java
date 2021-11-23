@@ -152,8 +152,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             }
         });
 
-        imgProducto.setBorder(javax.swing.BorderFactory.createLineBorder(null));
-
         btnLimpiarCampos.setText("Limpiar Campos");
         btnLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +198,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jLabel7.setText("Estado");
 
         listEstado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        listEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bueno", "Daño", "Averiado" }));
+        listEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bueno", "Dañado", "Averiado" }));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("mes");
@@ -281,7 +279,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(133, 133, 133)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(listAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,7 +406,14 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarModeloActionPerformed
 
     private void btnActualizarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModeloActionPerformed
-        model.updateModel(txtNombre.getText(), txtDescripcion.getText(), "src/patch", txtModelo.getText(),"", "",labelIdRegistro.getText());
+        Calendar calndr = Calendar.getInstance();
+        calndr.set(Calendar.YEAR, Integer.parseInt(listAno.getSelectedItem().toString()));
+        calndr.set(Calendar.MONTH, model.mes(ListMes.getSelectedItem().toString().toLowerCase()));
+        calndr.set(Calendar.DAY_OF_MONTH, Integer.parseInt(listDia.getSelectedItem().toString())); 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(calndr.getTime());
+        String estado = listEstado.getSelectedItem().toString().equals("Danado") ? "Danado" : listEstado.getSelectedItem().toString();
+        model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(), estado,txtModelo.getText(), date,labelIdRegistro.getText());
         model.loadData(tbGetDatosModelo,"");
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
 
@@ -440,8 +444,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         calndr.set(Calendar.DAY_OF_MONTH, Integer.parseInt(listDia.getSelectedItem().toString())); 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(calndr.getTime());
-                
-        model.save(txtNombre.getText(), txtDescripcion.getText(), Ruta, listEstado.getSelectedItem().toString(),txtModelo.getText(), date);
+        String estado = listEstado.getSelectedItem().toString().equals("Danado") ? "Danado" : listEstado.getSelectedItem().toString();
+        model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(), estado,txtModelo.getText(), date);
         model.loadData(tbGetDatosModelo,"");
     }//GEN-LAST:event_btnGuardarModeloActionPerformed
 
@@ -456,6 +460,10 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void listEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listEstadoActionPerformed
 
     
         private byte[] getImagen(String ruta) {
@@ -507,11 +515,21 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     
    public void modificar(){
      int fila =tbGetDatosModelo.getSelectedRow();
+     listEstado.removeAllItems();
      if(fila >=0){
        txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
-       txtModelo.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
        txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
-       labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());;
+       labelRutaImagen.setText(tbGetDatosModelo.getValueAt(fila, 3).toString());
+       
+       txtModelo.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());
+       ListMes.addItem(tbGetDatosModelo.getValueAt(fila, 6).toString());
+       labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 7).toString());
+        
+       listEstado.addItem(tbGetDatosModelo.getValueAt(fila, 4).toString());
+        listEstado.addItem("Bueno");
+        listEstado.addItem("Dañado");
+       
+       
      }
  } 
  public void listAno(){
@@ -524,11 +542,11 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExaminarImagen;
     private javax.swing.JComboBox<String> ListMes;
-    private javax.swing.JButton btnActualizarModelo;
-    private javax.swing.JButton btnEliminarModelo;
-    private javax.swing.JButton btnGuardarModelo;
-    private javax.swing.JButton btnLimpiarCampos;
-    private javax.swing.JLabel imgProducto;
+    public javax.swing.JButton btnActualizarModelo;
+    public javax.swing.JButton btnEliminarModelo;
+    public javax.swing.JButton btnGuardarModelo;
+    public javax.swing.JButton btnLimpiarCampos;
+    public javax.swing.JLabel imgProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -542,16 +560,16 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanelModeloCarro;
-    private javax.swing.JLabel labelIdRegistro;
+    public javax.swing.JLabel labelIdRegistro;
     private javax.swing.JLabel labelRutaImagen;
     private javax.swing.JComboBox<String> listAno;
     private javax.swing.JComboBox<String> listDia;
     private javax.swing.JComboBox<String> listEstado;
     private javax.swing.ButtonGroup rdbGrupoEliminar_Actualizar;
-    private javax.swing.JTable tbGetDatosModelo;
-    private javax.swing.JTextArea txtDescripcion;
+    public javax.swing.JTable tbGetDatosModelo;
+    public javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtFilterTable;
-    private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtModelo;
+    public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
