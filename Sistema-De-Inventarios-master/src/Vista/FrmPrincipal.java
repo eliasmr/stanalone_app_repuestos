@@ -323,26 +323,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     
     private void BotonMitsubitshiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMitsubitshiActionPerformed
-        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
-        
-        MarcasCarrosController ctrl = new MarcasCarrosController();
-        ctrl.iniciar();
+       TBLModeloImpl impl = new TBLModeloImpl();
+        TBLModelo model = new TBLModelo();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
     }//GEN-LAST:event_BotonMitsubitshiActionPerformed
 
     private void BotonDihatsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDihatsuActionPerformed
-        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
-        
-        MarcasCarrosController ctrl = new MarcasCarrosController();
-        ctrl.iniciar();
+        TBLModeloImpl impl = new TBLModeloImpl();
+        TBLModelo model = new TBLModelo();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
     }//GEN-LAST:event_BotonDihatsuActionPerformed
 
     private void BotonNissanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNissanActionPerformed
-        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
-        
-        MarcasCarrosController ctrl = new MarcasCarrosController();
-        ctrl.iniciar();
+       TBLModeloImpl impl = new TBLModeloImpl();
+        TBLModelo model = new TBLModelo();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);    }//GEN-LAST:event_BotonNissanActionPerformed
 
     /**
