@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.ModeloCarroController;
+import Vista.PanelImage2;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,14 +29,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Elias ,Daniel
  */
-public class FrmCrearModeloCarrro extends javax.swing.JFrame {
+public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCrearModeloCarrro
      */
     public String Ruta = "";
     private static ModeloCarroController model;
-    public FrmCrearModeloCarrro() {
+    public FrmCrearRepuestoCarro() {
+        repuesto = new RepuestoController();
         model = new ModeloCarroController();
         initComponents();
         setTitle("Modelo");
@@ -57,19 +59,19 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private void initComponents() {
 
         rdbGrupoEliminar_Actualizar = new javax.swing.ButtonGroup();
-        jpanelModeloCarro = new javax.swing.JPanel();
+        jpanelModeloCarro = new PanelImage2();
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtCilindraje = new javax.swing.JTextField();
+        txtReferencia = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
-        btnGuardarModelo = new javax.swing.JButton();
+        btnGuardarRepuesto = new javax.swing.JButton();
         ExaminarImagen = new javax.swing.JButton();
         btnActualizarModelo = new javax.swing.JButton();
-        btnEliminarModelo = new javax.swing.JButton();
+        btnEliminarRepuesto = new javax.swing.JButton();
         imgProducto = new javax.swing.JLabel();
         btnLimpiarCampos = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -77,11 +79,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         txtFilterTable = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         labelIdRegistro = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        ListTipoCombistible = new javax.swing.JComboBox<>();
         labelRutaImagen = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        listAno1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -106,11 +104,11 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jLabel3.setText("Imagen");
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jLabel4.setText("Cilindraje");
+        jLabel4.setText("Referencia");
 
-        txtCilindraje.addActionListener(new java.awt.event.ActionListener() {
+        txtReferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCilindrajeActionPerformed(evt);
+                txtReferenciaActionPerformed(evt);
             }
         });
 
@@ -124,13 +122,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDescripcion);
         txtDescripcion.getAccessibleContext().setAccessibleParent(this);
 
-        btnGuardarModelo.setBackground(new java.awt.Color(209, 37, 29));
-        btnGuardarModelo.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
-        btnGuardarModelo.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarModelo.setText("Crear Modelo");
-        btnGuardarModelo.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarRepuesto.setBackground(new java.awt.Color(209, 37, 29));
+        btnGuardarRepuesto.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        btnGuardarRepuesto.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarRepuesto.setText("Crear Repuesto");
+        btnGuardarRepuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarModeloActionPerformed(evt);
+                btnGuardarRepuestoActionPerformed(evt);
             }
         });
 
@@ -147,20 +145,20 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         btnActualizarModelo.setBackground(new java.awt.Color(209, 37, 29));
         btnActualizarModelo.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         btnActualizarModelo.setForeground(new java.awt.Color(255, 255, 255));
-        btnActualizarModelo.setText("Actualizar Modelo");
+        btnActualizarModelo.setText("Actualizar Repuesto");
         btnActualizarModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarModeloActionPerformed(evt);
             }
         });
 
-        btnEliminarModelo.setBackground(new java.awt.Color(209, 37, 29));
-        btnEliminarModelo.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
-        btnEliminarModelo.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminarModelo.setText("Eliminar Modelo");
-        btnEliminarModelo.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarRepuesto.setBackground(new java.awt.Color(209, 37, 29));
+        btnEliminarRepuesto.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        btnEliminarRepuesto.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarRepuesto.setText("Eliminar Repuesto");
+        btnEliminarRepuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarModeloActionPerformed(evt);
+                btnEliminarRepuestoActionPerformed(evt);
             }
         });
 
@@ -211,20 +209,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 
         labelIdRegistro.setEnabled(false);
 
-        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jLabel9.setText("Tipo de Combustible");
-
-        ListTipoCombistible.setBackground(new java.awt.Color(209, 37, 29));
-        ListTipoCombistible.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        ListTipoCombistible.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel10.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jLabel10.setText("Año");
-
-        listAno1.setBackground(new java.awt.Color(209, 37, 29));
-        listAno1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        listAno1.setForeground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
         jpanelModeloCarroLayout.setHorizontalGroup(
@@ -232,6 +216,38 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                .addGap(268, 268, 268)
+                                .addComponent(labelRutaImagen))
+                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel4))
+                                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                                .addGap(14, 14, 14)
+                                                .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ExaminarImagen)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,52 +258,11 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnEliminarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnGuardarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnActualizarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(btnEliminarRepuesto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnGuardarRepuesto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnActualizarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCilindraje, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(8, 8, 8)
-                                                .addComponent(ExaminarImagen)
-                                                .addGap(53, 53, 53)
-                                                .addComponent(labelRutaImagen)
-                                                .addGap(78, 78, 78))
-                                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jLabel10)
-                                                .addGap(42, 42, 42)
-                                                .addComponent(listAno1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel9)
-                                                .addGap(39, 39, 39)))
-                                        .addComponent(ListTipoCombistible, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jpanelModeloCarroLayout.setVerticalGroup(
             jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,40 +276,35 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCilindraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ListTipoCombistible, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(listAno1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(ExaminarImagen)
-                                .addComponent(labelRutaImagen))
-                            .addComponent(jLabel3)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(ExaminarImagen)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(labelRutaImagen)
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                .addComponent(labelIdRegistro)
-                                .addGap(38, 38, 38))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
-                                .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(labelIdRegistro)
+                                .addGap(311, 311, 311))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
+                                .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)))
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18))
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(btnGuardarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnActualizarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -343,14 +313,14 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         );
 
         txtNombre.getAccessibleContext().setAccessibleParent(this);
-        txtCilindraje.getAccessibleContext().setAccessibleParent(this);
-        btnGuardarModelo.getAccessibleContext().setAccessibleParent(this);
+        txtReferencia.getAccessibleContext().setAccessibleParent(this);
+        btnGuardarRepuesto.getAccessibleContext().setAccessibleParent(this);
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 0));
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(209, 37, 29));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("FORMULARIO PARA GESTIONAR MODELO DE lAS MARCAS");
+        jLabel6.setText("FORMULARIO PARA GESTIONAR REPUESTOS DE LOS VEHICULOS");
         jLabel6.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel6.setDoubleBuffered(true);
@@ -368,7 +338,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,17 +362,17 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
   
     private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
         txtNombre.setText("");
-         txtCilindraje.setText("");
+         txtReferencia.setText("");
          txtDescripcion.setText("");
          imgProducto.setIcon(null);
     }//GEN-LAST:event_btnLimpiarCamposActionPerformed
   private void limpiarCampos(){
          txtNombre.setText("");
-         txtCilindraje.setText("");
+         txtReferencia.setText("");
          txtDescripcion.setText("");
          imgProducto.setIcon(null);
     }
-    private void btnEliminarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModeloActionPerformed
+    private void btnEliminarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRepuestoActionPerformed
            if (!labelIdRegistro.getText().isEmpty()) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
                         "¿Esta seguro de que desea borrar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
@@ -418,13 +388,10 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para eliminar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnEliminarModeloActionPerformed
+    }//GEN-LAST:event_btnEliminarRepuestoActionPerformed
 
     private void btnActualizarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModeloActionPerformed
         Calendar calndr = Calendar.getInstance();
-        calndr.set(Calendar.YEAR, Integer.parseInt(ListTipoCombistible.getSelectedItem().toString()));
-        //calndr.set(Calendar.MONTH, model.mes(ListMes.getSelectedItem().toString().toLowerCase()));
-        //calndr.set(Calendar.DAY_OF_MONTH, Integer.parseInt(listDia.getSelectedItem().toString())); 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(calndr.getTime());
         //String estado = listEstado.getSelectedItem().toString().equals("Dañado") ? "Danado" : listEstado.getSelectedItem().toString();
@@ -432,7 +399,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
                         "¿Esta seguro de que desea actualizar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                    try {
-                   model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtCilindraje.getText(), date,labelIdRegistro.getText());
+                   model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText(), date,labelIdRegistro.getText());
                   } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un modelo", JOptionPane.ERROR_MESSAGE);
                     }             
@@ -468,16 +435,10 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             labelRutaImagen.setText(spl[cont-1]);
     }//GEN-LAST:event_ExaminarImagenActionPerformed
 
-    private void btnGuardarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarModeloActionPerformed
-        Calendar calndr = Calendar.getInstance();
-        calndr.set(Calendar.YEAR, Integer.parseInt(ListTipoCombistible.getSelectedItem().toString()));
-        //calndr.set(Calendar.MONTH, model.mes(ListMes.getSelectedItem().toString().toLowerCase()));
-        //calndr.set(Calendar.DAY_OF_MONTH, Integer.parseInt(listDia.getSelectedItem().toString())); 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(calndr.getTime());
-       // String estado = listEstado.getSelectedItem().toString().equals("Dañado") ? "Danado" : listEstado.getSelectedItem().toString();
-        if(modeloEsValido(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtCilindraje.getText(), date)){
-            model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtCilindraje.getText(), date);
+    private void btnGuardarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRepuestoActionPerformed
+
+        if(RepuestoEsValido(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText())){
+            model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText());
         model.loadData(tbGetDatosModelo,"");
         JOptionPane.showMessageDialog(null,"Modelo creaco correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();
@@ -485,18 +446,18 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Todos los campos son requeridos", "Error", JOptionPane.ERROR_MESSAGE);
         }
        
-    }//GEN-LAST:event_btnGuardarModeloActionPerformed
+    }//GEN-LAST:event_btnGuardarRepuestoActionPerformed
 
-     public boolean modeloEsValido(String nombre, String descripcion , String rutaImagen,String modelo, String fecha) {
-        return !nombre.isEmpty() && !descripcion.isEmpty() && !rutaImagen.isEmpty() && !fecha.isEmpty();
+     public boolean RepuestoEsValido(String nombre, String descripcion , String rutaImagen,String referencia) {
+        return !nombre.isEmpty() && !descripcion.isEmpty() && !rutaImagen.isEmpty();
     }
     private void txtDescripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDescripcionMouseClicked
 
     }//GEN-LAST:event_txtDescripcionMouseClicked
 
-    private void txtCilindrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCilindrajeActionPerformed
+    private void txtReferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReferenciaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCilindrajeActionPerformed
+    }//GEN-LAST:event_txtReferenciaActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -536,20 +497,21 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCrearModeloCarrro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCrearRepuestoCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCrearModeloCarrro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCrearRepuestoCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCrearModeloCarrro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCrearRepuestoCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCrearModeloCarrro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCrearRepuestoCarro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCrearModeloCarrro().setVisible(true);
+                new FrmCrearRepuestoCarro().setVisible(true);
             }
         });
     }
@@ -558,19 +520,19 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
      int fila =tbGetDatosModelo.getSelectedRow();
      if(fila >=0){
        //listEstado.removeAllItems();
-       ListTipoCombistible.removeAllItems();
+       //listAno.removeAllItems();
        //ListMes.removeAllItems();
        //listDia.removeAllItems();
        
        txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
        txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
        labelRutaImagen.setText(tbGetDatosModelo.getValueAt(fila, 3).toString());
-       txtCilindraje.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());   
+       txtReferencia.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());   
        labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 7).toString());
 //       listEstado.addItem(tbGetDatosModelo.getValueAt(fila, 4).toString());
  
        String fecha[] = tbGetDatosModelo.getValueAt(fila, 6).toString().split("-");
-       ListTipoCombistible.addItem(fecha[0]);
+       //listAno.addItem(fecha[0]);
        //ListMes.addItem(model.mesStr(Integer.parseInt(fecha[1])));
        //listDia.addItem(fecha[2]);
        
@@ -599,7 +561,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
      
      for(int i=1900;i<=3000;i++){
        if(ano != i){
-       ListTipoCombistible.addItem(String.valueOf(i));
+       //listAno.addItem(String.valueOf(i));
        }
        
      }
@@ -616,31 +578,27 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExaminarImagen;
-    private javax.swing.JComboBox<String> ListTipoCombistible;
     public javax.swing.JButton btnActualizarModelo;
-    public javax.swing.JButton btnEliminarModelo;
-    public javax.swing.JButton btnGuardarModelo;
+    public javax.swing.JButton btnEliminarRepuesto;
+    public javax.swing.JButton btnGuardarRepuesto;
     public javax.swing.JButton btnLimpiarCampos;
     public javax.swing.JLabel imgProducto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanelModeloCarro;
     public javax.swing.JLabel labelIdRegistro;
     private javax.swing.JLabel labelRutaImagen;
-    private javax.swing.JComboBox<String> listAno1;
     private javax.swing.ButtonGroup rdbGrupoEliminar_Actualizar;
     public javax.swing.JTable tbGetDatosModelo;
-    public javax.swing.JTextField txtCilindraje;
     public javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtFilterTable;
     public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtReferencia;
     // End of variables declaration//GEN-END:variables
 }
