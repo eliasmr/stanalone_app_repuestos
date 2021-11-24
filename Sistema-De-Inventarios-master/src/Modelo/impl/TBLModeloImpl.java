@@ -36,8 +36,8 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.setString(1, dto.getNombre());
             pstmt.setString(2, dto.getDescripcion());
             pstmt.setString(3, dto.getPathImagen());
-            pstmt.setString(4, dto.getEstado());
-             pstmt.setString(5, dto.getModelo());
+//            pstmt.setString(4, dto.getEstado());
+             pstmt.setString(5, dto.getCilindraje());
             pstmt.setString(6, dto.getFechaModelo());
             pstmt.execute();
             return true;
@@ -58,7 +58,7 @@ public class TBLModeloImpl extends  Conexion{
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             .estado(rs.getString("ESTADO"))
+                             //.estado(rs.getString("ESTADO"))
                              .fechaModelo(rs.getString("FECHA_MODELO"))
                              .build();
                                          
@@ -75,8 +75,8 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.setString(1, dto.getNombre());
             pstmt.setString(2, dto.getDescripcion());
             pstmt.setString(3, dto.getPathImagen());
-            pstmt.setString(4, dto.getEstado());
-            pstmt.setString(5, dto.getModelo());
+            //pstmt.setString(4, dto.getEstado());
+            pstmt.setString(5, dto.getCilindraje());
             pstmt.setString(6, dto.getFechaModelo());
             pstmt.setInt(7, dto.getId());
             pstmt.execute();
@@ -112,8 +112,8 @@ public class TBLModeloImpl extends  Conexion{
                              .nombre(rs.getString("NOMBRE"))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             .estado(rs.getString("ESTADO"))
-                             .modelo(rs.getString("MODELO"))
+                            // .estado(rs.getString("ESTADO"))
+                             .cilindraje(rs.getString("CILINDRAJE"))
                              .fechaModelo(rs.getString("FECHA_MODELO"))
                              .build();
             lts.add(tbl);

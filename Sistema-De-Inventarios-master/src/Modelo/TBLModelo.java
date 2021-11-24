@@ -24,8 +24,8 @@ public class TBLModelo {
     private String nombre;
     private String descripcion;
     private String pathImagen;
-    private String estado;
+    //private String estado;
     private String fechaModelo;
-    private String modelo;
+    private String cilindraje;
     
 }

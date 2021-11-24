@@ -39,8 +39,8 @@ public class ModeloCarroController{
     
     
 
-    public void save(String nombre,String descripcion,String ruta, String estado, String modelo,String fecha) {      
-        impl.insertaModelo(setModelo(nombre,descripcion,ruta,estado,modelo,fecha,0));
+    public void save(String nombre,String descripcion,String ruta, String modelo,String fecha) {      
+        impl.insertaModelo(setModelo(nombre,descripcion,ruta,modelo,fecha,0));
     }
     
     public void loadData(JTable jt, String param){
@@ -62,27 +62,27 @@ public class ModeloCarroController{
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();
       columna[3] = obj.getPathImagen();
-      columna[4] = obj.getEstado().equals("Danado") ? "Dañado" : obj.getEstado();
-      columna[5] = obj.getModelo();
+      //columna[4] = obj.getEstado().equals("Danado") ? "Dañado" : obj.getEstado();
+      columna[5] = obj.getCilindraje();
       columna[6] = obj.getFechaModelo();
       columna[7] = obj.getId();
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
    }
-    public void updateModel(String nombre,String descripcion,String ruta, String estado,String modelo, String fecha, String id){
-    impl.update(setModelo(nombre,descripcion,ruta,estado,modelo,fecha,Integer.parseInt(id)));
+    public void updateModel(String nombre,String descripcion,String ruta,String modelo, String fecha, String id){
+    impl.update(setModelo(nombre,descripcion,ruta,modelo,fecha,Integer.parseInt(id)));
     }
      public void deleteModelo(String text) {
         impl.delete(Integer.parseInt(text));
     }
-    public TBLModelo setModelo(String nombre,String descripcion,String ruta, String estado,String modelo, String fecha,int id){
+    public TBLModelo setModelo(String nombre,String descripcion,String ruta,String cilindraje, String fecha,int id){
     return TBLModelo.builder()
             .nombre(nombre)
             .descripcion(descripcion)
             .pathImagen(ruta)
-            .estado(estado)
-            .modelo(modelo)
+            //.estado(estado)
+            .cilindraje(cilindraje)
             .id(id)
             .fechaModelo(fecha)
             .build();
