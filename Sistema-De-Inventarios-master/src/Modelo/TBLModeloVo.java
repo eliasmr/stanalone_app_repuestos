@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,13 +20,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TBLModelo {
+public class TBLModeloVo {
     private int id;
     private String nombre;
+    private String ano;
+    private String cilindraje;
+    private TBLTipoCombustibleVo tipoCombustible;
     private String descripcion;
     private String pathImagen;
-    //private String estado;
-    private String fechaModelo;
-    private String cilindraje;
+    private TBLRepuestoVo repuestos ;
+    private TBLMarcaVo idMarca;
     
 }

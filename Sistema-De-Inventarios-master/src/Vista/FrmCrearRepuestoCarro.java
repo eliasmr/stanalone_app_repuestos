@@ -37,7 +37,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     public String Ruta = "";
     private static ModeloCarroController model;
     public FrmCrearRepuestoCarro() {
-        repuesto = new RepuestoController();
+        //repuesto = new RepuestoController();
         model = new ModeloCarroController();
         initComponents();
         setTitle("Modelo");

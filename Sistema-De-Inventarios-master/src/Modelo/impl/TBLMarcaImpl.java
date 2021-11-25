@@ -6,14 +6,14 @@ package Modelo.impl;
 
 import Modelo.Conexion;
 import Modelo.ConsultasSQL;
-import Modelo.TBLMarca;
-import Modelo.TBLModelo;
+import Modelo.TBLMarcaVo;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
-import util.MensajesSistema;
+import util.TraceInfoSistem;
 
 /**
  *
@@ -21,29 +21,103 @@ import util.MensajesSistema;
  */
 public class TBLMarcaImpl extends Conexion {
     private static final Logger LOGGER = Logger.getLogger("TBLMarcaImpl");
-    private Connection connection = getConexion();
+    private final Connection connection = getConexion();
     private ResultSet rs = null;
+    private TBLModeloImpl marcaImpl;
     
     public TBLMarcaImpl(){}
     
-    public TBLMarcaImpl(Connection connection){
-        this.connection = connection;
+    public TBLMarcaImpl(Connection connection, TBLModeloImpl marca){
+        this.marcaImpl=marca;
     }
     
-        public Boolean insertaMarca(final TBLMarca marca){
-        LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "Insertar","TBL_MARCA"));
+    public Boolean insertaMarca(final TBLMarcaVo marca){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la insercion de la marca "));
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_MARCA)){
             pstmt.setString(1, marca.getNombre());
-            pstmt.setString(2, marca.getCodigo());
             pstmt.setString(3, marca.getDescripcion());
-            pstmt.setString(4, marca.getPathImagen());
-            pstmt.setBoolean(5, true);
             pstmt.setInt(6, marca.getIdModelo().getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {
-         LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MARCA","TBL_MARCA","insertaModelo","33",e));
+         LOGGER.severe(TraceInfoSistem.getTraceInfoError("insertando marca", e));
         }
         return false;
     }
+    
+    public boolean  updateMarca(final TBLMarcaVo vo){
+    LOGGER.info(TraceInfoSistem.getTraceInfo("inicia actualizacion de los datos "));
+            try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.UPDATE_MARCA)){
+                pstmt.setString(1, vo.getNombre());
+                pstmt.setString(2, vo.getDescripcion());
+                pstmt.setInt(3, vo.getIdModelo().getId());
+                pstmt.setInt(4, vo.getIdMarca());
+                return true;
+            } catch (Exception e) {
+                LOGGER.severe(TraceInfoSistem.getTraceInfoError("obteniendo realziando actulizacion", e));
+            }
+            return false;
+    }
+    public TBLMarcaVo getMarcaById(final String nombre){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta by id "+nombre));
+        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MARCA)){
+            pstmt.setString(1, nombre);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+             TBLMarcaVo
+                     .builder()
+                     .idMarca(rs.getInt("ID_MARCA"))
+                     .nombre(rs.getString("NOMBRE"))
+                     .descripcion(rs.getString("DESCRIPCION"))
+                     .idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
+                     .build();
+            }
+            
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("obteniendo marca por id", e));
+        }
+        return null;
+    }
+    public TBLMarcaVo getMarcaById(final int id){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta by id "+id));
+        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MARCA_BY_ID)){
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+             TBLMarcaVo
+                     .builder()
+                     .idMarca(rs.getInt("ID_MARCA"))
+                     .nombre(rs.getString("NOMBRE"))
+                     .descripcion(rs.getString("DESCRIPCION"))
+                     .idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
+                     .build();
+            }
+            
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("obteniendo marca por id", e));
+        }
+        return null;
+    }
+        public List<TBLMarcaVo> getMarcaAll(){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta de toda las marcas "));
+        List<TBLMarcaVo> lts = new ArrayList<>();
+        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_MARCA)){
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+            TBLMarcaVo marca = TBLMarcaVo
+                                .builder()
+                                .idMarca(rs.getInt("ID_MARCA"))
+                                .nombre(rs.getString("NOMBRE"))
+                                .descripcion(rs.getString("DESCRIPCION"))
+                                .idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
+                                .build();
+            lts.add(marca);
+            }
+            
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("obteniendo marca por id", e));
+        }
+        return lts;
+    }
+    
 }

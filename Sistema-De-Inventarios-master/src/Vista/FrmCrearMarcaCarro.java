@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Modelo.TBLModelo;
+import Modelo.TBLModeloVo;
 import Modelo.impl.TBLModeloImpl;
 import java.sql.Date;
 

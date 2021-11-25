@@ -20,7 +20,7 @@ import Modelo.clientes;
 import Modelo.proveedor;
 import Controlador.MarcasCarrosController;
 import Controlador.ModeloCarroController;
-import Modelo.TBLModelo;
+import Modelo.TBLModeloVo;
 import Modelo.impl.TBLModeloImpl;
 
 
@@ -378,7 +378,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void opcionCrearModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearModeloActionPerformed
         TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModelo model = new TBLModelo();
+        TBLModeloVo model = new TBLModeloVo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
@@ -448,7 +448,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void gestionarModeloToyotaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloToyotaBotonActionPerformed
         TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModelo model = new TBLModelo();
+        TBLModeloVo model = new TBLModeloVo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
@@ -456,7 +456,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void gestionarModeloMitsubishiBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloMitsubishiBotonActionPerformed
           TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModelo model = new TBLModelo();
+        TBLModeloVo model = new TBLModeloVo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
@@ -464,14 +464,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void gestionarModeloDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloDaihatsuBotonActionPerformed
    TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModelo model = new TBLModelo();
+        TBLModeloVo model = new TBLModeloVo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);    }//GEN-LAST:event_gestionarModeloDaihatsuBotonActionPerformed
 
     private void gestionarModeloNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloNissanBotonActionPerformed
            TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModelo model = new TBLModelo();
+        TBLModeloVo model = new TBLModeloVo();
         FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);

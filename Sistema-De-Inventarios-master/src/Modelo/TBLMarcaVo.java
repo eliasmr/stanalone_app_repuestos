@@ -19,13 +19,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TBLMarca {
+public class TBLMarcaVo {
   private int idMarca;
   private String nombre;
-  private String codigo;
   private String descripcion;
-  private String pathImagen;
-  private Boolean estado;
-  private TBLModelo idModelo;
+  private TBLModeloVo idModelo;
   
 }

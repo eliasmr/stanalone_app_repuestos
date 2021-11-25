@@ -4,7 +4,7 @@
  */
 package Controlador;
 
-import Modelo.TBLModelo;
+import Modelo.TBLModeloVo;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
@@ -22,13 +22,13 @@ import javax.swing.table.DefaultTableModel;
 public class ModeloCarroController{
 
     private TBLModeloImpl impl;
-    private TBLModelo model;
+    private TBLModeloVo model;
     private FrmCrearModeloCarrro frm;
     
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
     }
-    public ModeloCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModelo model){
+    public ModeloCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModeloVo model){
     /*DropBoxImpl im =  new DropBoxImpl();
    // im.dropbox();
     this.impl = impl;
@@ -76,8 +76,8 @@ public class ModeloCarroController{
      public void deleteModelo(String text) {
         impl.delete(Integer.parseInt(text));
     }
-    public TBLModelo setModelo(String nombre,String descripcion,String ruta,String cilindraje, String fecha,int id){
-    return TBLModelo.builder()
+    public TBLModeloVo setModelo(String nombre,String descripcion,String ruta,String cilindraje, String fecha,int id){
+    return TBLModeloVo.builder()
             .nombre(nombre)
             .descripcion(descripcion)
             .pathImagen(ruta)

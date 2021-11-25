@@ -1,20 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo.impl;
 
 import Modelo.Conexion;
 import Modelo.ConsultasSQL;
-import Modelo.TBLModelo;
+import Modelo.TBLModeloVo;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import util.MensajesSistema;
+import util.TraceInfoSistem;
 
 /**
  *
@@ -23,83 +18,92 @@ import util.MensajesSistema;
 public class TBLModeloImpl extends  Conexion{
     
     private static final Logger LOGGER = Logger.getLogger("TBLModeloImpl");
-    private Connection connection = getConexion();
+    private final Connection connection = getConexion();
     private ResultSet rs = null;
-    public TBLModeloImpl(){}
-    public TBLModeloImpl(Connection connection){
-        this.connection = connection;
-    }
+    private TBLCombustibleImpl tipoCombustible;
+    private TBLRepuestoImpl repuestoImpl;
+    private TBLMarcaImpl marcaImpl;
     
-    public Boolean insertaModelo(final TBLModelo dto){
-        LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "Insertar","TBL_Modelo"));
+    public TBLModeloImpl(){}
+    public TBLModeloImpl(TBLCombustibleImpl tipoCombustible, TBLRepuestoImpl repuesto, TBLMarcaImpl marca){
+         this.tipoCombustible = tipoCombustible;
+         this.repuestoImpl  = repuesto;
+         this.marcaImpl = marca;
+    }
+    public Boolean insertaModelo(final TBLModeloVo dto){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia el guardado del modelo "));
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_MODELO)){
             pstmt.setString(1, dto.getNombre());
-            pstmt.setString(2, dto.getDescripcion());
-            pstmt.setString(3, dto.getPathImagen());
-//            pstmt.setString(4, dto.getEstado());
-             pstmt.setString(5, dto.getCilindraje());
-            pstmt.setString(6, dto.getFechaModelo());
+            pstmt.setString(2, dto.getAno());
+            pstmt.setString(3, dto.getCilindraje());
+            pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
+            pstmt.setString(5, dto.getDescripcion());
+            pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
+            pstmt.setInt(7, dto.getIdMarca().getIdMarca());
             pstmt.execute();
             return true;
         } catch (Exception e) {
-         LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","insertaModelo","27",e));
+         LOGGER.severe(TraceInfoSistem.getTraceInfoError("al insertar modelo del carro", e));
         }
         return false;
     }
     
-    public TBLModelo getModelo(final String nombre){
-    LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "obtener datos","TBL_Modelo"));
+    public TBLModeloVo getModelo(final String nombre){
+   LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda del modelo "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO)) {
             pstmt.setString(0, nombre);
             rs = pstmt.executeQuery();
             if (rs.next()){
-             return TBLModelo.builder()
+             return TBLModeloVo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
+                             .ano(rs.getString("ANO"))
+                             .cilindraje(rs.getString("CILINDRAJE"))
+                             .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             //.estado(rs.getString("ESTADO"))
-                             .fechaModelo(rs.getString("FECHA_MODELO"))
+                             .repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
+                             .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                              .build();
                                          
             }
         } catch (Exception e) {
-            LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","getModelo","43",e));
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener el modelo del carro", e));
         }
         return null;
     }
     
-    public boolean update(final TBLModelo dto){
-    LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "update","TBL_Modelo"));
+    public boolean update(final TBLModeloVo dto){
+    LOGGER.info(TraceInfoSistem.getTraceInfo("inicia actulizacion del modelo "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.UPDATE_MODELO)) {
             pstmt.setString(1, dto.getNombre());
-            pstmt.setString(2, dto.getDescripcion());
-            pstmt.setString(3, dto.getPathImagen());
-            //pstmt.setString(4, dto.getEstado());
-            pstmt.setString(5, dto.getCilindraje());
-            pstmt.setString(6, dto.getFechaModelo());
-            pstmt.setInt(7, dto.getId());
+            pstmt.setString(2, dto.getAno());
+            pstmt.setString(3, dto.getCilindraje());
+            pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
+            pstmt.setString(5, dto.getDescripcion());
+            pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
+            pstmt.setInt(7, dto.getIdMarca().getIdMarca());
             pstmt.execute();
             return true;
         } catch (Exception e) {
-        LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","update","72",e));
+        LOGGER.severe(TraceInfoSistem.getTraceInfoError("al actulizar el modelo delos carros", e));
         }
         return false;
     }
     public boolean delete(final int id){
-        LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "borrado del registro","TBL_Modelo"));
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia el borrado del modelo "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.DELETE_MODELO)) {
             pstmt.setInt(1, id);
             pstmt.execute();
             return true;
         } catch (Exception e) {
-        LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","delete","91",e));
+        LOGGER.severe(TraceInfoSistem.getTraceInfoError("al borrar el modelo del carro", e));
         }
         return false;
     }
-    public List<TBLModelo> allModelo(String filtro){
-         LOGGER.info(MessageFormat.format(MensajesSistema.INFO_CLASS, "todo los modelos de vehiculos","TBL_Modelo"));
-        List<TBLModelo>  lts = new ArrayList<>();
+    public List<TBLModeloVo> allModelo(String filtro){
+         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los modelos de los carros "));
+        List<TBLModeloVo>  lts = new ArrayList<>();
         String consulta = ConsultasSQL.ALL_MODELO;
         if(!filtro.isEmpty()){
           consulta = consulta.concat(" Where  NOMBRE like '%"+filtro+"%' or ESTADO like '%"+filtro+"%' or FECHA_MODELO like '%"+filtro+"%'");
@@ -107,20 +111,46 @@ public class TBLModeloImpl extends  Conexion{
          try(PreparedStatement pstmt = connection.prepareStatement(consulta)){           
             rs = pstmt.executeQuery();
             while(rs.next()){
-            TBLModelo tbl = TBLModelo.builder()
+            TBLModeloVo tbl = TBLModeloVo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
+                             .ano(rs.getString("ANO"))
+                             .cilindraje(rs.getString("CILINDRAJE"))
+                             .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                            // .estado(rs.getString("ESTADO"))
-                             .cilindraje(rs.getString("CILINDRAJE"))
-                             .fechaModelo(rs.getString("FECHA_MODELO"))
+                             .repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
+                             .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                              .build();
             lts.add(tbl);
             }
         } catch (Exception e) {
-            LOGGER.severe(MessageFormat.format(MensajesSistema.ERROR_SQL_DBA, "TBL_MODELO","TBL_Modelo","all","118",e));
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener todo los modelos delos carros", e));
         }
          return lts;
+    }
+    
+    public TBLModeloVo getModeloById(final int id){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda del modelo by id "));
+        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO_BY_ID)){
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                return TBLModeloVo.builder()
+                    .id(rs.getInt("ID_MODELO"))
+                    .nombre(rs.getString("NOMBRE"))
+                    .ano(rs.getString("ANO"))
+                    .cilindraje(rs.getString("CILINDRAJE"))
+                    .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
+                    .descripcion(rs.getString("DESCRIPCION"))
+                    .pathImagen(rs.getString("RUTA_IMAGEN"))
+                    .repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
+                    .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
+                    .build();
+            }
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener el modelo por id", e));
+        }
+        return null;
     }
 }

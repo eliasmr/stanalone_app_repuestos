@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelo;
 
 /**
@@ -9,11 +6,33 @@ package Modelo;
  * @author Elias
  */
 public class ConsultasSQL {
-    public final static String INSERT_MODELO = "INSERT INTO TBL_MODELO(NOMBRE,DESCRIPCION,RUTA_IMAGEN,ESTADO,MODELO,FECHA_MODELO) VALUES(?,?,?,?,?,?)";
+    
+    /*repuesto**/
+    public final static String INSERT_REPUESTO = "INSERT INTO TBL_REPUESTO(NOMBRE,REFERENCIA,DESCRIPCION,RUTA_IMAGEN) VALUES(?,?,?,?)";
+    public final static String GET_REPUESTO = "SELECT * FROM TBL_REPUESTO M WHERE M.NOMBRE LIKE '%?%'";
+    public final static String GET_REPUESTO_BY_ID = "SELECT * FROM TBL_REPUESTO M WHERE M.ID_REPUESTO =?";
+    public final static String UPDATE_REPUESTO = "UPDATE TBL_MODELO SET NOMBRE=?, REFERENCIA=?, DESCRIPCION=?, RUTA_IMAGEN=? WHERE ID_REPUESTO=?";
+    public final static String DELETE_REPUESTO = "DELETE FROM TBL_MODELO WHERE ID_REPUESTO = ?";
+    public final static String ALL_REPUESTO = "SELECT * FROM TBL_MODELO";
+    
+    /*Combustible*/
+    public final static String GET_COMBUSTIBLE = "SELECT * FROM TBL_TIPO_COMBUSTIBLE M WHERE M.ID_TIPO_COMBUSTIBLE =?";
+    public final static String ALL_COMBUSTIBLE = "SELECT * FROM TBL_TIPO_COMBUSTIBLE";
+    
+    /**Modelo*/
+    public final static String INSERT_MODELO = "INSERT INTO TBL_MODELO(NOMBRE,ANO,CILINDRAJE,ID_TIPO_COMBUSTIBLE,DESCRIPCION,RUTA_IMAGEN,ID_REPUESTO,ID_MARCA) VALUES(?,?,?,?,?,?,?,?)";
     public final static String GET_MODELO = "SELECT * FROM TBL_MODELO M WHERE M.NOMBRE LIKE '%?%'";
-    public final static String UPDATE_MODELO = "UPDATE TBL_MODELO SET NOMBRE=?, DESCRIPCION=?, RUTA_IMAGEN=?, ESTADO=?, MODELO=?, FECHA_MODELO=? WHERE ID_MODELO=?";
+    public final static String GET_MODELO_BY_ID = "SELECT * FROM TBL_MODELO M WHERE M.ID_MODELO =?";
+    public final static String UPDATE_MODELO = "UPDATE TBL_MODELO SET NOMBRE=?, ANO=?, CILINDRAJE=?, ID_TIPO_COMBUSTIBLE=?, DESCRIPCION=?, RUTA_IMAGEN=?, ID_REPUESTO=?, ID_MARCA=? WHERE ID_MODELO=?";
     public final static String DELETE_MODELO = "DELETE FROM TBL_MODELO WHERE ID_MODELO = ?";
     public final static String ALL_MODELO = "SELECT * FROM TBL_MODELO";
+    
     /** MARCA **/
-    public final static String INSERT_MARCA = "INSERT INTO TBL_MARCA(NOMBRE,CODIGO,DESCRIPCION,RUTA_IMAGEN,ESTADO,ID_MODELO) VALUES(?,?,?,?,?,?)";
+    public final static String INSERT_MARCA = "INSERT INTO TBL_MARCA(NOMBRE,DESCRIPCION,ID_MODELO) VALUES(?,?,?)";
+    public final static String GET_MARCA = "SELECT * FROM TBL_MARCA M WHERE M.NOMBRE LIKE '%?%'";
+    public final static String GET_MARCA_BY_ID = "SELECT * FROM TBL_MARCA M WHERE M.NOMBRE =?";
+    public final static String UPDATE_MARCA = "UPDATE TBL_MARCA SET NOMBRE=?, DESCRIPCION=?, ID_MODELO=? WHERE ID_MARCA=?";
+    public final static String DELETE_MARCA = "DELETE FROM TBL_MARCA WHERE ID_REPUESTO = ?";
+    public final static String ALL_MARCA = "SELECT * FROM TBL_MARCA";
+    
 }
