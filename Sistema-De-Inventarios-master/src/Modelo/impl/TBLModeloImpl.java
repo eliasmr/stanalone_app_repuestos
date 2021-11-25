@@ -34,7 +34,7 @@ public class TBLModeloImpl extends  Conexion{
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia el guardado del modelo "));
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_MODELO)){
             pstmt.setString(1, dto.getNombre());
-            pstmt.setString(2, dto.getAno());
+            pstmt.setString(2, dto.getAnio());
             pstmt.setString(3, dto.getCilindraje());
             pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
             pstmt.setString(5, dto.getDescripcion());
@@ -57,7 +57,7 @@ public class TBLModeloImpl extends  Conexion{
              return TBLModeloVo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
-                             .ano(rs.getString("ANO"))
+                             .anio(rs.getString("ANO"))
                              .cilindraje(rs.getString("CILINDRAJE"))
                              .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
@@ -77,7 +77,7 @@ public class TBLModeloImpl extends  Conexion{
     LOGGER.info(TraceInfoSistem.getTraceInfo("inicia actulizacion del modelo "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.UPDATE_MODELO)) {
             pstmt.setString(1, dto.getNombre());
-            pstmt.setString(2, dto.getAno());
+            pstmt.setString(2, dto.getAnio());
             pstmt.setString(3, dto.getCilindraje());
             pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
             pstmt.setString(5, dto.getDescripcion());
@@ -114,7 +114,7 @@ public class TBLModeloImpl extends  Conexion{
             TBLModeloVo tbl = TBLModeloVo.builder()
                              .id(rs.getInt("ID_MODELO"))
                              .nombre(rs.getString("NOMBRE"))
-                             .ano(rs.getString("ANO"))
+                             .anio(rs.getString("ANO"))
                              .cilindraje(rs.getString("CILINDRAJE"))
                              .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
@@ -139,7 +139,7 @@ public class TBLModeloImpl extends  Conexion{
                 return TBLModeloVo.builder()
                     .id(rs.getInt("ID_MODELO"))
                     .nombre(rs.getString("NOMBRE"))
-                    .ano(rs.getString("ANO"))
+                    .anio(rs.getString("ANO"))
                     .cilindraje(rs.getString("CILINDRAJE"))
                     .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                     .descripcion(rs.getString("DESCRIPCION"))

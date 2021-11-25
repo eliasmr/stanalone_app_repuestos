@@ -23,7 +23,7 @@ import lombok.Setter;
 public class TBLModeloVo {
     private int id;
     private String nombre;
-    private String ano;
+    private String anio;
     private String cilindraje;
     private TBLTipoCombustibleVo tipoCombustible;
     private String descripcion;

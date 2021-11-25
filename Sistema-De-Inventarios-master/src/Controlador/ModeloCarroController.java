@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.TBLModeloVo;
+import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
@@ -62,9 +63,9 @@ public class ModeloCarroController{
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();
       columna[3] = obj.getPathImagen();
-      //columna[4] = obj.getEstado().equals("Danado") ? "Dañado" : obj.getEstado();
+      columna[4] = obj.getTipoCombustible().getNombre();
       columna[5] = obj.getCilindraje();
-      columna[6] = obj.getFechaModelo();
+      columna[6] = obj.getAno();
       columna[7] = obj.getId();
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
@@ -76,15 +77,17 @@ public class ModeloCarroController{
      public void deleteModelo(String text) {
         impl.delete(Integer.parseInt(text));
     }
-    public TBLModeloVo setModelo(String nombre,String descripcion,String ruta,String cilindraje, String fecha,int id){
+    public TBLModeloVo setModelo(String nombre,String descripcion,String ruta,String cilindraje, String anio,String tipoCombustible,int id){
+        
     return TBLModeloVo.builder()
             .nombre(nombre)
             .descripcion(descripcion)
             .pathImagen(ruta)
-            //.estado(estado)
+            .ano(anio)
+            .tipoCombustible()
             .cilindraje(cilindraje)
             .id(id)
-            .fechaModelo(fecha)
+            .
             .build();
     }
  
