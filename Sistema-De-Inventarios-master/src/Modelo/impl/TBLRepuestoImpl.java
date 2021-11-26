@@ -20,10 +20,9 @@ public class TBLRepuestoImpl{
     private static final Logger LOGGER = Logger.getLogger("TBLCombustibleImpl");
     private final Connection connection = Conexion.getInstance().getConexion();
     private ResultSet rs = null;
-    private TBLModeloImpl modeloImpl;
+    private  TBLModeloImpl modeloImpl;
     
-    public TBLRepuestoImpl(){}
-    public TBLRepuestoImpl(TBLModeloImpl modelo){
+    public TBLRepuestoImpl(){
         this.modeloImpl = new TBLModeloImpl();
     }
     public boolean insertarRepuesto(final TBLRepuestoVo rvo){
@@ -32,8 +31,8 @@ public class TBLRepuestoImpl{
             pstmt.setString(1, rvo.getNombre());
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
-            pstmt.setInt(4, rvo.getIdmodelo().getId());
-            pstmt.setString(5, rvo.getPathImagen());
+            pstmt.setString(4, rvo.getPathImagen());
+            pstmt.setInt(5, rvo.getIdmodelo().getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -112,8 +111,8 @@ public class TBLRepuestoImpl{
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .nombre(rs.getString("NOMBRE"))
                       .referencia(rs.getString("REFERENCIA"))
-                      .descripcion("DESCRIPCION")
-                      .pathImagen("RUTA_IMAGEN")
+                      .descripcion(rs.getString("DESCRIPCION"))
+                      .pathImagen(rs.getString("RUTA_IMAGEN"))
                       .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))         
                       .build();
              lts.add(repuesto);

@@ -1,12 +1,8 @@
 
 package Controlador;
 
-import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
 import Modelo.TBLRepuestoVo;
-import Modelo.TBLTipoCombustibleVo;
-import Modelo.impl.TBLCombustibleImpl;
-import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
 import Modelo.impl.TBLRepuestoImpl;
 import Vista.FrmCrearModeloCarrro;
@@ -29,8 +25,8 @@ public class RepuestoCarroController{
     //private TBLMarcaImpl marca;
     
     public RepuestoCarroController(){
-      this.impl = new TBLRepuestoImpl();
-      this.modelo = new TBLModeloImpl();
+        this.modelo = new TBLModeloImpl();
+        this.impl = new TBLRepuestoImpl();
      // this.marca = new TBLMarcaImpl();
     }
     public RepuestoCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModeloVo model){
@@ -65,7 +61,7 @@ public class RepuestoCarroController{
     repuestoT.addColumn("Imagen");
     repuestoT.addColumn("Modelo");
     
-    Object[] columna = new Object [5];
+    Object[] columna = new Object [6];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     impl.getAllRepuesto(param).stream().forEach(obj ->{
       

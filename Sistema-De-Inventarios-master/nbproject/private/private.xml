@@ -5,9 +5,8 @@
         <group>
             <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/impl/TBLModeloImpl.java</file>
             <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/ConsultasSQL.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Controlador/ModeloCarroController.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/impl/TBLCombustibleImpl.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Vista/FrmCrearModeloCarrro.java</file>
+            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/Conexion.java</file>
+            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/impl/TBLRepuestoImpl.java</file>
         </group>
     </open-files>
 </project-private>

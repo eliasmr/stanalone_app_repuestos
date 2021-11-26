@@ -46,7 +46,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         initComponents();
         setTitle("Repuestos");
         this.ltsModelos();
-        repuesto.loadData(tbGetDatosRepuesto, "");  
+       repuesto.loadData(tbGetDatosRepuesto, "");  
     }
 
     /**

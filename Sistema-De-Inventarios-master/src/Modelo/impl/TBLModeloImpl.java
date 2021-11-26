@@ -21,12 +21,11 @@ public class TBLModeloImpl{
     private final Connection connection = Conexion.getInstance().getConexion();;
     private ResultSet rs = null;
     private TBLCombustibleImpl tipoCombustible;
-    private TBLRepuestoImpl repuestoImpl;
     private TBLMarcaImpl marcaImpl;
     
     public TBLModeloImpl(){
+        super();
          this.tipoCombustible = new TBLCombustibleImpl();
-         this.repuestoImpl  = new TBLRepuestoImpl();
          this.marcaImpl = new TBLMarcaImpl();
     }
     public Boolean insertaModelo(final TBLModeloVo dto){
@@ -62,7 +61,6 @@ public class TBLModeloImpl{
                              .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             //.repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
                              .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                              .build();
                                          
@@ -145,7 +143,6 @@ public class TBLModeloImpl{
                     .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                     .descripcion(rs.getString("DESCRIPCION"))
                     .pathImagen(rs.getString("RUTA_IMAGEN"))
-                    //.repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
                     .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                     .build();
             }
