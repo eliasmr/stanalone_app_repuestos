@@ -5,6 +5,7 @@ import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
 import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.TBLCombustibleImpl;
+import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
 import java.util.List;
@@ -22,9 +23,12 @@ public class ModeloCarroController{
     private TBLModeloVo model;
     private FrmCrearModeloCarrro frm;
     private TBLCombustibleImpl combustible;
+    private TBLMarcaImpl marca;
+    
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
       this.combustible = new TBLCombustibleImpl();
+      this.marca = new TBLMarcaImpl();
     }
     public ModeloCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModeloVo model){
     /*DropBoxImpl im =  new DropBoxImpl();
@@ -57,14 +61,15 @@ public class ModeloCarroController{
     modeloT.addColumn("Nombre");
     modeloT.addColumn("Descripcion");
     modeloT.addColumn("Imagen");
-    modeloT.addColumn("Estado");
-    modeloT.addColumn("Modelo");
-    modeloT.addColumn("Fecha Modelo");
-    modeloT.addColumn("Codigo Registo");
+    modeloT.addColumn("Tipo Combustible");
+    modeloT.addColumn("Cilindraje");
+    modeloT.addColumn("Año Modelo");
+    modeloT.addColumn("Id Marca");
     
     Object[] columna = new Object [8];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     impl.allModelo(param).stream().forEach(obj ->{
+      String marca = setearMarca(obj.getId());
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();
@@ -72,11 +77,33 @@ public class ModeloCarroController{
       columna[4] = obj.getTipoCombustible().getNombre();
       columna[5] = obj.getCilindraje();
       columna[6] = obj.getAnio();
-      columna[7] = obj.getId();
+      columna[7] = marca;
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
    }
+    
+    public String setearMarca(int idMarca){
+        String marca = null;
+        switch (idMarca) {
+            case 1:
+                marca= "Toyota";
+                break;
+            case 2:
+                marca="Mitsubishi";
+                break;
+            case 3:
+                marca="Daihatsu";
+                break;
+            case 4:
+                marca="Nissan";
+                break;
+            default:
+                marca ="Sin Marca";
+                break;
+        }
+        return marca;
+    }
     public void updateModel(int id,String nombre,String ano,String cilindraje,TBLTipoCombustibleVo tipoCombustible,String descripcion,String img, TBLMarcaVo marca){
     impl.update(TBLModeloVo
                            .builder()
@@ -95,6 +122,10 @@ public class ModeloCarroController{
     }
      public List<TBLTipoCombustibleVo> ltsTipoCombustible(){
       return combustible.getAllTipoCpmbustible();
+     }
+     
+      public List<TBLMarcaVo> ltsMarca(){
+      return marca.getMarcaAll();
      }
  
     public int mes(String mes){

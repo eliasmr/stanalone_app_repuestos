@@ -98,9 +98,11 @@ public class TBLMarcaImpl {
         }
         return null;
     }
+    
+    
         public List<TBLMarcaVo> getMarcaAll(){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta de toda las marcas "));
-        List<TBLMarcaVo> lts = new ArrayList<>();
+        List<TBLMarcaVo> ltsMarca = new ArrayList<>();
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_MARCA)){
             rs = pstmt.executeQuery();
             while(rs.next()){
@@ -109,15 +111,14 @@ public class TBLMarcaImpl {
                                 .idMarca(rs.getInt("ID_MARCA"))
                                 .nombre(rs.getString("NOMBRE"))
                                 .descripcion(rs.getString("DESCRIPCION"))
-                                //.idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
                                 .build();
-            lts.add(marca);
+            ltsMarca.add(marca);
             }
             
         } catch (Exception e) {
             LOGGER.severe(TraceInfoSistem.getTraceInfoError("obteniendo marca por id", e));
         }
-        return lts;
+        return ltsMarca;
     }
     
 }

@@ -5,6 +5,9 @@
 package Vista;
 
 import Controlador.ModeloCarroController;
+import Controlador.RepuestoCarroController;
+import Modelo.TBLModeloVo;
+import Modelo.TBLTipoCombustibleVo;
 import Vista.PanelImage2;
 import java.awt.Image;
 import java.io.File;
@@ -22,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.event.ListDataListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -35,18 +39,14 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
      * Creates new form FrmCrearModeloCarrro
      */
     public String Ruta = "";
-    private static ModeloCarroController model;
+    private static RepuestoCarroController repuesto;
     public FrmCrearRepuestoCarro() {
         //repuesto = new RepuestoController();
-        model = new ModeloCarroController();
+        repuesto = new RepuestoCarroController();
         initComponents();
-        setTitle("Modelo");
-        model.loadData(tbGetDatosModelo, "");
-        this.setLocationRelativeTo(null);//centrar formulario
-        this.listAno(0);
-        //this.listEstado("");
-        this.listMes("");
-        this.listDias(0);
+        setTitle("Repuestos");
+        this.ltsModelos();
+        repuesto.loadData(tbGetDatosRepuesto, "");  
     }
 
     /**
@@ -59,7 +59,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     private void initComponents() {
 
         rdbGrupoEliminar_Actualizar = new javax.swing.ButtonGroup();
-        jpanelModeloCarro = new PanelImage2();
+        jpanelModeloCarro = new JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -75,11 +75,13 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         imgProducto = new javax.swing.JLabel();
         btnLimpiarCampos = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbGetDatosModelo = new javax.swing.JTable();
+        tbGetDatosRepuesto = new javax.swing.JTable();
         txtFilterTable = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         labelIdRegistro = new javax.swing.JLabel();
         labelRutaImagen = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        ListModelos = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -174,7 +176,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
             }
         });
 
-        tbGetDatosModelo.setModel(new javax.swing.table.DefaultTableModel(
+        tbGetDatosRepuesto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -185,17 +187,17 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbGetDatosModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbGetDatosRepuesto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbGetDatosModeloMouseClicked(evt);
+                tbGetDatosRepuestoMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbGetDatosModelo);
-        if (tbGetDatosModelo.getColumnModel().getColumnCount() > 0) {
-            tbGetDatosModelo.getColumnModel().getColumn(0).setHeaderValue("Title 1");
-            tbGetDatosModelo.getColumnModel().getColumn(1).setHeaderValue("Title 2");
-            tbGetDatosModelo.getColumnModel().getColumn(2).setHeaderValue("Title 3");
-            tbGetDatosModelo.getColumnModel().getColumn(3).setHeaderValue("Title 4");
+        jScrollPane2.setViewportView(tbGetDatosRepuesto);
+        if (tbGetDatosRepuesto.getColumnModel().getColumnCount() > 0) {
+            tbGetDatosRepuesto.getColumnModel().getColumn(0).setHeaderValue("Title 1");
+            tbGetDatosRepuesto.getColumnModel().getColumn(1).setHeaderValue("Title 2");
+            tbGetDatosRepuesto.getColumnModel().getColumn(2).setHeaderValue("Title 3");
+            tbGetDatosRepuesto.getColumnModel().getColumn(3).setHeaderValue("Title 4");
         }
 
         txtFilterTable.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -208,6 +210,19 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         jLabel5.setText("Filtro");
 
         labelIdRegistro.setEnabled(false);
+
+        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel9.setText("Modelo Carro");
+
+        ListModelos.setBackground(new java.awt.Color(209, 37, 29));
+        ListModelos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        ListModelos.setForeground(new java.awt.Color(255, 255, 255));
+        ListModelos.setName(""); // NOI18N
+        ListModelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListModelosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
@@ -237,8 +252,12 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(ExaminarImagen)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                        .addComponent(ExaminarImagen))
+                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(ListModelos, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -274,19 +293,24 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(labelRutaImagen))
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ListModelos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(ExaminarImagen)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(labelRutaImagen)
+                            .addComponent(ExaminarImagen))
+                        .addGap(2, 2, 2)))
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
                                 .addComponent(labelIdRegistro)
@@ -338,7 +362,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,12 +377,12 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFilterTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterTableKeyReleased
-        model.loadData(tbGetDatosModelo, txtFilterTable.getText());
+        repuesto.loadData(tbGetDatosRepuesto, txtFilterTable.getText());
     }//GEN-LAST:event_txtFilterTableKeyReleased
 
-    private void tbGetDatosModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMouseClicked
+    private void tbGetDatosRepuestoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosRepuestoMouseClicked
         modificar();
-    }//GEN-LAST:event_tbGetDatosModeloMouseClicked
+    }//GEN-LAST:event_tbGetDatosRepuestoMouseClicked
   
     private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
         txtNombre.setText("");
@@ -375,17 +399,17 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     private void btnEliminarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRepuestoActionPerformed
            if (!labelIdRegistro.getText().isEmpty()) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
-                        "¿Esta seguro de que desea borrar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
+                        "¿Esta seguro de que desea borrar este repuesto?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                    try {
-                       model.deleteModelo(labelIdRegistro.getText());
+                       repuesto.deleteRepuesto(labelIdRegistro.getText());
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al eliminar un modelo", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al eliminar un repuesto", JOptionPane.ERROR_MESSAGE);
                     }             
-                   JOptionPane.showMessageDialog(null,"Modelo eliminado correctamente", "Modelo Eliminado",JOptionPane.INFORMATION_MESSAGE);
+                   JOptionPane.showMessageDialog(null,"Repuesto eliminado correctamente", "Repuesto Eliminado",JOptionPane.INFORMATION_MESSAGE);
                 }
-                    model.loadData(tbGetDatosModelo,"");
+                    repuesto.loadData(tbGetDatosRepuesto,"");
             }else {
-            JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para eliminar", "Error",
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado un repuesto para eliminar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarRepuestoActionPerformed
@@ -397,20 +421,20 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         //String estado = listEstado.getSelectedItem().toString().equals("Dañado") ? "Danado" : listEstado.getSelectedItem().toString();
             if (!labelIdRegistro.getText().isEmpty()) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
-                        "¿Esta seguro de que desea actualizar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
+                        "¿Esta seguro de que desea actualizar este Repuesto?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                    try {
                    //model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText(), date,labelIdRegistro.getText());
                   } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un modelo", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un Repuesto", JOptionPane.ERROR_MESSAGE);
                     }             
-                    JOptionPane.showMessageDialog(this,"Modelo actualizado correctamente", "Modelo Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Modelo actualizado correctamente", "Repuesto Actualizado",JOptionPane.INFORMATION_MESSAGE);
                 }
                     
             }else {
-            JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para actualizar", "Error",
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado un Repuesto para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        model.loadData(tbGetDatosModelo,"");
+        repuesto.loadData(tbGetDatosRepuesto,"");
         limpiarCampos();
         
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
@@ -436,11 +460,11 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_ExaminarImagenActionPerformed
 
     private void btnGuardarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRepuestoActionPerformed
-
-        if(RepuestoEsValido(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText())){
-            //model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText());
-        model.loadData(tbGetDatosModelo,"");
-        JOptionPane.showMessageDialog(null,"Modelo creaco correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
+        TBLModeloVo tipoModelo = (TBLModeloVo)ListModelos.getSelectedItem();
+        if(RepuestoEsValido(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(),labelRutaImagen.getText(),tipoModelo.getId())){
+        repuesto.save(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(),labelRutaImagen.getText(),tipoModelo);
+        repuesto.loadData(tbGetDatosRepuesto,"");
+        JOptionPane.showMessageDialog(null,"Repuesto creado correctamente", "Repuesto creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();
         }else {
             JOptionPane.showMessageDialog(this, "Todos los campos son requeridos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -448,8 +472,8 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnGuardarRepuestoActionPerformed
 
-     public boolean RepuestoEsValido(String nombre, String descripcion , String rutaImagen,String referencia) {
-        return !nombre.isEmpty() && !descripcion.isEmpty() && !rutaImagen.isEmpty();
+     public boolean RepuestoEsValido(String nombre, String referencia , String descripcion, String rutaImagen,int tipoModelo) {
+        return !nombre.isEmpty() && !referencia.isEmpty() && !descripcion.isEmpty() && !rutaImagen.isEmpty() && tipoModelo!=0;
     }
     private void txtDescripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDescripcionMouseClicked
 
@@ -466,6 +490,10 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     private void listEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_listEstadoActionPerformed
+
+    private void ListModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListModelosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListModelosActionPerformed
 
     
         private byte[] getImagen(String ruta) {
@@ -517,21 +545,21 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     }
     
    public void modificar(){
-     int fila =tbGetDatosModelo.getSelectedRow();
+     int fila =tbGetDatosRepuesto.getSelectedRow();
      if(fila >=0){
        //listEstado.removeAllItems();
        //listAno.removeAllItems();
        //ListMes.removeAllItems();
        //listDia.removeAllItems();
        
-       txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
-       txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
-       labelRutaImagen.setText(tbGetDatosModelo.getValueAt(fila, 3).toString());
-       txtReferencia.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());   
-       labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 7).toString());
+       txtNombre.setText(tbGetDatosRepuesto.getValueAt(fila, 1).toString());
+       txtDescripcion.setText(tbGetDatosRepuesto.getValueAt(fila, 2).toString());
+       labelRutaImagen.setText(tbGetDatosRepuesto.getValueAt(fila, 3).toString());
+       txtReferencia.setText(tbGetDatosRepuesto.getValueAt(fila, 5).toString());   
+       labelIdRegistro.setText(tbGetDatosRepuesto.getValueAt(fila, 7).toString());
 //       listEstado.addItem(tbGetDatosModelo.getValueAt(fila, 4).toString());
  
-       String fecha[] = tbGetDatosModelo.getValueAt(fila, 6).toString().split("-");
+       String fecha[] = tbGetDatosRepuesto.getValueAt(fila, 6).toString().split("-");
        //listAno.addItem(fecha[0]);
        //ListMes.addItem(model.mesStr(Integer.parseInt(fecha[1])));
        //listDia.addItem(fecha[2]);
@@ -543,6 +571,12 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
        
      }
  } 
+   
+    public void ltsModelos(){       
+     repuesto.ltsModelos().forEach(obj->{
+        ListModelos.addItem(obj);
+     });
+ }  
  public void listDias(int dia){
   for(int i=1; i<=31;i++){
     if(dia != i){
@@ -578,6 +612,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
 }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExaminarImagen;
+    private javax.swing.JComboBox<TBLModeloVo> ListModelos;
     public javax.swing.JButton btnActualizarModelo;
     public javax.swing.JButton btnEliminarRepuesto;
     public javax.swing.JButton btnGuardarRepuesto;
@@ -589,13 +624,14 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanelModeloCarro;
     public javax.swing.JLabel labelIdRegistro;
     private javax.swing.JLabel labelRutaImagen;
     private javax.swing.ButtonGroup rdbGrupoEliminar_Actualizar;
-    public javax.swing.JTable tbGetDatosModelo;
+    public javax.swing.JTable tbGetDatosRepuesto;
     public javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtFilterTable;
     public javax.swing.JTextField txtNombre;

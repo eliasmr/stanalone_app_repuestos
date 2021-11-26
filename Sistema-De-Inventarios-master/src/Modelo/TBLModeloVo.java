@@ -29,4 +29,8 @@ public class TBLModeloVo {
     private String pathImagen;
     private TBLMarcaVo idMarca;
     
+     @Override
+    public String toString() {
+        return  nombre;
+    }
 }

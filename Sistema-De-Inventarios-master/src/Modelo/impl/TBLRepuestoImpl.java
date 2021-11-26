@@ -20,19 +20,19 @@ public class TBLRepuestoImpl{
     private static final Logger LOGGER = Logger.getLogger("TBLCombustibleImpl");
     private final Connection connection = Conexion.getInstance().getConexion();
     private ResultSet rs = null;
-    private TBLModeloImpl modelo;
+    private TBLModeloImpl modeloImpl;
     
     public TBLRepuestoImpl(){}
     public TBLRepuestoImpl(TBLModeloImpl modelo){
-        this.modelo = modelo;
+        this.modeloImpl = new TBLModeloImpl();
     }
-    public boolean insert(final TBLRepuestoVo rvo){
+    public boolean insertarRepuesto(final TBLRepuestoVo rvo){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la insercion del repuesto "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_REPUESTO)){
             pstmt.setString(1, rvo.getNombre());
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
-             pstmt.setInt(4, rvo.getModelo().getId());
+            pstmt.setInt(4, rvo.getIdmodelo().getId());
             pstmt.setString(5, rvo.getPathImagen());
             pstmt.execute();
             return true;
@@ -49,7 +49,7 @@ public class TBLRepuestoImpl{
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
             pstmt.setString(4, rvo.getPathImagen());
-            pstmt.setInt(5, rvo.getModelo().getId());
+            pstmt.setInt(5, rvo.getIdmodelo().getId());
             pstmt.setInt(6, rvo.getIdRepuesto());
             pstmt.execute();
             return true;
@@ -71,7 +71,7 @@ public class TBLRepuestoImpl{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
                       .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .modelo(modelo.getModeloById(rs.getInt("ID_MODELO")))
+                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
             }
@@ -92,7 +92,7 @@ public class TBLRepuestoImpl{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
                       .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .modelo(modelo.getModeloById(rs.getInt("ID_MODELO")))
+                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
             }
@@ -109,12 +109,12 @@ public class TBLRepuestoImpl{
             while(rs.next()){
              TBLRepuestoVo repuesto = TBLRepuestoVo
                       .builder()
+                      .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .nombre(rs.getString("NOMBRE"))
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion("DESCRIPCION")
                       .pathImagen("RUTA_IMAGEN")
-                      .modelo(modelo.getModeloById(rs.getInt("ID_MODELO")))
-                      .idRepuesto(rs.getInt("ID_REPUESTO"))
+                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))         
                       .build();
              lts.add(repuesto);
             }
@@ -122,5 +122,17 @@ public class TBLRepuestoImpl{
             LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener todo los repuestos", e));
         }
         return lts;
+    }
+     
+      public boolean delete(final int id){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia el borrado del modelo "));
+        try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.DELETE_REPUESTO)) {
+            pstmt.setInt(1, id);
+            pstmt.execute();
+            return true;
+        } catch (Exception e) {
+        LOGGER.severe(TraceInfoSistem.getTraceInfoError("al borrar el modelo del carro", e));
+        }
+        return false;
     }
 }

@@ -25,6 +25,6 @@ public class TBLRepuestoVo {
   private String referencia;
   private String descripcion;
   private String pathImagen;
-  private TBLModeloVo modelo;
+  private TBLModeloVo idmodelo;
   
 }

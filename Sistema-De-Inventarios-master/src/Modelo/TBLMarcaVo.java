@@ -25,4 +25,9 @@ public class TBLMarcaVo {
   private String descripcion;
   //private TBLModeloVo idModelo;
   
+  
+   @Override
+    public String toString() {
+        return  nombre;
+    }
 }

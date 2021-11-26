@@ -121,7 +121,6 @@ public class TBLModeloImpl{
                              .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             //.repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
                              .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                              .build();
             lts.add(tbl);
@@ -155,4 +154,31 @@ public class TBLModeloImpl{
         }
         return null;
     }
+
+    public List<TBLModeloVo> allModelos() {
+     LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta de toda los modelos "));
+        List<TBLModeloVo> ltsModelos = new ArrayList<>();
+        try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_MODELO)){           
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+            TBLModeloVo tbl = TBLModeloVo.builder()
+                             .id(rs.getInt("ID_MODELO"))
+                             .nombre(rs.getString("NOMBRE"))
+                             .anio(rs.getString("ANO"))
+                             .cilindraje(rs.getString("CILINDRAJE"))
+                             .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
+                             .descripcion(rs.getString("DESCRIPCION"))
+                             .pathImagen(rs.getString("RUTA_IMAGEN"))
+                             .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
+                             .build();
+            ltsModelos.add(tbl);
+            }
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener todo los modelos delos carros", e));
+        }
+        return ltsModelos;
+    }    
 }
+    
+  
+
