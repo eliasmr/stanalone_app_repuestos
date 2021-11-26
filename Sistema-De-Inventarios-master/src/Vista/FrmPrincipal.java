@@ -495,7 +495,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);    }//GEN-LAST:event_gestionarModelosMitsubishiBotonActionPerformed
 
     private void gestionarRepuestosMitsubishiBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosMitsubishiBotonActionPerformed
-        // TODO add your handling code here:
+       
+        JFrame frm = new FrmCrearRepuestoCarro();
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_gestionarRepuestosMitsubishiBotonActionPerformed
 
     private void gestionarModelosDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosDaihatsuBotonActionPerformed
@@ -508,11 +512,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_gestionarModelosDaihatsuBotonActionPerformed
 
     private void gestionarRepuestosDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosDaihatsuBotonActionPerformed
-        // TODO add your handling code here:
+        JFrame frm = new FrmCrearRepuestoCarro();
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_gestionarRepuestosDaihatsuBotonActionPerformed
 
     private void gestionarModelosNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosNissanBotonActionPerformed
- TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());
+       TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());
         JFrame frm = new FrmCrearModeloCarrro(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
@@ -521,7 +528,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_gestionarModelosNissanBotonActionPerformed
 
     private void gestionarRepuestosNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosNissanBotonActionPerformed
-        // TODO add your handling code here:
+      
+        JFrame frm = new FrmCrearRepuestoCarro();
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_gestionarRepuestosNissanBotonActionPerformed
 
     /**
