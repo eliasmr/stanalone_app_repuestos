@@ -73,6 +73,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         labelRutaImagen = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         listAnio = new javax.swing.JComboBox<>();
+        BotonBuscarModelo = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -226,6 +227,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         listAnio.setBackground(new java.awt.Color(209, 37, 29));
         listAnio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         listAnio.setForeground(new java.awt.Color(255, 255, 255));
+        listAnio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listAnioActionPerformed(evt);
+            }
+        });
+
+        BotonBuscarModelo.setBackground(new java.awt.Color(209, 37, 29));
+        BotonBuscarModelo.setForeground(new java.awt.Color(255, 255, 255));
+        BotonBuscarModelo.setText("Buscar");
 
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
@@ -251,7 +261,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BotonBuscarModelo))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -316,7 +328,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                         .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BotonBuscarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18))
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
@@ -497,6 +511,10 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFilterTableActionPerformed
 
+    private void listAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAnioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listAnioActionPerformed
+
     
         private byte[] getImagen(String ruta) {
         File imagen = new File(ruta);
@@ -547,21 +565,17 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     
    public void modificar(){
      int fila =tbGetDatosModelo.getSelectedRow();
-     if(fila >=0){
-
-       
+     String anio = (String) listAnio.getSelectedItem();
+     if(fila >=0){       
        txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
        txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
        labelRutaImagen.setText(tbGetDatosModelo.getValueAt(fila, 3).toString());
-       txtCilindraje.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());     
-       String fecha[] = tbGetDatosModelo.getValueAt(fila, 6).toString().split("-");
-       labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 7).toString());
-
-       this.listAno(Integer.parseInt(fecha[0]));
-       this.listMes(fecha[1]);
-       this.listDias(Integer.parseInt(fecha[2]));
        this.ltsTipoCombustible();
-       
+       txtCilindraje.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());     
+       this.listAno(Integer.parseInt(anio));
+       //marcas
+       labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 8).toString());
+
      }
  } 
  public void listDias(int dia){
@@ -578,8 +592,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 //          ListMes.addItem(mes);
       }
     }
- public void listAno(int ano){
-     
+ public void listAno(int ano){     
      for(int i=1900;i<=3000;i++){
        if(ano != i){
        listAnio.addItem(String.valueOf(i));
@@ -599,6 +612,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
   
  }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonBuscarModelo;
     private javax.swing.JButton ExaminarImagen;
     private javax.swing.JComboBox<TBLTipoCombustibleVo> ListTipoCombistible;
     public javax.swing.JButton btnActualizarModelo;
@@ -627,4 +641,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private javax.swing.JTextField txtFilterTable;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+   
 }

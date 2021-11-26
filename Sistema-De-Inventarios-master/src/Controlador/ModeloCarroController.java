@@ -64,9 +64,10 @@ public class ModeloCarroController{
     modeloT.addColumn("Tipo Combustible");
     modeloT.addColumn("Cilindraje");
     modeloT.addColumn("Año Modelo");
-    modeloT.addColumn("Id Marca");
+    modeloT.addColumn("Marca");
+    modeloT.addColumn("Codigo");
     
-    Object[] columna = new Object [8];
+    Object[] columna = new Object [9];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     impl.allModelo(param).stream().forEach(obj ->{
       String marca = setearMarca(obj.getId());
@@ -78,6 +79,7 @@ public class ModeloCarroController{
       columna[5] = obj.getCilindraje();
       columna[6] = obj.getAnio();
       columna[7] = marca;
+      columna[8] =obj.getId();
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
