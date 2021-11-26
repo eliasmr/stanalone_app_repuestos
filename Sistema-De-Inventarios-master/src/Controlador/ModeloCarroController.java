@@ -1,18 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controlador;
 
+import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
 import Modelo.TBLTipoCombustibleVo;
-import Modelo.impl.DropBoxImpl;
+import Modelo.impl.TBLCombustibleImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
-import java.awt.event.ActionEvent;
-import java.sql.Date;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,9 +21,10 @@ public class ModeloCarroController{
     private TBLModeloImpl impl;
     private TBLModeloVo model;
     private FrmCrearModeloCarrro frm;
-    
+    private TBLCombustibleImpl combustible;
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
+      this.combustible = new TBLCombustibleImpl();
     }
     public ModeloCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModeloVo model){
     /*DropBoxImpl im =  new DropBoxImpl();
@@ -40,8 +37,17 @@ public class ModeloCarroController{
     
     
 
-    public void save(String nombre,String descripcion,String ruta, String modelo,String fecha) {      
-        impl.insertaModelo(setModelo(nombre,descripcion,ruta,modelo,fecha,0));
+    public void save(String nombre,String ano,String cilindraje,TBLTipoCombustibleVo tipoCombustible,String descripcion,String img, TBLMarcaVo marca) {      
+        impl.insertaModelo(TBLModeloVo
+                           .builder()
+                           .nombre(nombre)
+                           .anio(ano)
+                           .cilindraje(cilindraje)
+                           .tipoCombustible(tipoCombustible)
+                           .descripcion(descripcion)
+                           .pathImagen(img)
+                           .idMarca(marca)
+                           .build());
     }
     
     public void loadData(JTable jt, String param){
@@ -65,31 +71,31 @@ public class ModeloCarroController{
       columna[3] = obj.getPathImagen();
       columna[4] = obj.getTipoCombustible().getNombre();
       columna[5] = obj.getCilindraje();
-      columna[6] = obj.getAno();
+      columna[6] = obj.getAnio();
       columna[7] = obj.getId();
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
    }
-    public void updateModel(String nombre,String descripcion,String ruta,String modelo, String fecha, String id){
-    impl.update(setModelo(nombre,descripcion,ruta,modelo,fecha,Integer.parseInt(id)));
+    public void updateModel(int id,String nombre,String ano,String cilindraje,TBLTipoCombustibleVo tipoCombustible,String descripcion,String img, TBLMarcaVo marca){
+    impl.update(TBLModeloVo
+                           .builder()
+                           .id(id)
+                           .nombre(nombre)
+                           .anio(ano)
+                           .cilindraje(cilindraje)
+                           .tipoCombustible(tipoCombustible)
+                           .descripcion(descripcion)
+                           .pathImagen(img)
+                           .idMarca(marca)
+                           .build());
     }
      public void deleteModelo(String text) {
         impl.delete(Integer.parseInt(text));
     }
-    public TBLModeloVo setModelo(String nombre,String descripcion,String ruta,String cilindraje, String anio,String tipoCombustible,int id){
-        
-    return TBLModeloVo.builder()
-            .nombre(nombre)
-            .descripcion(descripcion)
-            .pathImagen(ruta)
-            .ano(anio)
-            .tipoCombustible()
-            .cilindraje(cilindraje)
-            .id(id)
-            .
-            .build();
-    }
+     public List<TBLTipoCombustibleVo> ltsTipoCombustible(){
+      return combustible.getAllTipoCpmbustible();
+     }
  
     public int mes(String mes){
      int mesT = 0;

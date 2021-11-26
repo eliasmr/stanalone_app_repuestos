@@ -16,10 +16,10 @@ import util.TraceInfoSistem;
  *
  * @author Elias
  */
-public class TBLCombustibleImpl extends  Conexion{
+public class TBLCombustibleImpl{
     
     private static final Logger LOGGER = Logger.getLogger("TBLCombustibleImpl");
-    private final Connection connection = getConexion();
+    private final Connection connection = Conexion.getInstance().getConexion();;
     private ResultSet rs = null;
     public TBLCombustibleImpl(){
     }

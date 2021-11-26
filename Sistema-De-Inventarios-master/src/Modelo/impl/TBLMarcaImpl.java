@@ -19,9 +19,9 @@ import util.TraceInfoSistem;
  *
  * @author Elias
  */
-public class TBLMarcaImpl extends Conexion {
+public class TBLMarcaImpl {
     private static final Logger LOGGER = Logger.getLogger("TBLMarcaImpl");
-    private final Connection connection = getConexion();
+    private final Connection connection = Conexion.getInstance().getConexion();;
     private ResultSet rs = null;
     private TBLModeloImpl marcaImpl;
     
@@ -36,7 +36,7 @@ public class TBLMarcaImpl extends Conexion {
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_MARCA)){
             pstmt.setString(1, marca.getNombre());
             pstmt.setString(3, marca.getDescripcion());
-            pstmt.setInt(6, marca.getIdModelo().getId());
+            //pstmt.setInt(6, marca.getIdModelo().getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class TBLMarcaImpl extends Conexion {
             try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.UPDATE_MARCA)){
                 pstmt.setString(1, vo.getNombre());
                 pstmt.setString(2, vo.getDescripcion());
-                pstmt.setInt(3, vo.getIdModelo().getId());
+                //pstmt.setInt(3, vo.getIdModelo().getId());
                 pstmt.setInt(4, vo.getIdMarca());
                 return true;
             } catch (Exception e) {
@@ -69,7 +69,7 @@ public class TBLMarcaImpl extends Conexion {
                      .idMarca(rs.getInt("ID_MARCA"))
                      .nombre(rs.getString("NOMBRE"))
                      .descripcion(rs.getString("DESCRIPCION"))
-                     .idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
+                     //.idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
                      .build();
             }
             
@@ -84,12 +84,12 @@ public class TBLMarcaImpl extends Conexion {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             if(rs.next()){
-             TBLMarcaVo
+            return TBLMarcaVo
                      .builder()
                      .idMarca(rs.getInt("ID_MARCA"))
                      .nombre(rs.getString("NOMBRE"))
                      .descripcion(rs.getString("DESCRIPCION"))
-                     .idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
+                     //.idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
                      .build();
             }
             
@@ -109,7 +109,7 @@ public class TBLMarcaImpl extends Conexion {
                                 .idMarca(rs.getInt("ID_MARCA"))
                                 .nombre(rs.getString("NOMBRE"))
                                 .descripcion(rs.getString("DESCRIPCION"))
-                                .idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
+                                //.idModelo(marcaImpl.getModeloById(rs.getInt("ID_MODELO")))
                                 .build();
             lts.add(marca);
             }

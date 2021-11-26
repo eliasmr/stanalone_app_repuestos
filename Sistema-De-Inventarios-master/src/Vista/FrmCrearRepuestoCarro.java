@@ -399,7 +399,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
                         "¿Esta seguro de que desea actualizar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                    try {
-                   model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText(), date,labelIdRegistro.getText());
+                   //model.updateModel(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText(), date,labelIdRegistro.getText());
                   } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un modelo", JOptionPane.ERROR_MESSAGE);
                     }             
@@ -438,7 +438,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     private void btnGuardarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRepuestoActionPerformed
 
         if(RepuestoEsValido(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText())){
-            model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText());
+            //model.save(txtNombre.getText(), txtDescripcion.getText(), labelRutaImagen.getText(),txtReferencia.getText());
         model.loadData(tbGetDatosModelo,"");
         JOptionPane.showMessageDialog(null,"Modelo creaco correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();

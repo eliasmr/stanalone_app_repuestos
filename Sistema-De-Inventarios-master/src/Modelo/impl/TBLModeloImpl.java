@@ -15,20 +15,19 @@ import util.TraceInfoSistem;
  *
  * @author Elias
  */
-public class TBLModeloImpl extends  Conexion{
+public class TBLModeloImpl{
     
     private static final Logger LOGGER = Logger.getLogger("TBLModeloImpl");
-    private final Connection connection = getConexion();
+    private final Connection connection = Conexion.getInstance().getConexion();;
     private ResultSet rs = null;
     private TBLCombustibleImpl tipoCombustible;
     private TBLRepuestoImpl repuestoImpl;
     private TBLMarcaImpl marcaImpl;
     
-    public TBLModeloImpl(){}
-    public TBLModeloImpl(TBLCombustibleImpl tipoCombustible, TBLRepuestoImpl repuesto, TBLMarcaImpl marca){
-         this.tipoCombustible = tipoCombustible;
-         this.repuestoImpl  = repuesto;
-         this.marcaImpl = marca;
+    public TBLModeloImpl(){
+         this.tipoCombustible = new TBLCombustibleImpl();
+         this.repuestoImpl  = new TBLRepuestoImpl();
+         this.marcaImpl = new TBLMarcaImpl();
     }
     public Boolean insertaModelo(final TBLModeloVo dto){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia el guardado del modelo "));
@@ -38,7 +37,8 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.setString(3, dto.getCilindraje());
             pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
             pstmt.setString(5, dto.getDescripcion());
-            pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
+            pstmt.setString(6, dto.getPathImagen());
+            //pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
             pstmt.setInt(7, dto.getIdMarca().getIdMarca());
             pstmt.execute();
             return true;
@@ -62,7 +62,7 @@ public class TBLModeloImpl extends  Conexion{
                              .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             .repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
+                             //.repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
                              .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                              .build();
                                          
@@ -81,8 +81,10 @@ public class TBLModeloImpl extends  Conexion{
             pstmt.setString(3, dto.getCilindraje());
             pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
             pstmt.setString(5, dto.getDescripcion());
-            pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
+            pstmt.setString(6, dto.getPathImagen());
+            //pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
             pstmt.setInt(7, dto.getIdMarca().getIdMarca());
+            pstmt.setInt(8, dto.getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -106,7 +108,7 @@ public class TBLModeloImpl extends  Conexion{
         List<TBLModeloVo>  lts = new ArrayList<>();
         String consulta = ConsultasSQL.ALL_MODELO;
         if(!filtro.isEmpty()){
-          consulta = consulta.concat(" Where  NOMBRE like '%"+filtro+"%' or ESTADO like '%"+filtro+"%' or FECHA_MODELO like '%"+filtro+"%'");
+          consulta = consulta.concat(" Where  NOMBRE like '%"+filtro+"%'");
         }
          try(PreparedStatement pstmt = connection.prepareStatement(consulta)){           
             rs = pstmt.executeQuery();
@@ -119,7 +121,7 @@ public class TBLModeloImpl extends  Conexion{
                              .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                              .descripcion(rs.getString("DESCRIPCION"))
                              .pathImagen(rs.getString("RUTA_IMAGEN"))
-                             .repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
+                             //.repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
                              .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                              .build();
             lts.add(tbl);
@@ -144,7 +146,7 @@ public class TBLModeloImpl extends  Conexion{
                     .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
                     .descripcion(rs.getString("DESCRIPCION"))
                     .pathImagen(rs.getString("RUTA_IMAGEN"))
-                    .repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
+                    //.repuestos(repuestoImpl.getRepuestoByID(rs.getInt("ID_REPUESTO")))
                     .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
                     .build();
             }

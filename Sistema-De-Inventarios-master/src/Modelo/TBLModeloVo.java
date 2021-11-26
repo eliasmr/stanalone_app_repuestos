@@ -4,7 +4,6 @@
  */
 package Modelo;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +27,6 @@ public class TBLModeloVo {
     private TBLTipoCombustibleVo tipoCombustible;
     private String descripcion;
     private String pathImagen;
-    private TBLRepuestoVo repuestos ;
     private TBLMarcaVo idMarca;
     
 }

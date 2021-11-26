@@ -19,6 +19,7 @@ public class SistemaDeInventarios {
      */
     public static void main(String[] args) {
         FrmPrincipal frm = new FrmPrincipal();
+        frm.setLocationRelativeTo(null);
         frm.setVisible(true);
     }
     

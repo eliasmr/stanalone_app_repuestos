@@ -23,5 +23,10 @@ public class TBLTipoCombustibleVo {
   private int idTipoCombustible;
   private String nombre;
   private String descripcion;
+
+    @Override
+    public String toString() {
+        return  nombre;
+    }
   
 }

@@ -6,30 +6,34 @@ import Modelo.TBLRepuestoVo;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import util.MensajesSistema;
 import util.TraceInfoSistem;
 
 /**
  *
  * @author Elias
  */
-public class TBLRepuestoImpl extends Conexion{
+public class TBLRepuestoImpl{
     
     private static final Logger LOGGER = Logger.getLogger("TBLCombustibleImpl");
-    private final Connection connection = getConexion();
+    private final Connection connection = Conexion.getInstance().getConexion();
     private ResultSet rs = null;
+    private TBLModeloImpl modelo;
     
+    public TBLRepuestoImpl(){}
+    public TBLRepuestoImpl(TBLModeloImpl modelo){
+        this.modelo = modelo;
+    }
     public boolean insert(final TBLRepuestoVo rvo){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la insercion del repuesto "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.INSERT_REPUESTO)){
             pstmt.setString(1, rvo.getNombre());
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
-            pstmt.setString(4, rvo.getPathImagen());
+             pstmt.setInt(4, rvo.getModelo().getId());
+            pstmt.setString(5, rvo.getPathImagen());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -45,7 +49,8 @@ public class TBLRepuestoImpl extends Conexion{
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
             pstmt.setString(4, rvo.getPathImagen());
-            pstmt.setInt(5, rvo.getIdRepuesto());
+            pstmt.setInt(5, rvo.getModelo().getId());
+            pstmt.setInt(6, rvo.getIdRepuesto());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -66,6 +71,7 @@ public class TBLRepuestoImpl extends Conexion{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
                       .pathImagen(rs.getString("RUTA_IMAGEN"))
+                      .modelo(modelo.getModeloById(rs.getInt("ID_MODELO")))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
             }
@@ -86,6 +92,7 @@ public class TBLRepuestoImpl extends Conexion{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
                       .pathImagen(rs.getString("RUTA_IMAGEN"))
+                      .modelo(modelo.getModeloById(rs.getInt("ID_MODELO")))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
             }
@@ -106,6 +113,7 @@ public class TBLRepuestoImpl extends Conexion{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion("DESCRIPCION")
                       .pathImagen("RUTA_IMAGEN")
+                      .modelo(modelo.getModeloById(rs.getInt("ID_MODELO")))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
              lts.add(repuesto);

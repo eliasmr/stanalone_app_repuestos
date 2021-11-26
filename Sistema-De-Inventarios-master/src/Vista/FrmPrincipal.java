@@ -20,8 +20,12 @@ import Modelo.clientes;
 import Modelo.proveedor;
 import Controlador.MarcasCarrosController;
 import Controlador.ModeloCarroController;
+import Controlador.PrincipalController;
+import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
 import Modelo.impl.TBLModeloImpl;
+import javax.swing.JFrame;
+import util.MarcasCarros;
 
 
 /**
@@ -35,12 +39,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
         PanelImage fondo = new PanelImage();
-
+        PrincipalController controller;
 
     /**
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
+        controller = new PrincipalController();
         this.setContentPane(fondo);
         initComponents();
        
@@ -379,9 +384,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void opcionCrearModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearModeloActionPerformed
         TBLModeloImpl impl = new TBLModeloImpl();
         TBLModeloVo model = new TBLModeloVo();
-        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
-        ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
-        frm.setVisible(true);
+        //FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        //ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
+        //frm.setVisible(true);
     }//GEN-LAST:event_opcionCrearModeloActionPerformed
 
     private void MnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnuSalirMouseClicked
@@ -447,17 +452,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonDihatsuActionPerformed
 
     private void gestionarModeloToyotaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloToyotaBotonActionPerformed
-        TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModeloVo model = new TBLModeloVo();
-        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
-        ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
+        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.TOYOTA.getId());
+        JFrame frm = new FrmCrearModeloCarrro(marcas);
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
         frm.setVisible(true);
     }//GEN-LAST:event_gestionarModeloToyotaBotonActionPerformed
 
     private void gestionarModeloMitsubishiBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloMitsubishiBotonActionPerformed
           TBLModeloImpl impl = new TBLModeloImpl();
         TBLModeloVo model = new TBLModeloVo();
-        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro(new TBLMarcaVo());
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
     }//GEN-LAST:event_gestionarModeloMitsubishiBotonActionPerformed
@@ -465,14 +470,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void gestionarModeloDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloDaihatsuBotonActionPerformed
    TBLModeloImpl impl = new TBLModeloImpl();
         TBLModeloVo model = new TBLModeloVo();
-        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro(new TBLMarcaVo());
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);    }//GEN-LAST:event_gestionarModeloDaihatsuBotonActionPerformed
 
     private void gestionarModeloNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModeloNissanBotonActionPerformed
            TBLModeloImpl impl = new TBLModeloImpl();
         TBLModeloVo model = new TBLModeloVo();
-        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
+        FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro(new TBLMarcaVo());
         ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
         frm.setVisible(true);
     }//GEN-LAST:event_gestionarModeloNissanBotonActionPerformed
