@@ -74,6 +74,7 @@ public class TBLModeloImpl{
     public boolean update(final TBLModeloVo dto){
     LOGGER.info(TraceInfoSistem.getTraceInfo("inicia actulizacion del modelo "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.UPDATE_MODELO)) {
+          
             pstmt.setString(1, dto.getNombre());
             pstmt.setString(2, dto.getAnio());
             pstmt.setString(3, dto.getCilindraje());
@@ -81,7 +82,7 @@ public class TBLModeloImpl{
             pstmt.setString(5, dto.getDescripcion());
             pstmt.setString(6, dto.getPathImagen());
             pstmt.setInt(7, dto.getIdMarca().getIdMarca());
-            pstmt.setInt(8, dto.getId());
+            pstmt.setInt(8,dto.getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {

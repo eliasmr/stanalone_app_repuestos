@@ -60,8 +60,9 @@ public class RepuestoCarroController{
     repuestoT.addColumn("Descripcion");
     repuestoT.addColumn("Imagen");
     repuestoT.addColumn("Modelo");
+    repuestoT.addColumn("Codigo");
     
-    Object[] columna = new Object [6];
+    Object[] columna = new Object [7];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     impl.getAllRepuesto(param).stream().forEach(obj ->{
       
@@ -71,16 +72,17 @@ public class RepuestoCarroController{
       columna[3] = obj.getDescripcion();
       columna[4] = obj.getPathImagen();
       columna[5] = obj.getIdmodelo();
+      columna[6] = obj.getIdRepuesto();
       counter.getAndUpdate(value -> value + 1);
       repuestoT.addRow(columna);
     });
    }
     
    
-    public void updateRepuesto(int idRepuesto,String nombre,String referencia,String descripcion,String img, TBLModeloVo modelo){
+    public void updateRepuesto(int id,String nombre,String referencia,String descripcion,String img, TBLModeloVo modelo){
     impl.update(TBLRepuestoVo
                            .builder()
-                           .idRepuesto(idRepuesto)
+                           .idRepuesto(id)
                            .nombre(nombre)
                            .referencia(referencia)
                            .descripcion(descripcion)                       
