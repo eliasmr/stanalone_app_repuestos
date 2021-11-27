@@ -80,7 +80,6 @@ public class TBLModeloImpl{
             pstmt.setInt(4, dto.getTipoCombustible().getIdTipoCombustible());
             pstmt.setString(5, dto.getDescripcion());
             pstmt.setString(6, dto.getPathImagen());
-            //pstmt.setInt(6, dto.getRepuestos().getIdRepuesto());
             pstmt.setInt(7, dto.getIdMarca().getIdMarca());
             pstmt.setInt(8, dto.getId());
             pstmt.execute();
@@ -101,13 +100,10 @@ public class TBLModeloImpl{
         }
         return false;
     }
-    public List<TBLModeloVo> allModelo(String filtro){
+    public List<TBLModeloVo> allModelo(){
          LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los modelos de los carros "));
         List<TBLModeloVo>  lts = new ArrayList<>();
         String consulta = ConsultasSQL.ALL_MODELO;
-        if(!filtro.isEmpty()){
-          consulta = consulta.concat(" Where  NOMBRE like '%"+filtro+"%'");
-        }
          try(PreparedStatement pstmt = connection.prepareStatement(consulta)){           
             rs = pstmt.executeQuery();
             while(rs.next()){

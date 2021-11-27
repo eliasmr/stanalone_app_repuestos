@@ -8,8 +8,10 @@ import Modelo.impl.TBLCombustibleImpl;
 import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,25 +21,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ModeloCarroController{
 
-    private TBLModeloImpl impl;
+    private final TBLModeloImpl impl;
     private TBLModeloVo model;
     private FrmCrearModeloCarrro frm;
-    private TBLCombustibleImpl combustible;
-    private TBLMarcaImpl marca;
+    private final TBLCombustibleImpl combustible;
+    private final TBLMarcaImpl marca;
+    private final PrincipalController principaCtr;
+    private  List<TBLModeloVo> ltsModelo;
     
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
       this.combustible = new TBLCombustibleImpl();
       this.marca = new TBLMarcaImpl();
+      this.principaCtr = new PrincipalController();
+      this.ltsModelo = new ArrayList<>();
     }
-    public ModeloCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModeloVo model){
-    /*DropBoxImpl im =  new DropBoxImpl();
-   // im.dropbox();
-    this.impl = impl;
-    this.model = model;
-    this.frm = frm;*/
-    //this.frm.btnGuardarModelo.addActionListener(this);
-    }
+
     
     
 
@@ -56,6 +55,19 @@ public class ModeloCarroController{
     
     public void loadData(JTable jt, String param){
      DefaultTableModel modeloT = new DefaultTableModel();
+     
+     if(param.isEmpty()){
+         ltsModelo = principaCtr.listaModelo();
+     }else{
+         ltsModelo.stream().filter(registro -> 
+                                             registro.getNombre().contains(param) ||
+                                             registro.getCilindraje().contains(param) ||
+                                             registro.getAnio().contains(param) ||
+                                             registro.getDescripcion().contains(param) ||
+                                             registro.getIdMarca().getNombre().contains(param) ||
+                                             registro.getTipoCombustible().getNombre().contains(param)
+                                             ).collect(Collectors.toList());
+     }
     jt.setModel(modeloT);
     modeloT.addColumn("#");
     modeloT.addColumn("Nombre");
@@ -68,7 +80,7 @@ public class ModeloCarroController{
     
     Object[] columna = new Object [8];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
-    impl.allModelo(param).stream().forEach(obj ->{
+    ltsModelo.stream().forEach(obj ->{
       String marca = setearMarca(obj.getId());
       columna[0] = counter.get();
       columna[1] = obj.getNombre();

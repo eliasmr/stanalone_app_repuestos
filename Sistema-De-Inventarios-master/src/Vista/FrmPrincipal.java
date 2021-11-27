@@ -6,20 +6,6 @@
 package Vista;
 
 
-import Controlador.CtrlProveedor;
-import Controlador.CtrlTiposDeMovimiento;
-import Controlador.CtrlUnidadDeMedida;
-import Controlador.Ctrlclientes;
-import Modelo.ConsultasClientes;
-import Modelo.ConsultasProveedor;
-import Modelo.TiposDeMovimiento;
-import Modelo.TiposDeMovimientoSQL;
-import Modelo.UnidadDeMedida;
-import Modelo.UnidadDeMedidaSQL;
-import Modelo.clientes;
-import Modelo.proveedor;
-import Controlador.MarcasCarrosController;
-import Controlador.ModeloCarroController;
 import Controlador.PrincipalController;
 import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
@@ -409,23 +395,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MnuSalirMouseClicked
 
     private void MnuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuProveedoresActionPerformed
-       Modelo.proveedor pro = new proveedor();
-        Modelo.ConsultasProveedor modC = new ConsultasProveedor();
         frmProveedor frm = new frmProveedor();
-        
-        Controlador.CtrlProveedor ctrl = new CtrlProveedor(pro, modC, frm);
-        ctrl.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_MnuProveedoresActionPerformed
 
     private void MnuTiposdeMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuTiposdeMovimientoActionPerformed
-        // TODO add your handling code here:
-        TiposDeMovimiento tdm = new TiposDeMovimiento();
-        TiposDeMovimientoSQL modC = new TiposDeMovimientoSQL();
         FrmTiposDeMovimiento frm = new FrmTiposDeMovimiento();
-
-        CtrlTiposDeMovimiento ctrl = new CtrlTiposDeMovimiento(tdm, modC, frm);
-        ctrl.Iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_MnuTiposdeMovimientoActionPerformed
 
@@ -434,18 +409,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
      **/
     private void mnuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProductosActionPerformed
         FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
-        MarcasCarrosController ctrl = new MarcasCarrosController();
-        ctrl.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_mnuProductosActionPerformed
 
     private void MnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuClientesActionPerformed
-        clientes cl = new clientes();
-        ConsultasClientes modC = new ConsultasClientes();
         frmclientes1 frm = new frmclientes1();
-        
-        Ctrlclientes ctrl = new Ctrlclientes(cl, modC, frm);
-        ctrl.Iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_MnuClientesActionPerformed
 
