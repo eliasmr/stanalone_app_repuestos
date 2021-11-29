@@ -442,12 +442,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         modificar();
         
     }//GEN-LAST:event_tbGetDatosModeloMouseClicked
-    private void cargarImagen(){
-        String urlImagen = "/AutopartesLeon/modelo/DCBR_NISSAN.jpg";
-        ImageIcon icon = new ImageIcon(urlImagen);
-        //this.lbFondo.setIcon(icon);
-        //this.lbFondo.setText("");
-  }
+
     private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
         txtNombre.setText("");
          txtCilindraje.setText("");
@@ -578,18 +573,16 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
  
     private void tbGetDatosModeloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMousePressed
         FramImagen.setVisible(true);
-       FramImagen.setSize(500, 500);
+        FramImagen.setSize(500, 500);
   
          int fila =tbGetDatosModelo.getSelectedRow();
          Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();  
-         //ImageIcon imagen = new ImageIcon("Imagenes\fondo.PNG");
-         Image img= new ImageIcon("C:/Users/Admin/Desktop/app taller/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Imagenes/icondaihatsu.png").getImage();
+         String imagen = dropBoxImpl.getFileDrobox(Ruta);
+         Image img= new ImageIcon(imagen).getImage();
          ImageIcon img2=new ImageIcon(img.getScaledInstance(78, 124, Image.SCALE_SMOOTH));
 
           Labelimagenes.setIcon(img2);   
          //FramImagen.add(Labelimagenes);
-      
-   
 	//FramImagen.setLocationRelativeTo(null);
         System.out.println("frame pressed");
         System.out.println("dialog focused ");
