@@ -8,6 +8,7 @@ import Controlador.ModeloCarroController;
 import Controlador.RepuestoCarroController;
 import Modelo.TBLModeloVo;
 import Modelo.TBLTipoCombustibleVo;
+import Modelo.impl.DropBoxImpl;
 import Vista.PanelImage2;
 import java.awt.Image;
 import java.io.File;
@@ -40,9 +41,11 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
      */
     public String Ruta = "";
     private static RepuestoCarroController repuesto;
+    private DropBoxImpl dropBoxImpl;
     public FrmCrearRepuestoCarro() {
         //repuesto = new RepuestoController();
         repuesto = new RepuestoCarroController();
+        dropBoxImpl = new DropBoxImpl();
         initComponents();
         setTitle("Repuestos");
         this.ltsModelos();
@@ -427,25 +430,28 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarRepuestoActionPerformed
 
     private void btnActualizarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModeloActionPerformed
-            TBLModeloVo modelo = (TBLModeloVo)ListModelos.getSelectedItem();
+        TBLModeloVo modelo = (TBLModeloVo) ListModelos.getSelectedItem();
         if (!labelIdRegistro.getText().isEmpty()) {
-                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
-                        "¿Esta seguro de que desea actualizar este Repuesto?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
-                   try {
-                   repuesto.updateRepuesto(Integer.parseInt(labelIdRegistro.getText()),txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(),labelRutaImagen.getText(),modelo);
-                  } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un Repuesto", JOptionPane.ERROR_MESSAGE);
-                    }             
-                    JOptionPane.showMessageDialog(this,"Modelo actualizado correctamente", "Repuesto Actualizado",JOptionPane.INFORMATION_MESSAGE);
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
+                    "¿Esta seguro de que desea actualizar este Repuesto?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
+                try {
+                    String path = Ruta;
+                    if (!Ruta.contains("/AutopartesLeon/")) {
+                        path = dropBoxImpl.uploadFIleDropbox("repuestos", Ruta);
+                    }
+                    repuesto.updateRepuesto(Integer.parseInt(labelIdRegistro.getText()), txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(), path, modelo);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un Repuesto", JOptionPane.ERROR_MESSAGE);
                 }
-                    
-            }else {
+                JOptionPane.showMessageDialog(this, "Modelo actualizado correctamente", "Repuesto Actualizado", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un Repuesto para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        repuesto.loadData(tbGetDatosRepuesto,"");
+        repuesto.loadData(tbGetDatosRepuesto, "");
         limpiarCampos();
-        
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
 
     private void ExaminarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExaminarImagenActionPerformed
@@ -459,26 +465,24 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
             ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(this.imgProducto.getWidth(), this.imgProducto.getHeight(), Image.SCALE_SMOOTH));
             imgProducto.setIcon(mIcono);
         }
-        String rtRe = Ruta.replace("\\", "1000001").replace("/", "1000001");
-            String spl[] = rtRe.split("1000001");
-            int cont = 0;
-            for(String st: spl){
-                cont +=1;
-            }
-            labelRutaImagen.setText(spl[cont-1]);
+         labelRutaImagen.setText(splitPAthImg(Ruta));
     }//GEN-LAST:event_ExaminarImagenActionPerformed
 
     private void btnGuardarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarRepuestoActionPerformed
-        TBLModeloVo tipoModelo = (TBLModeloVo)ListModelos.getSelectedItem();
-        if(RepuestoEsValido(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(),labelRutaImagen.getText(),tipoModelo.getId())){
-        repuesto.save(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(),labelRutaImagen.getText(),tipoModelo);
-        repuesto.loadData(tbGetDatosRepuesto,"");
-        JOptionPane.showMessageDialog(null,"Repuesto creado correctamente", "Repuesto creado",JOptionPane.INFORMATION_MESSAGE); 
-        limpiarCampos();
-        }else {
+        TBLModeloVo tipoModelo = (TBLModeloVo) ListModelos.getSelectedItem();
+        if (RepuestoEsValido(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(), labelRutaImagen.getText(), tipoModelo.getId())) {
+                    String path = Ruta;
+                    if (!Ruta.contains("/AutopartesLeon/")) {
+                        path = dropBoxImpl.uploadFIleDropbox("repuestos", Ruta);
+                    }
+            repuesto.save(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(), path, tipoModelo);
+            repuesto.loadData(tbGetDatosRepuesto, "");
+            JOptionPane.showMessageDialog(null, "Repuesto creado correctamente", "Repuesto creado", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+        } else {
             JOptionPane.showMessageDialog(this, "Todos los campos son requeridos", "Error", JOptionPane.ERROR_MESSAGE);
         }
-       
+
     }//GEN-LAST:event_btnGuardarRepuestoActionPerformed
 
      public boolean RepuestoEsValido(String nombre, String referencia , String descripcion, String rutaImagen,int tipoModelo) {
@@ -559,11 +563,16 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
        txtNombre.setText(tbGetDatosRepuesto.getValueAt(fila, 1).toString());
        txtReferencia.setText(tbGetDatosRepuesto.getValueAt(fila, 2).toString());
        txtDescripcion.setText(tbGetDatosRepuesto.getValueAt(fila, 3).toString());
-       labelRutaImagen.setText(tbGetDatosRepuesto.getValueAt(fila, 4).toString());
+       Ruta = tbGetDatosRepuesto.getValueAt(fila, 4).toString();
+       labelRutaImagen.setText(splitPAthImg(Ruta));
        this.ltsModelos();
        labelIdRegistro.setText(tbGetDatosRepuesto.getValueAt(fila, 6).toString());
 
-       
+        //imagen
+        String img = dropBoxImpl.getFileDrobox(Ruta);
+        Image mImagen = new ImageIcon(img).getImage();
+        ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(this.imgProducto.getWidth(), this.imgProducto.getHeight(), Image.SCALE_SMOOTH));
+        imgProducto.setIcon(mIcono);
      }
  } 
    
@@ -595,16 +604,15 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
        
      }
  }
-/*public void listEstado(String estado){
- String ltsEstado[] = {"Bueno","Dañado","Regular","Averiado"};
-  for(String est: ltsEstado){
-    if(!estado.equals(est)){
-      listEstado.addItem(est);
-    }
-
+ public String splitPAthImg(String pathImg){
+       pathImg = pathImg.replace("\\", "1000001").replace("/", "1000001");
+            String spl[] = pathImg.split("1000001");
+            int cont = 0;
+            for(String st: spl){
+                cont +=1;
+            }
+            return spl[cont-1];
  }
-
-}*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonFiltrarRepuesto;
     private javax.swing.JButton ExaminarImagen;
