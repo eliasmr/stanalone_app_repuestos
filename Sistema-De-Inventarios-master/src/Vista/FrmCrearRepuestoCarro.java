@@ -62,6 +62,8 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     private void initComponents() {
 
         rdbGrupoEliminar_Actualizar = new javax.swing.ButtonGroup();
+        FramImagen = new javax.swing.JFrame();
+        Labelimagenes = new javax.swing.JLabel();
         jpanelModeloCarro = new JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -87,6 +89,23 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         ListModelos = new javax.swing.JComboBox<>();
         BotonFiltrarRepuesto = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout FramImagenLayout = new javax.swing.GroupLayout(FramImagen.getContentPane());
+        FramImagen.getContentPane().setLayout(FramImagenLayout);
+        FramImagenLayout.setHorizontalGroup(
+            FramImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FramImagenLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(Labelimagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        FramImagenLayout.setVerticalGroup(
+            FramImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FramImagenLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(Labelimagenes, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -194,6 +213,9 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         tbGetDatosRepuesto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGetDatosRepuestoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbGetDatosRepuestoMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(tbGetDatosRepuesto);
@@ -508,6 +530,23 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ListModelosActionPerformed
 
+    private void tbGetDatosRepuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosRepuestoMousePressed
+        // TODO add your handling code here:
+        FramImagen.setVisible(true);
+        FramImagen.setSize(500, 500);
+  
+         int fila =tbGetDatosRepuesto.getSelectedRow();
+         Ruta = tbGetDatosRepuesto.getValueAt(fila, 4).toString();  
+         String imagen = dropBoxImpl.getFileDrobox(Ruta);
+         Image img= new ImageIcon(imagen).getImage();
+         ImageIcon img2=new ImageIcon(img.getScaledInstance(Labelimagenes.getWidth(), Labelimagenes.getHeight(),
+        Image.SCALE_SMOOTH));
+
+          Labelimagenes.setIcon(img2);   
+	FramImagen.setLocationRelativeTo(null);
+
+    }//GEN-LAST:event_tbGetDatosRepuestoMousePressed
+
     
         private byte[] getImagen(String ruta) {
         File imagen = new File(ruta);
@@ -616,6 +655,8 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonFiltrarRepuesto;
     private javax.swing.JButton ExaminarImagen;
+    private javax.swing.JFrame FramImagen;
+    private javax.swing.JLabel Labelimagenes;
     private javax.swing.JComboBox<TBLModeloVo> ListModelos;
     public javax.swing.JButton btnActualizarModelo;
     public javax.swing.JButton btnEliminarRepuesto;

@@ -102,17 +102,17 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         FramImagen.getContentPane().setLayout(FramImagenLayout);
         FramImagenLayout.setHorizontalGroup(
             FramImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FramImagenLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(Labelimagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FramImagenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Labelimagenes, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                .addContainerGap())
         );
         FramImagenLayout.setVerticalGroup(
             FramImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FramImagenLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(Labelimagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FramImagenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Labelimagenes, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -526,7 +526,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             model.save(txtNombre.getText(),anio,txtCilindraje.getText(),tipoCombustible, txtDescripcion.getText(), path,marcas);
             model.loadData(tbGetDatosModelo,"");
             
-        JOptionPane.showMessageDialog(null,"Modelo creaco correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
+        JOptionPane.showMessageDialog(null,"Modelo creado correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();
         }else {
             JOptionPane.showMessageDialog(this, "Todos los campos son requeridos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -579,14 +579,11 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
          Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();  
          String imagen = dropBoxImpl.getFileDrobox(Ruta);
          Image img= new ImageIcon(imagen).getImage();
-         ImageIcon img2=new ImageIcon(img.getScaledInstance(78, 124, Image.SCALE_SMOOTH));
-
+         ImageIcon img2=new ImageIcon(img.getScaledInstance(Labelimagenes.getWidth(), Labelimagenes.getHeight(),
+        Image.SCALE_SMOOTH));
           Labelimagenes.setIcon(img2);   
-         //FramImagen.add(Labelimagenes);
-	//FramImagen.setLocationRelativeTo(null);
-        System.out.println("frame pressed");
-        System.out.println("dialog focused ");
-        System.out.println("frame focused ");
+	FramImagen.setLocationRelativeTo(null);
+
        
     }//GEN-LAST:event_tbGetDatosModeloMousePressed
 
