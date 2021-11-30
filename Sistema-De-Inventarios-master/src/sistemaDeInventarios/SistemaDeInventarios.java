@@ -23,7 +23,7 @@ public class SistemaDeInventarios {
     public static void main(String[] args) {
         
         ValidacionSessionImpl valSession = new ValidacionSessionImpl();
-        if(valSession.validaSession()){
+        if(!valSession.validaSession()){
             FrmPrincipal frm = new FrmPrincipal();
             frm.setLocationRelativeTo(null);
             frm.setVisible(true);

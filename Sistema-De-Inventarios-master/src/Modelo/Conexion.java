@@ -8,13 +8,11 @@ import util.TraceInfoSistem;
 
 public class Conexion {
     
-
-    private static final Logger LOGGER = Logger.getLogger("Conexion");
-    private final String base = "partesleon";
-    private final String user = "admin_repuestos";
-    private final String password = "3HEDWl20";
-    private final String url = "jdbc:mysql://db4free.net:3306/"+base+"?useSSL=false";
-
+    private static Logger LOGGER = Logger.getLogger("Conexion");
+    private final String base = "repuestos";
+    private final String user = "root";
+    private final String password = "liliana2357";
+    private final String url = "jdbc:mysql://localhost:3306/" + base+"verifyServerCertificate=false&useSSL=true";
     private Connection con = null;
     
     public static Conexion dbInstance;
