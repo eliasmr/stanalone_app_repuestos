@@ -4,33 +4,6 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="rdbGrupoEliminar_Actualizar">
     </Component>
-    <Container class="javax.swing.JFrame" name="FramImagen">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Labelimagenes" pref="540" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Labelimagenes" pref="383" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="Labelimagenes">
-        </Component>
-      </SubComponents>
-    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -58,18 +31,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" pref="830" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jpanelModeloCarro" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" pref="830" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="87" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,6 +64,9 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel()"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -98,68 +74,82 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                                  <Component id="txtReferencia" min="-2" pref="402" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtNombre" min="-2" pref="402" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="ExaminarImagen" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="ListModelos" min="-2" pref="330" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtNombre" alignment="0" min="-2" pref="402" max="-2" attributes="0"/>
-                                      <Component id="txtCilindraje" alignment="0" min="-2" pref="402" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace pref="55" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane1" min="-2" pref="423" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" pref="419" max="-2" attributes="0"/>
                                   </Group>
-                              </Group>
-                              <Component id="jScrollPane2" alignment="0" min="-2" pref="919" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="ListTipoCombistible" min="-2" pref="142" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                  <Component id="listAnio" min="-2" pref="79" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                  <Component id="ExaminarImagen" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Component id="labelRutaImagen" min="-2" pref="206" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="imgProducto" alignment="0" min="-2" pref="732" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                                          <Component id="labelRutaImagen" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel5" min="-2" pref="57" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="txtFilterTable" min="-2" pref="224" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="BotonBuscarModelo" min="-2" max="-2" attributes="0"/>
+                                          <Component id="BotonFiltrarRepuesto" min="-2" pref="86" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="jScrollPane2" alignment="0" min="-2" pref="919" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="btnEliminarModelo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnGuardarModelo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnActualizarModelo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnLimpiarCampos" min="-2" pref="135" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="51" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="722" max="-2" attributes="0"/>
-                          <Component id="labelIdRegistro" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Component id="imgProducto" min="-2" pref="613" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Component id="labelIdRegistro" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="btnEliminarRepuesto" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnGuardarRepuesto" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnActualizarModelo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnLimpiarCampos" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -173,60 +163,67 @@
                       <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="labelRutaImagen" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="txtCilindraje" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtReferencia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="ListTipoCombistible" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="listAnio" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel9" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel9" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="ListModelos" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelRutaImagen" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="ExaminarImagen" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ExaminarImagen" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="labelIdRegistro" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="imgProducto" min="-2" pref="293" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="labelIdRegistro" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="311" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="imgProducto" min="-2" pref="330" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtFilterTable" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="BotonBuscarModelo" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="BotonFiltrarRepuesto" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="106" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btnGuardarModelo" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="btnGuardarRepuesto" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnActualizarModelo" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnEliminarModelo" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="btnEliminarRepuesto" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnLimpiarCampos" min="-2" pref="42" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane2" min="-2" pref="122" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -274,17 +271,17 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Comic Sans MS" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cilindraje"/>
+            <Property name="text" type="java.lang.String" value="Referencia"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCilindraje">
+        <Component class="javax.swing.JTextField" name="txtReferencia">
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCilindrajeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtReferenciaActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -316,7 +313,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnGuardarModelo">
+        <Component class="javax.swing.JButton" name="btnGuardarRepuesto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="25" red="d1" type="rgb"/>
@@ -327,7 +324,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Crear Modelo"/>
+            <Property name="text" type="java.lang.String" value="Crear Repuesto"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -335,7 +332,7 @@
             </Property>
           </AccessibilityProperties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarModeloActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarRepuestoActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -369,7 +366,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Actualizar Modelo"/>
+            <Property name="text" type="java.lang.String" value="Actualizar Repuesto"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarModeloActionPerformed"/>
@@ -378,7 +375,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="btnEliminarModelo">
+        <Component class="javax.swing.JButton" name="btnEliminarRepuesto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="25" red="d1" type="rgb"/>
@@ -389,10 +386,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Eliminar Modelo"/>
+            <Property name="text" type="java.lang.String" value="Eliminar Repuesto"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarModeloActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarRepuestoActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -435,7 +432,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tbGetDatosModelo">
+            <Component class="javax.swing.JTable" name="tbGetDatosRepuesto">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
@@ -474,8 +471,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbGetDatosModeloMouseClicked"/>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbGetDatosModeloMousePressed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbGetDatosRepuestoMouseClicked"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -485,7 +481,6 @@
         </Container>
         <Component class="javax.swing.JTextField" name="txtFilterTable">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFilterTableActionPerformed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFilterTableKeyReleased"/>
           </Events>
         </Component>
@@ -505,15 +500,17 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JLabel" name="labelRutaImagen">
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Comic Sans MS" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tipo de Combustible"/>
+            <Property name="text" type="java.lang.String" value="Modelo Carro"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="ListTipoCombistible">
+        <Component class="javax.swing.JComboBox" name="ListModelos">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="25" red="d1" type="rgb"/>
@@ -530,45 +527,13 @@
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ListTipoCombistibleActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ListModelosActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TBLTipoCombustibleVo&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TBLModeloVo&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="labelRutaImagen">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Comic Sans MS" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="A&#xf1;o"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="listAnio">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="1d" green="25" red="d1" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="18" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listAnioActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="BotonBuscarModelo">
+        <Component class="javax.swing.JButton" name="BotonFiltrarRepuesto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1d" green="25" red="d1" type="rgb"/>
@@ -578,9 +543,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonBuscarModeloActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -596,7 +558,7 @@
           <Color blue="1d" green="25" red="d1" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="FORMULARIO PARA GESTIONAR MODELO DE lAS MARCAS"/>
+        <Property name="text" type="java.lang.String" value="FORMULARIO PARA GESTIONAR REPUESTOS DE LOS VEHICULOS"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
             <CompoundBorder/>

@@ -8,12 +8,15 @@ import Modelo.impl.TBLCombustibleImpl;
 import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -52,6 +55,9 @@ public class ModeloCarroController{
                            .idMarca(marca)
                            .build());
     }
+   
+ 
+
     
     public void loadData(JTable jt, String param){
      DefaultTableModel modeloT = new DefaultTableModel();
@@ -78,11 +84,12 @@ public class ModeloCarroController{
     modeloT.addColumn("Año Modelo");
     modeloT.addColumn("Marca");
     modeloT.addColumn("Codigo");
+
     
     Object[] columna = new Object [9];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsModelo.stream().forEach(obj ->{
-      String marca = setearMarca(obj.getId());
+      String marca = setearMarca(obj.getIdMarca().getIdMarca());
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();

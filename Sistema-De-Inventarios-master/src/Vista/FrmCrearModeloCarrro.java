@@ -5,14 +5,30 @@ import Controlador.ModeloCarroController;
 import Modelo.TBLMarcaVo;
 import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableColumn;
+import jdk.internal.org.jline.terminal.spi.JansiSupport;
 
 /**
  *
@@ -24,10 +40,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
      * Creates new form FrmCrearModeloCarrro
      */
     public String Ruta = "";
+    
     private static ModeloCarroController model;
     private TBLMarcaVo marcas;
     private DropBoxImpl dropBoxImpl;
     private int id;
+    DefaultTableModel modelo;
+
     public FrmCrearModeloCarrro(TBLMarcaVo marcas) {
         model = new ModeloCarroController();
         dropBoxImpl = new DropBoxImpl();
@@ -49,6 +68,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private void initComponents() {
 
         rdbGrupoEliminar_Actualizar = new javax.swing.ButtonGroup();
+        FramImagen = new javax.swing.JFrame();
+        Labelimagenes = new javax.swing.JLabel();
         jpanelModeloCarro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -76,6 +97,23 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         listAnio = new javax.swing.JComboBox<>();
         BotonBuscarModelo = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout FramImagenLayout = new javax.swing.GroupLayout(FramImagen.getContentPane());
+        FramImagen.getContentPane().setLayout(FramImagenLayout);
+        FramImagenLayout.setHorizontalGroup(
+            FramImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FramImagenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Labelimagenes, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        FramImagenLayout.setVerticalGroup(
+            FramImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FramImagenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Labelimagenes, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -184,6 +222,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGetDatosModeloMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbGetDatosModeloMousePressed(evt);
+            }
         });
         jScrollPane2.setViewportView(tbGetDatosModelo);
         if (tbGetDatosModelo.getColumnModel().getColumnCount() > 0) {
@@ -264,12 +305,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BotonBuscarModelo))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                 .addComponent(jLabel9)
@@ -284,21 +319,28 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addComponent(ExaminarImagen)
                                 .addGap(36, 36, 36)
-                                .addComponent(labelRutaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(38, Short.MAX_VALUE))
+                                .addComponent(labelRutaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BotonBuscarModelo)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnEliminarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnGuardarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnActualizarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)))
+                        .addContainerGap(51, Short.MAX_VALUE))
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGap(722, 722, 722)
                         .addComponent(labelIdRegistro)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelModeloCarroLayout.createSequentialGroup()
-                        .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnEliminarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGuardarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnActualizarModelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(78, 78, 78))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jpanelModeloCarroLayout.setVerticalGroup(
             jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +392,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                         .addComponent(btnLimpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(115, 115, 115)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(217, 217, 217))
+                .addGap(272, 272, 272))
         );
 
         txtNombre.getAccessibleContext().setAccessibleParent(this);
@@ -379,7 +421,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jpanelModeloCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,15 +434,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void txtFilterTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterTableKeyReleased
         
     }//GEN-LAST:event_txtFilterTableKeyReleased
 
     private void tbGetDatosModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMouseClicked
         modificar();
+        
     }//GEN-LAST:event_tbGetDatosModeloMouseClicked
-  
+
     private void btnLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCamposActionPerformed
         txtNombre.setText("");
          txtCilindraje.setText("");
@@ -415,6 +457,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
          imgProducto.setIcon(null);
          labelRutaImagen.setText("");
     }
+  
     private void btnEliminarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModeloActionPerformed
            if (!labelIdRegistro.getText().isEmpty()) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
@@ -483,7 +526,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             model.save(txtNombre.getText(),anio,txtCilindraje.getText(),tipoCombustible, txtDescripcion.getText(), path,marcas);
             model.loadData(tbGetDatosModelo,"");
             
-        JOptionPane.showMessageDialog(null,"Modelo creaco correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
+        JOptionPane.showMessageDialog(null,"Modelo creado correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();
         }else {
             JOptionPane.showMessageDialog(this, "Todos los campos son requeridos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -523,8 +566,26 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 
     private void BotonBuscarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarModeloActionPerformed
         // TODO add your handling code here:
+        
         model.loadData(tbGetDatosModelo, txtFilterTable.getText());
     }//GEN-LAST:event_BotonBuscarModeloActionPerformed
+
+ 
+    private void tbGetDatosModeloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMousePressed
+        FramImagen.setVisible(true);
+        FramImagen.setSize(500, 500);
+  
+         int fila =tbGetDatosModelo.getSelectedRow();
+         Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();  
+         String imagen = dropBoxImpl.getFileDrobox(Ruta);
+         Image img= new ImageIcon(imagen).getImage();
+         ImageIcon img2=new ImageIcon(img.getScaledInstance(Labelimagenes.getWidth(), Labelimagenes.getHeight(),
+        Image.SCALE_SMOOTH));
+          Labelimagenes.setIcon(img2);   
+	FramImagen.setLocationRelativeTo(null);
+
+       
+    }//GEN-LAST:event_tbGetDatosModeloMousePressed
 
     
         private byte[] getImagen(String ruta) {
@@ -642,6 +703,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonBuscarModelo;
     private javax.swing.JButton ExaminarImagen;
+    private javax.swing.JFrame FramImagen;
+    private javax.swing.JLabel Labelimagenes;
     private javax.swing.JComboBox<TBLTipoCombustibleVo> ListTipoCombistible;
     public javax.swing.JButton btnActualizarModelo;
     public javax.swing.JButton btnEliminarModelo;

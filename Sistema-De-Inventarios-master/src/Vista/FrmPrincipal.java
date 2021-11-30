@@ -395,13 +395,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MnuSalirMouseClicked
 
     private void MnuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuProveedoresActionPerformed
-        frmProveedor frm = new frmProveedor();
-        frm.setVisible(true);
+      
     }//GEN-LAST:event_MnuProveedoresActionPerformed
 
     private void MnuTiposdeMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuTiposdeMovimientoActionPerformed
-        FrmTiposDeMovimiento frm = new FrmTiposDeMovimiento();
-        frm.setVisible(true);
+
     }//GEN-LAST:event_MnuTiposdeMovimientoActionPerformed
 
     /**
@@ -413,8 +411,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuProductosActionPerformed
 
     private void MnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuClientesActionPerformed
-        frmclientes1 frm = new frmclientes1();
-        frm.setVisible(true);
+ 
     }//GEN-LAST:event_MnuClientesActionPerformed
 
     private void mnuTransportistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTransportistaActionPerformed
