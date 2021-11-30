@@ -7,8 +7,10 @@ import Modelo.impl.TBLModeloImpl;
 import Modelo.impl.TBLRepuestoImpl;
 import Vista.FrmCrearModeloCarrro;
 import Vista.FrmCrearRepuestoCarro;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,21 +24,16 @@ public class RepuestoCarroController{
     private TBLRepuestoVo repuesto;
     private FrmCrearRepuestoCarro frm;
     private TBLModeloImpl modelo;
-    //private TBLMarcaImpl marca;
+    private final PrincipalController principaCtr;
+    private  List<TBLRepuestoVo> ltsRepuesto;
     
     public RepuestoCarroController(){
         this.modelo = new TBLModeloImpl();
         this.impl = new TBLRepuestoImpl();
-     // this.marca = new TBLMarcaImpl();
+        this.principaCtr = new PrincipalController();
+        this.ltsRepuesto = new ArrayList<>();
     }
-    public RepuestoCarroController(FrmCrearModeloCarrro frm,TBLModeloImpl impl,TBLModeloVo model){
-    /*DropBoxImpl im =  new DropBoxImpl();
-   // im.dropbox();
-    this.impl = impl;
-    this.model = model;
-    this.frm = frm;*/
-    //this.frm.btnGuardarModelo.addActionListener(this);
-    }
+
     
     
 
@@ -51,8 +48,21 @@ public class RepuestoCarroController{
                            .build());
     }
     
-    public void loadData(JTable jt, String param){
+    public void loadData(JTable jt, String params){
      DefaultTableModel repuestoT = new DefaultTableModel();
+     List<TBLRepuestoVo> ltsTem = new ArrayList<>();
+     String param = params.toUpperCase();
+     if(params.isEmpty()){
+         ltsRepuesto = principaCtr.getAllRepuesto();
+         ltsTem = ltsRepuesto;
+     }else{
+       ltsTem =  ltsRepuesto.stream().filter(registro -> 
+                                             registro.getNombre().toUpperCase().contains(param)||
+                                             registro.getReferencia().toUpperCase().contains(param) ||
+                                             registro.getDescripcion().toUpperCase().contains(param) ||
+                                             registro.getIdmodelo().getNombre().toUpperCase().contains(param) 
+                                             ).collect(Collectors.toList());
+     }
     jt.setModel(repuestoT);
     repuestoT.addColumn("#");
     repuestoT.addColumn("Nombre");
@@ -64,7 +74,7 @@ public class RepuestoCarroController{
     
     Object[] columna = new Object [7];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
-    impl.getAllRepuesto(param).stream().forEach(obj ->{
+    ltsTem.stream().forEach(obj ->{
       
       columna[0] = counter.get();
       columna[1] = obj.getNombre();

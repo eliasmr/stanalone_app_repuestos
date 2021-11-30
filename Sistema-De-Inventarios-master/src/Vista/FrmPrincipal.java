@@ -328,16 +328,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MnuSalirMouseClicked
 
     private void BotonToyotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonToyotaActionPerformed
-
+        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.TOYOTA.getId());
+        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_BotonToyotaActionPerformed
 
     
     private void BotonMitsubitshiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMitsubitshiActionPerformed
-    
+        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.MITSUBISHI.getId());
+        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_BotonMitsubitshiActionPerformed
 
     private void BotonDihatsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDihatsuActionPerformed
-    
+      TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.DAIHATSU.getId());
+        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_BotonDihatsuActionPerformed
 
     private void gestionarModelosToyotaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosToyotaBotonActionPerformed
@@ -358,7 +370,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     
     private void BotonNissanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNissanActionPerformed
-        // TODO add your handling code here:
+       TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());
+        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true); 
     }//GEN-LAST:event_BotonNissanActionPerformed
 
     private void gestionarModelosMitsubishiBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosMitsubishiBotonActionPerformed

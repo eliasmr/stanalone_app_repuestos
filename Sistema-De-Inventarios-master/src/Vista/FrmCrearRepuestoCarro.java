@@ -253,6 +253,11 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         BotonFiltrarRepuesto.setBackground(new java.awt.Color(209, 37, 29));
         BotonFiltrarRepuesto.setForeground(new java.awt.Color(255, 255, 255));
         BotonFiltrarRepuesto.setText("Buscar");
+        BotonFiltrarRepuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonFiltrarRepuestoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
@@ -414,7 +419,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFilterTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterTableKeyReleased
-        repuesto.loadData(tbGetDatosRepuesto, txtFilterTable.getText());
+       
     }//GEN-LAST:event_txtFilterTableKeyReleased
 
     private void tbGetDatosRepuestoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosRepuestoMouseClicked
@@ -546,6 +551,10 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
 	FramImagen.setLocationRelativeTo(null);
 
     }//GEN-LAST:event_tbGetDatosRepuestoMousePressed
+
+    private void BotonFiltrarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFiltrarRepuestoActionPerformed
+        repuesto.loadData(tbGetDatosRepuesto, txtFilterTable.getText());
+    }//GEN-LAST:event_BotonFiltrarRepuestoActionPerformed
 
     
         private byte[] getImagen(String ruta) {

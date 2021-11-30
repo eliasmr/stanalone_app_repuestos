@@ -6,9 +6,11 @@ package Controlador;
 
 import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
+import Modelo.TBLRepuestoVo;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
+import Modelo.impl.TBLRepuestoImpl;
 import java.util.List;
 
 /**
@@ -21,10 +23,12 @@ public class PrincipalController {
     
     //carga listas
     private final TBLModeloImpl impl;
+    private TBLRepuestoImpl repuesto;
     private DropBoxImpl drb;
     public PrincipalController(){
      this.marcas = new TBLMarcaImpl();
      this.impl = new TBLModeloImpl();
+     this.repuesto = new TBLRepuestoImpl();
      this.drb = new DropBoxImpl();
     }
     
@@ -34,6 +38,10 @@ public class PrincipalController {
     
     public List<TBLModeloVo> listaModelo(){
      return impl.allModelo();
+    }
+    
+    public List<TBLRepuestoVo> getAllRepuesto(){
+     return repuesto.getAllRepuesto();
     }
     
 }

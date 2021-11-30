@@ -100,7 +100,7 @@ public class TBLRepuestoImpl{
         }
         return null;
     }
-     public List<TBLRepuestoVo> getAllRepuesto(final String param){
+     public List<TBLRepuestoVo> getAllRepuesto(){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los repuestos "));
         List<TBLRepuestoVo> lts = new ArrayList<>();
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_REPUESTO)){

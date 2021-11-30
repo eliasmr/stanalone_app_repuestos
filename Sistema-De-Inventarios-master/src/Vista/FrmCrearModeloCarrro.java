@@ -52,8 +52,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         dropBoxImpl = new DropBoxImpl();
         initComponents();
         setTitle("Modelo");
-        model.loadData(tbGetDatosModelo, "");
         this.marcas = marcas;
+        model.loadData(tbGetDatosModelo, this.marcas.getNombre()+"init");
         this.listAno(0);
         this.ltsTipoCombustible();
     }

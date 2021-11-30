@@ -37,7 +37,7 @@ public class ModeloCarroController{
       this.combustible = new TBLCombustibleImpl();
       this.marca = new TBLMarcaImpl();
       this.principaCtr = new PrincipalController();
-      this.ltsModelo = new ArrayList<>();
+      this.ltsModelo = principaCtr.listaModelo();
     }
 
     
@@ -59,19 +59,25 @@ public class ModeloCarroController{
  
 
     
-    public void loadData(JTable jt, String param){
+    public void loadData(JTable jt, String params){
      DefaultTableModel modeloT = new DefaultTableModel();
-     
-     if(param.isEmpty()){
-         ltsModelo = principaCtr.listaModelo();
-     }else{
-         ltsModelo.stream().filter(registro -> 
-                                             registro.getNombre().contains(param) ||
+     List<TBLModeloVo> ltsTem = new ArrayList<>();
+     String param = params.toUpperCase();
+     if(params.isEmpty()){
+         ltsTem = ltsModelo;
+     }else if(params.contains("init")){
+         String paramRep=params.replace("init", "");
+       ltsTem =  ltsModelo.stream().filter(registro -> 
+                                             registro.getIdMarca().getNombre().toUpperCase().contains(paramRep.toUpperCase())
+                                             ).collect(Collectors.toList());
+     } else{
+       ltsTem =  ltsModelo.stream().filter(registro -> 
+                                             registro.getNombre().toUpperCase().contains(param)||
                                              registro.getCilindraje().contains(param) ||
                                              registro.getAnio().contains(param) ||
-                                             registro.getDescripcion().contains(param) ||
-                                             registro.getIdMarca().getNombre().contains(param) ||
-                                             registro.getTipoCombustible().getNombre().contains(param)
+                                             registro.getDescripcion().toUpperCase().contains(param) ||
+                                             registro.getIdMarca().getNombre().toUpperCase().contains(param) ||
+                                             registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
      }
     jt.setModel(modeloT);
@@ -88,7 +94,7 @@ public class ModeloCarroController{
     
     Object[] columna = new Object [9];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
-    ltsModelo.stream().forEach(obj ->{
+    ltsTem.stream().forEach(obj ->{
       String marca = setearMarca(obj.getIdMarca().getIdMarca());
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
