@@ -89,7 +89,7 @@ public class ModeloCarroController{
     Object[] columna = new Object [9];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsModelo.stream().forEach(obj ->{
-      String marca = setearMarca(obj.getId());
+      String marca = setearMarca(obj.getIdMarca().getIdMarca());
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();
