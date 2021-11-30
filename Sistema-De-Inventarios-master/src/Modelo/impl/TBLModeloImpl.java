@@ -101,11 +101,12 @@ public class TBLModeloImpl{
         }
         return false;
     }
-    public List<TBLModeloVo> allModelo(){
+    public List<TBLModeloVo> allModelo(int id){
          LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los modelos de los carros "));
         List<TBLModeloVo>  lts = new ArrayList<>();
         String consulta = ConsultasSQL.ALL_MODELO;
-         try(PreparedStatement pstmt = connection.prepareStatement(consulta)){           
+         try(PreparedStatement pstmt = connection.prepareStatement(consulta)){  
+             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             while(rs.next()){
             TBLModeloVo tbl = TBLModeloVo.builder()

@@ -122,7 +122,29 @@ public class TBLRepuestoImpl{
         }
         return lts;
     }
-     
+          public List<TBLRepuestoVo> getAllRepuestoByIdModelo(int id_modelo){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los repuestos "));
+        List<TBLRepuestoVo> lts = new ArrayList<>();
+        try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_REPUESTO)){
+           pstmt.setInt(1, id_modelo);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+             TBLRepuestoVo repuesto = TBLRepuestoVo
+                      .builder()
+                      .idRepuesto(rs.getInt("ID_REPUESTO"))
+                      .nombre(rs.getString("NOMBRE"))
+                      .referencia(rs.getString("REFERENCIA"))
+                      .descripcion(rs.getString("DESCRIPCION"))
+                      .pathImagen(rs.getString("RUTA_IMAGEN"))
+                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))         
+                      .build();
+             lts.add(repuesto);
+            }
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener todo los repuestos", e));
+        }
+        return lts;
+    }
       public boolean delete(final int id){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia el borrado del modelo "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.DELETE_REPUESTO)) {

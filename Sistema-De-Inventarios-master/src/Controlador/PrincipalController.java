@@ -36,12 +36,12 @@ public class PrincipalController {
         return marcas.getMarcaById(id);
     }
     
-    public List<TBLModeloVo> listaModelo(){
-     return impl.allModelo();
+    public List<TBLModeloVo> listaModelo(int id){
+     return impl.allModelo(id);
     }
     
-    public List<TBLRepuestoVo> getAllRepuesto(){
-     return repuesto.getAllRepuesto();
+    public List<TBLRepuestoVo> getAllRepuesto(int id_modelo){
+     return repuesto.getAllRepuestoByIdModelo(id_modelo);
     }
     
 }

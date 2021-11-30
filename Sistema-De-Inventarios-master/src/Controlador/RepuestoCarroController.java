@@ -48,12 +48,12 @@ public class RepuestoCarroController{
                            .build());
     }
     
-    public void loadData(JTable jt, String params){
+    public void loadData(JTable jt, int id_modelo,String params){
      DefaultTableModel repuestoT = new DefaultTableModel();
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
-         ltsRepuesto = principaCtr.getAllRepuesto();
+         ltsRepuesto = principaCtr.getAllRepuesto(id_modelo);
          ltsTem = ltsRepuesto;
      }else{
        ltsTem =  ltsRepuesto.stream().filter(registro -> 
@@ -103,8 +103,8 @@ public class RepuestoCarroController{
      public void deleteRepuesto(String text) {
         impl.delete(Integer.parseInt(text));
     }
-     public List<TBLModeloVo> ltsModelos(){
-      return modelo.allModelos();
+     public List<TBLModeloVo> ltsModelos(int id_marca){
+      return modelo.allModelo(id_marca);
      }
      
     

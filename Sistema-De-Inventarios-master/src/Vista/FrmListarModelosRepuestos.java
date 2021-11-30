@@ -35,7 +35,7 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
         initComponents();
         setTitle("Modelo");
         this.marcas = marcas;
-        model.loadData(tbGetDatosModelo, marcas.getNombre());
+        model.loadData(tbGetDatosModelo, marcas.getIdMarca(),"");
         
         this.listAno(0);
     }

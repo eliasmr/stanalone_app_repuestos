@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/impl/TBLModeloImpl.java</file>
+            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/util/MarcasCarros.java</file>
+            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Vista/FrmPrincipal.java</file>
+            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Vista/FrmListarModelosRepuestos.java</file>
             <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Controlador/ModeloCarroController.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/Conexion.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Controlador/RepuestoCarroController.java</file>
             <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Controlador/PrincipalController.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Modelo/impl/DropBoxImpl.java</file>
+            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Controlador/ModeloRepuestoCarroController.java</file>
             <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Vista/FrmCrearModeloCarrro.java</file>
-            <file>file:/C:/Users/Elias/Documents/proyectos/stanalone_app_repuestos/Sistema-De-Inventarios-master/src/Vista/FrmCrearRepuestoCarro.java</file>
         </group>
     </open-files>
 </project-private>

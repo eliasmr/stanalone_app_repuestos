@@ -25,17 +25,23 @@ public class ModeloRepuestoCarroController {
         this.principaCtr = new PrincipalController();
     }
     
-    public void loadData(JTable jt, String param){
+    public void loadData(JTable jt,int id, String params){
      DefaultTableModel modeloT = new DefaultTableModel();
-    
-     ltsModelo = principaCtr.listaModelo().stream().filter(registro -> 
-                                             registro.getNombre().contains(param) ||
+     List<TBLModeloVo> ltsTem = new ArrayList<>();
+     String param = params.toUpperCase();
+     if(params.isEmpty()){
+         ltsModelo = principaCtr.listaModelo(id);
+         ltsTem = ltsModelo;
+     } else{
+       ltsTem =  ltsModelo.stream().filter(registro -> 
+                                             registro.getNombre().toUpperCase().contains(param)||
                                              registro.getCilindraje().contains(param) ||
                                              registro.getAnio().contains(param) ||
-                                             registro.getDescripcion().contains(param) ||
-                                             registro.getIdMarca().getNombre().contains(param) ||
-                                             registro.getTipoCombustible().getNombre().contains(param)
+                                             registro.getDescripcion().toUpperCase().contains(param) ||
+                                             registro.getIdMarca().getNombre().toUpperCase().contains(param) ||
+                                             registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
+     }
      
     jt.setModel(modeloT);
     modeloT.addColumn("#");
@@ -51,7 +57,7 @@ public class ModeloRepuestoCarroController {
     
     Object[] columna = new Object [9];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
-    ltsModelo.stream().forEach(obj ->{
+    ltsTem.stream().forEach(obj ->{
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getDescripcion();

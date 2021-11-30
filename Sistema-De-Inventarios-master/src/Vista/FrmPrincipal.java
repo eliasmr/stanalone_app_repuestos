@@ -361,7 +361,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_gestionarModelosToyotaBotonActionPerformed
 
     private void gestionarRepuestosToyotaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosToyotaBotonActionPerformed
-        JFrame frm = new FrmCrearRepuestoCarro();
+       TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.TOYOTA.getId());
+        JFrame frm = new FrmCrearRepuestoCarro(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true);   
@@ -385,8 +386,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);    }//GEN-LAST:event_gestionarModelosMitsubishiBotonActionPerformed
 
     private void gestionarRepuestosMitsubishiBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosMitsubishiBotonActionPerformed
-       
-        JFrame frm = new FrmCrearRepuestoCarro();
+        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.MITSUBISHI.getId());
+        JFrame frm = new FrmCrearRepuestoCarro(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
@@ -402,7 +403,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_gestionarModelosDaihatsuBotonActionPerformed
 
     private void gestionarRepuestosDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosDaihatsuBotonActionPerformed
-        JFrame frm = new FrmCrearRepuestoCarro();
+         TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.DAIHATSU.getId());
+        JFrame frm = new FrmCrearRepuestoCarro(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
@@ -418,8 +420,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_gestionarModelosNissanBotonActionPerformed
 
     private void gestionarRepuestosNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosNissanBotonActionPerformed
-      
-        JFrame frm = new FrmCrearRepuestoCarro();
+        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());      
+        JFrame frm = new FrmCrearRepuestoCarro(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 

@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.ModeloCarroController;
 import Controlador.RepuestoCarroController;
+import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
 import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
@@ -42,14 +43,16 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     public String Ruta = "";
     private static RepuestoCarroController repuesto;
     private DropBoxImpl dropBoxImpl;
-    public FrmCrearRepuestoCarro() {
+    private TBLMarcaVo marcas;
+    public FrmCrearRepuestoCarro(TBLMarcaVo marcas) {
         //repuesto = new RepuestoController();
         repuesto = new RepuestoCarroController();
         dropBoxImpl = new DropBoxImpl();
         initComponents();
         setTitle("Repuestos");
-        this.ltsModelos();
-       repuesto.loadData(tbGetDatosRepuesto, "");  
+        this.marcas = marcas;
+        this.ltsModelos(this.marcas.getIdMarca());
+       repuesto.loadData(tbGetDatosRepuesto, this.marcas.getIdMarca(),"");  
     }
 
     /**
@@ -449,7 +452,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                     }             
                    JOptionPane.showMessageDialog(null,"Repuesto eliminado correctamente", "Repuesto Eliminado",JOptionPane.INFORMATION_MESSAGE);
                 }
-                    repuesto.loadData(tbGetDatosRepuesto,"");
+                    repuesto.loadData(tbGetDatosRepuesto,this.marcas.getIdMarca(),"");
             }else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un repuesto para eliminar", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -477,7 +480,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un Repuesto para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        repuesto.loadData(tbGetDatosRepuesto, "");
+        repuesto.loadData(tbGetDatosRepuesto, this.marcas.getIdMarca(),"");
         limpiarCampos();
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
 
@@ -503,7 +506,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
                         path = dropBoxImpl.uploadFIleDropbox("repuestos", Ruta);
                     }
             repuesto.save(txtNombre.getText(), txtReferencia.getText(), txtDescripcion.getText(), path, tipoModelo);
-            repuesto.loadData(tbGetDatosRepuesto, "");
+            repuesto.loadData(tbGetDatosRepuesto,this.marcas.getIdMarca(), "");
             JOptionPane.showMessageDialog(null, "Repuesto creado correctamente", "Repuesto creado", JOptionPane.INFORMATION_MESSAGE);
             limpiarCampos();
         } else {
@@ -553,7 +556,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_tbGetDatosRepuestoMousePressed
 
     private void BotonFiltrarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFiltrarRepuestoActionPerformed
-        repuesto.loadData(tbGetDatosRepuesto, txtFilterTable.getText());
+        repuesto.loadData(tbGetDatosRepuesto,this.marcas.getIdMarca(), txtFilterTable.getText());
     }//GEN-LAST:event_BotonFiltrarRepuestoActionPerformed
 
     
@@ -600,7 +603,7 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCrearRepuestoCarro().setVisible(true);
+                //new FrmCrearRepuestoCarro().setVisible(true);
             }
         });
     }
@@ -608,12 +611,13 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
    public void modificar(){
      int fila =tbGetDatosRepuesto.getSelectedRow();
      if(fila >=0){ 
+         ListModelos.removeAll();
        txtNombre.setText(tbGetDatosRepuesto.getValueAt(fila, 1).toString());
        txtReferencia.setText(tbGetDatosRepuesto.getValueAt(fila, 2).toString());
        txtDescripcion.setText(tbGetDatosRepuesto.getValueAt(fila, 3).toString());
        Ruta = tbGetDatosRepuesto.getValueAt(fila, 4).toString();
        labelRutaImagen.setText(splitPAthImg(Ruta));
-       this.ltsModelos();
+       this.ltsModelos(this.marcas.getIdMarca());
        labelIdRegistro.setText(tbGetDatosRepuesto.getValueAt(fila, 6).toString());
 
         //imagen
@@ -624,8 +628,8 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
      }
  } 
    
-    public void ltsModelos(){       
-     repuesto.ltsModelos().forEach(obj->{
+    public void ltsModelos(int id_marca){       
+     repuesto.ltsModelos(id_marca).forEach(obj->{
         ListModelos.addItem(obj);
      });
  }  

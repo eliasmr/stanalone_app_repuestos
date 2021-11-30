@@ -53,7 +53,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         initComponents();
         setTitle("Modelo");
         this.marcas = marcas;
-        model.loadData(tbGetDatosModelo, this.marcas.getNombre()+"init");
+        model.loadData(tbGetDatosModelo, this.marcas.getIdMarca(),"");
         this.listAno(0);
         this.ltsTipoCombustible();
     }
@@ -469,7 +469,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     }             
                    JOptionPane.showMessageDialog(null,"Modelo eliminado correctamente", "Modelo Eliminado",JOptionPane.INFORMATION_MESSAGE);
                 }
-                    model.loadData(tbGetDatosModelo,"");
+                    model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
             }else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para eliminar", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -499,7 +499,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        model.loadData(tbGetDatosModelo, "");
+        model.loadData(tbGetDatosModelo, this.marcas.getIdMarca(),"");
         limpiarCampos();
 
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
@@ -524,7 +524,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         if(modeloEsValido(txtNombre.getText(), txtCilindraje.getText(),tipoCombustible.getNombre(),anio, labelRutaImagen.getText(),txtDescripcion.getText())){
             String path = dropBoxImpl.uploadFIleDropbox("modelo", Ruta);
             model.save(txtNombre.getText(),anio,txtCilindraje.getText(),tipoCombustible, txtDescripcion.getText(), path,marcas);
-            model.loadData(tbGetDatosModelo,"");
+            model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
             
         JOptionPane.showMessageDialog(null,"Modelo creado correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();
@@ -567,7 +567,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private void BotonBuscarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarModeloActionPerformed
         // TODO add your handling code here:
         
-        model.loadData(tbGetDatosModelo, txtFilterTable.getText());
+        model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(), txtFilterTable.getText());
     }//GEN-LAST:event_BotonBuscarModeloActionPerformed
 
  
@@ -639,6 +639,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
      int fila =tbGetDatosModelo.getSelectedRow();
      String anio = (String) listAnio.getSelectedItem();
      if(fila >=0){      
+         
        Ruta="";
        txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
        txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
