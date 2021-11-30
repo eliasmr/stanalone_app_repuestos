@@ -6,7 +6,10 @@
 package sistemaDeInventarios;
 
 
+import Modelo.impl.ValidacionSessionImpl;
 import Vista.FrmPrincipal;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +21,17 @@ public class SistemaDeInventarios {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FrmPrincipal frm = new FrmPrincipal();
-        frm.setLocationRelativeTo(null);
-        frm.setVisible(true);
+        
+        ValidacionSessionImpl valSession = new ValidacionSessionImpl();
+        if(valSession.validaSession()){
+            FrmPrincipal frm = new FrmPrincipal();
+            frm.setLocationRelativeTo(null);
+            frm.setVisible(true);
+        }else{
+          String message = "<html><body><div width='100px' align='center'>No autorizado!</div></body></html>";
+          JLabel messageLabel = new JLabel(message);
+          JOptionPane.showMessageDialog(null,messageLabel, "No autorizado",JOptionPane.WARNING_MESSAGE);
+        }
     }
     
 }

@@ -35,4 +35,7 @@ public class ConsultasSQL {
     public final static String DELETE_MARCA = "DELETE FROM TBL_MARCA WHERE ID_REPUESTO = ?";
     public final static String ALL_MARCA = "SELECT * FROM TBL_MARCA";
     
+    /** Session */
+    
+    public final static String GET_SESSION = "SELECT * FRM TBL_SESSION WHERE NOMBRE = ?";
 }
