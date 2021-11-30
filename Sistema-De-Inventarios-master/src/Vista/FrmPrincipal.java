@@ -68,13 +68,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         gestionarRepuestosNissanBoton = new javax.swing.JButton();
         jPanel1 = new PanelImageLogo();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mnuProductos = new javax.swing.JMenuItem();
-        opcionCrearModelo = new javax.swing.JMenuItem();
-        MnuClientes = new javax.swing.JMenuItem();
-        MnuProveedores = new javax.swing.JMenuItem();
-        MnuTiposdeMovimiento = new javax.swing.JMenuItem();
-        mnuTransportista = new javax.swing.JMenuItem();
         MnuSalir = new javax.swing.JMenu();
 
         jMenuItem2.setText("jMenuItem2");
@@ -293,58 +286,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGap(0, 217, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Menu");
-
-        mnuProductos.setText("Crear Marca");
-        mnuProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuProductosActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuProductos);
-
-        opcionCrearModelo.setLabel("Crear Modelo");
-        opcionCrearModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcionCrearModeloActionPerformed(evt);
-            }
-        });
-        jMenu1.add(opcionCrearModelo);
-
-        MnuClientes.setText("Clientes");
-        MnuClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnuClientesActionPerformed(evt);
-            }
-        });
-        jMenu1.add(MnuClientes);
-
-        MnuProveedores.setText("Proveedores");
-        MnuProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnuProveedoresActionPerformed(evt);
-            }
-        });
-        jMenu1.add(MnuProveedores);
-
-        MnuTiposdeMovimiento.setText("Tipos de Movimientos");
-        MnuTiposdeMovimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnuTiposdeMovimientoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(MnuTiposdeMovimiento);
-
-        mnuTransportista.setText("Transportistas");
-        mnuTransportista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuTransportistaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuTransportista);
-
-        jMenuBar1.add(jMenu1);
-
         MnuSalir.setText("Salir");
         MnuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -382,41 +323,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void opcionCrearModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearModeloActionPerformed
-        TBLModeloImpl impl = new TBLModeloImpl();
-        TBLModeloVo model = new TBLModeloVo();
-        //FrmCrearModeloCarrro frm = new FrmCrearModeloCarrro();
-        //ModeloCarroController ctr = new ModeloCarroController(frm,impl,model);
-        //frm.setVisible(true);
-    }//GEN-LAST:event_opcionCrearModeloActionPerformed
-
     private void MnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnuSalirMouseClicked
         System.exit(0);
     }//GEN-LAST:event_MnuSalirMouseClicked
-
-    private void MnuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuProveedoresActionPerformed
-      
-    }//GEN-LAST:event_MnuProveedoresActionPerformed
-
-    private void MnuTiposdeMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuTiposdeMovimientoActionPerformed
-
-    }//GEN-LAST:event_MnuTiposdeMovimientoActionPerformed
-
-    /**
-     menu desplegable
-     **/
-    private void mnuProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProductosActionPerformed
-        FrmCrearMarcaCarro frm = new FrmCrearMarcaCarro();
-        frm.setVisible(true);
-    }//GEN-LAST:event_mnuProductosActionPerformed
-
-    private void MnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnuClientesActionPerformed
- 
-    }//GEN-LAST:event_MnuClientesActionPerformed
-
-    private void mnuTransportistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTransportistaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuTransportistaActionPerformed
 
     private void BotonToyotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonToyotaActionPerformed
 
@@ -540,10 +449,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton BotonMitsubitshi;
     private javax.swing.JButton BotonNissan;
     private javax.swing.JButton BotonToyota;
-    private javax.swing.JMenuItem MnuClientes;
-    private javax.swing.JMenuItem MnuProveedores;
     private javax.swing.JMenu MnuSalir;
-    private javax.swing.JMenuItem MnuTiposdeMovimiento;
     public javax.swing.JButton gestionarModelosDaihatsuBoton;
     public javax.swing.JButton gestionarModelosMitsubishiBoton;
     public javax.swing.JButton gestionarModelosNissanBoton;
@@ -552,7 +458,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton gestionarRepuestosMitsubishiBoton;
     private javax.swing.JButton gestionarRepuestosNissanBoton;
     private javax.swing.JButton gestionarRepuestosToyotaBoton;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -563,8 +468,5 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JMenuItem mnuProductos;
-    private javax.swing.JMenuItem mnuTransportista;
-    private javax.swing.JMenuItem opcionCrearModelo;
     // End of variables declaration//GEN-END:variables
 }

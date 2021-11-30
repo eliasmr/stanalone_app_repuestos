@@ -11,9 +11,9 @@ public class Conexion {
 
     private static final Logger LOGGER = Logger.getLogger("Conexion");
     private final String base = "partesleon";
-    private final String user = "admin_repuestos";
-    private final String password = "3HEDWl20";
-    private final String url = "jdbc:mysql://db4free.net:3306/"+base+"?useSSL=false";
+    private final String user = "admin";
+    private final String password = "root";
+    private final String url = "jdbc:mysql://192.168.0.6:3307/"+base+"?useUnicode=yes&characterEncoding=UTF-8&useSSL=false";
 
     private Connection con = null;
     

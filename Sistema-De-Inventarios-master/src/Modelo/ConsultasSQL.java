@@ -37,5 +37,5 @@ public class ConsultasSQL {
     
     /** Session */
     
-    public final static String GET_SESSION = "SELECT * FRM TBL_SESSION WHERE NOMBRE = ?";
+    public final static String GET_SESSION = "SELECT * FROM TBL_SESSION WHERE NOMBRE = ?";
 }
