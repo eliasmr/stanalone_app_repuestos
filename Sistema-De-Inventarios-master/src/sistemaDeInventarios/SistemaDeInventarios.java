@@ -8,8 +8,13 @@ package sistemaDeInventarios;
 
 import Modelo.impl.ValidacionSessionImpl;
 import Vista.FrmPrincipal;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -26,11 +31,14 @@ public class SistemaDeInventarios {
         if(valSession.validaSession()){
             FrmPrincipal frm = new FrmPrincipal();
             frm.setLocationRelativeTo(null);
+            frm.setResizable(false);
+            frm.setExtendedState(MAXIMIZED_BOTH);
             frm.setVisible(true);
         }else{
           String message = "<html><body><div width='100px' align='center'>No autorizado!</div></body></html>";
           JLabel messageLabel = new JLabel(message);
-          JOptionPane.showMessageDialog(null,messageLabel, "No autorizado",JOptionPane.WARNING_MESSAGE);
+          JOptionPane.showMessageDialog(null
+                  ,messageLabel, "No autorizado",JOptionPane.WARNING_MESSAGE);
         }
     }
     

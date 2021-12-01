@@ -8,15 +8,21 @@ import Modelo.impl.TBLCombustibleImpl;
 import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -103,6 +109,36 @@ public class ModeloCarroController{
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
+    
+        TableColumnModel columnModel = jt.getColumnModel();
+        
+        columnModel.getColumn(0).setMaxWidth(30);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(200);
+         columnModel.getColumn(4).setPreferredWidth(100);
+         columnModel.getColumn(5).setPreferredWidth(50);
+         columnModel.getColumn(6).setPreferredWidth(50);
+         columnModel.getColumn(7).setPreferredWidth(30);
+         columnModel.getColumn(8).setPreferredWidth(1);
+         
+         
+         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(7).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(8).setCellRenderer( centerRenderer );
+        
+        jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
+        jt.getTableHeader().setBackground(new Color(209,37,29));
+        jt.getTableHeader().setForeground(Color.white);
+        jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
    }
     
 
