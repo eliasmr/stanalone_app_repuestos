@@ -233,18 +233,17 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
     }//GEN-LAST:event_listEstadoActionPerformed
 
     private void tbGetDatosModeloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMousePressed
-        FramImagen.setVisible(true);
-        FramImagen.setSize(500, 500);
-
+        
         int fila =tbGetDatosModelo.getSelectedRow();
         Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
         String imagen = dropBoxImpl.getFileDrobox(Ruta);
         Image img= new ImageIcon(imagen).getImage();
-        ImageIcon img2=new ImageIcon(img.getScaledInstance(Labelimagenes.getWidth(), Labelimagenes.getHeight(),
+        ImageIcon img2=new ImageIcon(img.getScaledInstance(600, 600,
             Image.SCALE_SMOOTH));
-    Labelimagenes.setIcon(img2);
-    FramImagen.setLocationRelativeTo(null);
-
+        Labelimagenes.setIcon(img2);
+        FramImagen.setLocationRelativeTo(null);
+         FramImagen.setVisible(true);
+        FramImagen.setSize(600, 600);
     }//GEN-LAST:event_tbGetDatosModeloMousePressed
 
     private void tbGetDatosModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMouseClicked

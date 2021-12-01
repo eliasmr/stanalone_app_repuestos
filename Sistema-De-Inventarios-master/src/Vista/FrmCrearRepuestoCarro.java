@@ -535,18 +535,17 @@ public class FrmCrearRepuestoCarro extends javax.swing.JFrame {
 
     private void tbGetDatosRepuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosRepuestoMousePressed
         // TODO add your handling code here:
-        FramImagen.setVisible(true);
-        FramImagen.setSize(500, 500);
-  
          int fila =tbGetDatosRepuesto.getSelectedRow();
          Ruta = tbGetDatosRepuesto.getValueAt(fila, 4).toString();  
          String imagen = dropBoxImpl.getFileDrobox(Ruta);
          Image img= new ImageIcon(imagen).getImage();
-         ImageIcon img2=new ImageIcon(img.getScaledInstance(Labelimagenes.getWidth(), Labelimagenes.getHeight(),
+         ImageIcon img2=new ImageIcon(img.getScaledInstance(600, 600,
         Image.SCALE_SMOOTH));
 
-          Labelimagenes.setIcon(img2);   
+         Labelimagenes.setIcon(img2);   
 	FramImagen.setLocationRelativeTo(null);
+        FramImagen.setVisible(true);
+        FramImagen.setSize(600, 600);
 
     }//GEN-LAST:event_tbGetDatosRepuestoMousePressed
 
