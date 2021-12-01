@@ -6,11 +6,14 @@ import Controlador.ModeloRepuestoCarroController;
 import Modelo.TBLMarcaVo;
 import Modelo.impl.DropBoxImpl;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import javax.swing.ImageIcon;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -60,6 +63,9 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
         tbGetDatosModelo = new javax.swing.JTable();
         labelIdRegistro = new javax.swing.JLabel();
         labelRutaImagen = new javax.swing.JLabel();
+        BotonFiltrar = new javax.swing.JButton();
+        txtFilterTable = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout FramImagenLayout = new javax.swing.GroupLayout(FramImagen.getContentPane());
@@ -97,7 +103,15 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbGetDatosModelo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGetDatosModeloMouseClicked(evt);
@@ -107,14 +121,20 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tbGetDatosModelo);
-        if (tbGetDatosModelo.getColumnModel().getColumnCount() > 0) {
-            tbGetDatosModelo.getColumnModel().getColumn(0).setHeaderValue("Title 1");
-            tbGetDatosModelo.getColumnModel().getColumn(1).setHeaderValue("Title 2");
-            tbGetDatosModelo.getColumnModel().getColumn(2).setHeaderValue("Title 3");
-            tbGetDatosModelo.getColumnModel().getColumn(3).setHeaderValue("Title 4");
-        }
 
         labelIdRegistro.setEnabled(false);
+
+        BotonFiltrar.setBackground(new java.awt.Color(209, 37, 29));
+        BotonFiltrar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonFiltrar.setText("Buscar");
+        BotonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonFiltrarActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Filtro");
 
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
@@ -123,6 +143,13 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BotonFiltrar))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +171,15 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
                         .addGap(259, 259, 259))
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
@@ -216,6 +251,11 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
         modificar();
 
     }//GEN-LAST:event_tbGetDatosModeloMouseClicked
+
+    private void BotonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFiltrarActionPerformed
+        // TODO add your handling code here:
+        model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(), txtFilterTable.getText());
+    }//GEN-LAST:event_BotonFiltrarActionPerformed
 
  
     
@@ -323,16 +363,19 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
             return spl[cont-1];
  }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonFiltrar;
     private javax.swing.JFrame FramImagen;
     private javax.swing.JLabel Labelimagenes;
-    private javax.swing.JLabel imgProducto;
+    public javax.swing.JLabel imgProducto;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanelModeloCarro;
-    private javax.swing.JLabel labelIdRegistro;
+    public javax.swing.JLabel labelIdRegistro;
     private javax.swing.JLabel labelRutaImagen;
     private javax.swing.ButtonGroup rdbGrupoEliminar_Actualizar;
-    private javax.swing.JTable tbGetDatosModelo;
+    public javax.swing.JTable tbGetDatosModelo;
+    private javax.swing.JTextField txtFilterTable;
     // End of variables declaration//GEN-END:variables
 
    

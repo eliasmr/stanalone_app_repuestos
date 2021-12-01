@@ -217,7 +217,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbGetDatosModelo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGetDatosModeloMouseClicked(evt);
@@ -227,12 +235,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tbGetDatosModelo);
-        if (tbGetDatosModelo.getColumnModel().getColumnCount() > 0) {
-            tbGetDatosModelo.getColumnModel().getColumn(0).setHeaderValue("Title 1");
-            tbGetDatosModelo.getColumnModel().getColumn(1).setHeaderValue("Title 2");
-            tbGetDatosModelo.getColumnModel().getColumn(2).setHeaderValue("Title 3");
-            tbGetDatosModelo.getColumnModel().getColumn(3).setHeaderValue("Title 4");
-        }
 
         txtFilterTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
