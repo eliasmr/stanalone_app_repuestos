@@ -289,7 +289,7 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
         
         int fila =tbGetDatosModelo.getSelectedRow();
         String modelo = tbGetDatosModelo.getValueAt(fila, 8).toString();
-        String marca = tbGetDatosModelo.getValueAt(fila, 1).toString();
+        String nombreModelo = tbGetDatosModelo.getValueAt(fila, 1).toString();
         Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
         String imagen = dropBoxImpl.getFileDrobox(Ruta);
         Image img= new ImageIcon(imagen).getImage();
@@ -299,7 +299,7 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
         FramImagen.setLocationRelativeTo(null);
          FramImagen.setVisible(true);
         FramImagen.setSize(600, 600);
-        jLabel10.setText("REPUESTOS DE LA MARCA "+ modelo.toUpperCase() );
+        jLabel10.setText("REPUESTOS DE LA MARCA "+ nombreModelo.toUpperCase() );
         controlRepuesto.loadDataModeloXrepuesto(tbDatosXrepuesto, Integer.parseInt(modelo), "");
     }//GEN-LAST:event_tbGetDatosModeloMousePressed
 
@@ -318,8 +318,8 @@ public class FrmListarModelosRepuestos extends javax.swing.JFrame {
     }//GEN-LAST:event_tbDatosXrepuestoMouseClicked
 
     private void tbDatosXrepuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDatosXrepuestoMousePressed
-        int fila =tbGetDatosModelo.getSelectedRow();
-        Ruta = tbGetDatosModelo.getValueAt(fila, 4).toString();
+        int fila =tbDatosXrepuesto.getSelectedRow();
+        Ruta = tbDatosXrepuesto.getValueAt(fila, 4).toString();
         String imagen = dropBoxImpl.getFileDrobox(Ruta);
         Image img= new ImageIcon(imagen).getImage();
         ImageIcon img2=new ImageIcon(img.getScaledInstance(600, 600,
