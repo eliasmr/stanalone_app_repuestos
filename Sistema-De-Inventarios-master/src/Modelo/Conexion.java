@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import com.mysql.jdbc.Connection;
@@ -10,10 +9,10 @@ public class Conexion {
     
 
     private static final Logger LOGGER = Logger.getLogger("Conexion");
-    private final String base = "repuestos";
-    private final String user = "root";
-    private final String password = "liliana2357";
-    private final String url = "jdbc:mysql://localhost:3306/"+base+"?useUnicode=yes&characterEncoding=UTF-8&useSSL=false";
+    private final String base = "partesleon";
+    private final String user = "admin";
+    private final String password = "root";
+    private final String url = "jdbc:mysql://192.168.0.6:3307/"+base+"?useUnicode=yes&characterEncoding=UTF-8&useSSL=false";
 
     private Connection con = null;
     

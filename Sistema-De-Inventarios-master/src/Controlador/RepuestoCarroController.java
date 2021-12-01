@@ -88,6 +88,33 @@ public class RepuestoCarroController{
     });
    }
     
+       public void loadDataModeloXrepuesto(JTable jt, int id_modelo,String params){
+     DefaultTableModel repuestoT = new DefaultTableModel();
+      ltsRepuesto = principaCtr.getAllRepuestoByIdRepuestoModelo(id_modelo);
+    jt.setModel(repuestoT);
+    repuestoT.addColumn("#");
+    repuestoT.addColumn("Nombre");
+    repuestoT.addColumn("Referencia");
+    repuestoT.addColumn("Descripcion");
+    repuestoT.addColumn("Imagen");
+    repuestoT.addColumn("Modelo");
+    repuestoT.addColumn("Codigo");
+    
+    Object[] columna = new Object [7];
+    AtomicReference<Integer> counter = new AtomicReference<>(1);
+    ltsRepuesto.stream().forEach(obj ->{
+      
+      columna[0] = counter.get();
+      columna[1] = obj.getNombre();
+      columna[2] = obj.getReferencia();
+      columna[3] = obj.getDescripcion();
+      columna[4] = obj.getPathImagen();
+      columna[5] = obj.getIdmodelo();
+      columna[6] = obj.getIdRepuesto();
+      counter.getAndUpdate(value -> value + 1);
+      repuestoT.addRow(columna);
+    });
+   }
    
     public void updateRepuesto(int id,String nombre,String referencia,String descripcion,String img, TBLModeloVo modelo){
     impl.update(TBLRepuestoVo

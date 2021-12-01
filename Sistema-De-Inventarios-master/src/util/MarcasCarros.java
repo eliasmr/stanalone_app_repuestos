@@ -13,9 +13,10 @@ import lombok.Getter;
 @Getter
 public enum MarcasCarros {
     TOYOTA(1,"Toyota"),
-    MITSUBISHI(2,"Mitsubishi"),  
-    DAIHATSU(3,"Daihatsu"),
-    NISSAN(4,"Nissan");
+    MITSUBISHI(2,"Mitsubishi"),
+     NISSAN(3,"Nissan"),
+    DAIHATSU(4,"Daihatsu");
+   
     
     
     private int id;

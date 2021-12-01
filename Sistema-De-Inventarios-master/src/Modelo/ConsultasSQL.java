@@ -14,6 +14,7 @@ public class ConsultasSQL {
     public final static String UPDATE_REPUESTO = "UPDATE TBL_REPUESTO SET NOMBRE=?, REFERENCIA=?, DESCRIPCION=?, RUTA_IMAGEN=?, ID_MODELO=? WHERE ID_REPUESTO=?";
     public final static String DELETE_REPUESTO = "DELETE FROM TBL_REPUESTO WHERE ID_REPUESTO = ?";
     public final static String ALL_REPUESTO = "SELECT * FROM tbl_repuesto R JOIN tbl_modelo M ON R.ID_MODELO = M.ID_MODELO  WHERE M.ID_MARCA = ?";
+    public final static String ALL_REPUESTO_BY_MODELO= "SELECT * FROM tbl_repuesto r WHERE r.ID_MODELO = ?";
     
     /*Combustible*/
     public final static String GET_COMBUSTIBLE = "SELECT * FROM TBL_TIPO_COMBUSTIBLE M WHERE M.ID_TIPO_COMBUSTIBLE =?";

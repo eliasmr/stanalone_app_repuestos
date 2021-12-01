@@ -43,5 +43,7 @@ public class PrincipalController {
     public List<TBLRepuestoVo> getAllRepuesto(int id_modelo){
      return repuesto.getAllRepuestoByIdModelo(id_modelo);
     }
-    
+    public List<TBLRepuestoVo> getAllRepuestoByIdRepuestoModelo(int id_modelo){
+     return repuesto.getAllRepuestoByIdRepuestoModelo(id_modelo);
+    }
 }
