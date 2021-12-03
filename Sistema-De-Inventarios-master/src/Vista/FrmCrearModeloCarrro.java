@@ -5,8 +5,10 @@ import Controlador.ModeloCarroController;
 import Modelo.TBLMarcaVo;
 import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,9 +22,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,6 +36,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 import jdk.internal.org.jline.terminal.spi.JansiSupport;
+import util.MarcasCarros;
 
 /**
  *
@@ -61,7 +66,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
          
         this.marcas = marcas;
         jLabel6.setText("FORMULARIO PARA GESTIONAR MODELOS DE "+this.marcas.getNombre().toUpperCase());
-        imgProducto.setText("Espacio para visializar la imagen del modelo");
+        
         imgProducto.setFont(new Font("Serief", Font.ITALIC, 35));
         model.loadData(tbGetDatosModelo, this.marcas.getIdMarca(),"");
         
@@ -69,6 +74,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         
         this.listAno(0);
         this.ltsTipoCombustible();
+      
+        iconDefault();
+
     }
 
     /**
@@ -311,15 +319,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGap(722, 722, 722)
                         .addComponent(labelIdRegistro)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                .addGap(0, 139, Short.MAX_VALUE)
+                                .addGap(0, 167, Short.MAX_VALUE)
                                 .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -436,14 +444,12 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jpanelModeloCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(118, 118, 118)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpanelModeloCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,7 +467,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFilterTableKeyReleased
 
     private void tbGetDatosModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMouseClicked
-        modificar();
+        modificar(evt);
         
     }//GEN-LAST:event_tbGetDatosModeloMouseClicked
 
@@ -473,6 +479,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
          labelRutaImagen.setText("");
          btnGuardarModelo.setEnabled(true);
           btnGuardarModelo.setBackground(new Color(209,37,29));
+          iconDefault();
     }//GEN-LAST:event_btnLimpiarCamposActionPerformed
   private void limpiarCampos(){
          txtNombre.setText("");
@@ -482,6 +489,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
          labelRutaImagen.setText("");
          btnGuardarModelo.setEnabled(true);
          btnGuardarModelo.setBackground(new Color(209,37,29));
+         iconDefault();
     }
   
     private void btnEliminarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModeloActionPerformed
@@ -489,11 +497,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
                         "¿Esta seguro de que desea borrar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                    try {
-                       model.deleteModelo(labelIdRegistro.getText());
+                       if(!model.deleteModelo(labelIdRegistro.getText())){
+                            JOptionPane.showMessageDialog(this,"El modelo no se puede eliminar.. tiene repuestos asociados", "Advertencia",JOptionPane.ERROR_MESSAGE);
+                       }else{
+                       JOptionPane.showMessageDialog(this,"Modelo eliminado correctamente", "Modelo Eliminado",JOptionPane.INFORMATION_MESSAGE);
+                       }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al eliminar un modelo", JOptionPane.ERROR_MESSAGE);
                     }             
-                   JOptionPane.showMessageDialog(this,"Modelo eliminado correctamente", "Modelo Eliminado",JOptionPane.INFORMATION_MESSAGE);
+                   
                 }
                     model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
             }else {
@@ -598,16 +610,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 
  
     private void tbGetDatosModeloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMousePressed
-        FramImagen.setSize(600, 600);
-          int fila =tbGetDatosModelo.getSelectedRow();
-         Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();  
-         String imagen = dropBoxImpl.getFileDrobox(Ruta);
-         Image img= new ImageIcon(imagen).getImage();
-         ImageIcon img2=new ImageIcon(img.getScaledInstance(600, 600,
-        Image.SCALE_SMOOTH));
-          Labelimagenes.setIcon(img2);
-         FramImagen.setVisible(true);
-	FramImagen.setLocationRelativeTo(null);
+        //FramImagen.setSize(600, 600);
+
        
     }//GEN-LAST:event_tbGetDatosModeloMousePressed
 
@@ -659,33 +663,60 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         });
     }
     
-   public void modificar(){
-     int fila =tbGetDatosModelo.getSelectedRow();
-     String anio = (String) listAnio.getSelectedItem();
-     if(fila >=0){      
-         btnGuardarModelo.setEnabled(false);
-         btnGuardarModelo.setBackground(Color.GRAY);
-         
-       Ruta="";
-       txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
-       txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
-        Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
-       labelRutaImagen.setText(splitPAthImg(Ruta));
-       this.ltsTipoCombustible();
-       txtCilindraje.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());     
-       this.listAno(Integer.parseInt(anio));
-       //marcas
-       labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 8).toString());
-       
-       //imagen
-        String img = dropBoxImpl.getFileDrobox(Ruta);
-        Image mImagen = new ImageIcon(img).getImage();
-        ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(this.imgProducto.getWidth(), this.imgProducto.getHeight(), Image.SCALE_SMOOTH));
-        imgProducto.setIcon(mIcono);
-            
+    public void modificar(java.awt.event.MouseEvent evt) {
+        int fila = tbGetDatosModelo.rowAtPoint(evt.getPoint());
+        int colunm = tbGetDatosModelo.getColumnModel().getColumnIndexAtX(evt.getX());
+        String anio = (String) listAnio.getSelectedItem();
+        if (fila >= 0) {
+            btnGuardarModelo.setEnabled(false);
+            btnGuardarModelo.setBackground(Color.GRAY);
 
-     }
- } 
+            Ruta = "";
+            txtNombre.setText(tbGetDatosModelo.getValueAt(fila, 1).toString());
+            txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
+            Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
+            labelRutaImagen.setText(splitPAthImg(Ruta));
+            this.ltsTipoCombustible();
+            txtCilindraje.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());
+            this.listAno(Integer.parseInt(anio));
+            //marcas
+            labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 8).toString());
+
+            //imagen
+            String img = dropBoxImpl.getFileDrobox(Ruta);
+            Image mImagen = new ImageIcon(img).getImage();
+            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(this.imgProducto.getWidth(), this.imgProducto.getHeight(), Image.SCALE_SMOOTH));
+            imgProducto.setIcon(mIcono);
+
+            Object value = tbGetDatosModelo.getValueAt(fila, colunm);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton btn = (JButton) value;
+                if (btn.getName().equals("id_visualizar")) {
+
+                    Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
+                    String imagen = dropBoxImpl.getFileDrobox(Ruta);
+                    Image img3 = new ImageIcon(imagen).getImage();
+                    Dimension size = new Dimension(img3.getWidth(null), img3.getHeight(null));
+                    ImageIcon img2 = new ImageIcon(img3);
+
+                    FramImagen.getContentPane().setLayout(new BorderLayout());
+
+                    Labelimagenes.setIcon(img2);
+                    FramImagen.getContentPane().add(Labelimagenes, BorderLayout.CENTER);
+
+                    FramImagen.getContentPane().setBackground(Color.WHITE);
+                    FramImagen.setSize(new Dimension(img3.getWidth(this) + 50, img3.getWidth(this) + 50));
+                    FramImagen.setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
+                    FramImagen.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(209, 37, 29)));
+                    FramImagen.setVisible(true);
+                    FramImagen.setLocationRelativeTo(null);
+                    FramImagen.setResizable(false);
+                }
+            }
+
+        }
+    }
  public void listDias(int dia){
   for(int i=1; i<=31;i++){
     if(dia != i){
@@ -759,6 +790,22 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private javax.swing.JTextField txtFilterTable;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void iconDefault() {
+        String img = "";
+        if(marcas.getIdMarca() == MarcasCarros.TOYOTA.getId()){
+            img =dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/toyotaIcon.gif");
+        }else if(marcas.getIdMarca() == MarcasCarros.MITSUBISHI.getId()){
+            img = dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/mitsubishiIcon.gif");
+        }else if(marcas.getIdMarca() == MarcasCarros.NISSAN.getId()){
+            img = dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/nissanIcon.gif");
+        }else if(marcas.getIdMarca() == MarcasCarros.DAIHATSU.getId()){
+            img = dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/daihatsuIcon.gif");
+        }
+        
+        ImageIcon mIcono = new ImageIcon(img);
+        imgProducto.setIcon(mIcono);
+    }
 
    
 }

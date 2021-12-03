@@ -4,24 +4,25 @@ package Controlador;
 import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
 import Modelo.TBLTipoCombustibleVo;
+import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLCombustibleImpl;
 import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
 import Vista.FrmCrearModeloCarrro;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -37,6 +38,7 @@ public class ModeloCarroController{
     private final TBLMarcaImpl marca;
     private final PrincipalController principaCtr;
     private  List<TBLModeloVo> ltsModelo;
+    private DropBoxImpl dropBoxImpl;
     
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
@@ -44,6 +46,7 @@ public class ModeloCarroController{
       this.marca = new TBLMarcaImpl();
       this.principaCtr = new PrincipalController();
       this.ltsModelo = new ArrayList<>();
+      this.dropBoxImpl = new DropBoxImpl();
     }
 
     
@@ -67,6 +70,7 @@ public class ModeloCarroController{
     
     public void loadData(JTable jt,int id, String params){
      DefaultTableModel modeloT = new DefaultTableModel();
+     jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
@@ -82,6 +86,12 @@ public class ModeloCarroController{
                                              registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
      }
+     JButton btn = new JButton();
+     btn.setName("id_visualizar");
+     Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
+     ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+     btn.setIcon(mIcono);
+    btn.setOpaque(true);
     jt.setModel(modeloT);
     modeloT.addColumn("#");
     modeloT.addColumn("Nombre");
@@ -92,9 +102,10 @@ public class ModeloCarroController{
     modeloT.addColumn("Año Modelo");
     modeloT.addColumn("Marca");
     modeloT.addColumn("Codigo");
+    modeloT.addColumn("ver");
 
     
-    Object[] columna = new Object [9];
+    Object[] columna = new Object [10];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsTem.stream().forEach(obj ->{
       columna[0] = counter.get();
@@ -106,6 +117,7 @@ public class ModeloCarroController{
       columna[6] = obj.getAnio();
       columna[7] = obj.getIdMarca().getNombre();
       columna[8] =obj.getId();
+      columna[9] =btn;
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
@@ -121,6 +133,7 @@ public class ModeloCarroController{
          columnModel.getColumn(6).setPreferredWidth(50);
          columnModel.getColumn(7).setPreferredWidth(30);
          columnModel.getColumn(8).setPreferredWidth(1);
+          columnModel.getColumn(9).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -155,8 +168,8 @@ public class ModeloCarroController{
                            .idMarca(marca)
                            .build());
     }
-     public void deleteModelo(String text) {
-        impl.delete(Integer.parseInt(text));
+     public boolean deleteModelo(String text) {
+        return impl.delete(Integer.parseInt(text));
     }
      public List<TBLTipoCombustibleVo> ltsTipoCombustible(){
       return combustible.getAllTipoCpmbustible();
@@ -166,40 +179,4 @@ public class ModeloCarroController{
       return marca.getMarcaAll();
      }
  
-    public int mes(String mes){
-     int mesT = 0;
-    switch(mes){
-        case "enero": mesT =1; break;
-        case "febrero": mesT =2; break;
-        case "marzo": mesT =3; break;
-        case "abril": mesT =4; break;
-        case "mayo": mesT =5; break;
-        case "junio": mesT =6; break;
-        case "julio": mesT =7; break;
-        case "agosto": mesT =8; break;
-        case "septiembre": mesT =9; break;
-        case "octubre": mesT =10; break;
-        case "noviembre": mesT =11; break;
-        case "diciembre": mesT =12; break;
-    }
-    return mesT-1;
-    }
-   public String mesStr(int mes){
-     String mesT = "";
-    switch(mes){
-        case 1:  mesT ="Enero"; break;
-        case 2: mesT = "Febrero"; break;
-        case 3: mesT ="Marzo"; break;
-        case 4: mesT ="Abril"; break;
-        case 5: mesT ="Mayo"; break;
-        case 6: mesT ="Junio"; break;
-        case 7: mesT ="Julio"; break;
-        case 8: mesT ="Agosto"; break;
-        case 9: mesT ="Septiembre"; break;
-        case 10: mesT ="Octubre"; break;
-        case 11: mesT ="Noviembre"; break;
-        case 12: mesT ="Diciembre"; break;
-    }
-    return mesT;
-    }
 }

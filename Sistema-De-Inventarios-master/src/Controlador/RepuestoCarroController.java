@@ -3,6 +3,7 @@ package Controlador;
 
 import Modelo.TBLModeloVo;
 import Modelo.TBLRepuestoVo;
+import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLModeloImpl;
 import Modelo.impl.TBLRepuestoImpl;
 import Vista.FrmCrearModeloCarrro;
@@ -10,10 +11,13 @@ import Vista.FrmCrearRepuestoCarro;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -32,12 +36,13 @@ public class RepuestoCarroController{
     private TBLModeloImpl modelo;
     private final PrincipalController principaCtr;
     private  List<TBLRepuestoVo> ltsRepuesto;
-    
+    private DropBoxImpl dropBoxImpl;
     public RepuestoCarroController(){
         this.modelo = new TBLModeloImpl();
         this.impl = new TBLRepuestoImpl();
         this.principaCtr = new PrincipalController();
         this.ltsRepuesto = new ArrayList<>();
+        this.dropBoxImpl = new DropBoxImpl();
     }
 
     
@@ -56,6 +61,7 @@ public class RepuestoCarroController{
     
     public void loadData(JTable jt, int id_modelo,String params){
      DefaultTableModel repuestoT = new DefaultTableModel();
+      jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
@@ -69,26 +75,32 @@ public class RepuestoCarroController{
                                              registro.getIdmodelo().getNombre().toUpperCase().contains(param) 
                                              ).collect(Collectors.toList());
      }
+     JButton btn = new JButton();
+     btn.setName("id_visualizar");
+     Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
+     ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+     btn.setIcon(mIcono);
+    btn.setOpaque(true);
     jt.setModel(repuestoT);
     repuestoT.addColumn("#");
     repuestoT.addColumn("Nombre");
     repuestoT.addColumn("Referencia");
-    repuestoT.addColumn("Descripcion");
     repuestoT.addColumn("Imagen");
+    repuestoT.addColumn("Descripcion");
     repuestoT.addColumn("Modelo");
     repuestoT.addColumn("Codigo");
-    
-    Object[] columna = new Object [7];
+     repuestoT.addColumn("ver");
+    Object[] columna = new Object [8];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsTem.stream().forEach(obj ->{
-      
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getReferencia();
-      columna[3] = obj.getDescripcion();
-      columna[4] = obj.getPathImagen();
+      columna[3] = obj.getPathImagen();
+      columna[4] = obj.getDescripcion();
       columna[5] = obj.getIdmodelo();
       columna[6] = obj.getIdRepuesto();
+      columna[7] = btn;
       counter.getAndUpdate(value -> value + 1);
       repuestoT.addRow(columna);
     });
@@ -101,6 +113,7 @@ public class RepuestoCarroController{
          columnModel.getColumn(4).setPreferredWidth(200);
          columnModel.getColumn(5).setPreferredWidth(50);
          columnModel.getColumn(6).setPreferredWidth(1);
+         columnModel.getColumn(7).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -119,29 +132,38 @@ public class RepuestoCarroController{
         jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
    }
     
-    public boolean loadDataModeloXrepuesto(JTable jt, int id_modelo,String params){
+    public boolean loadDataModeloXrepuesto(JTable jt, int id_modelo,String param){
      DefaultTableModel repuestoT = new DefaultTableModel();
-      ltsRepuesto = principaCtr.getAllRepuestoByIdRepuestoModelo(id_modelo);
+     jt.setDefaultRenderer(Object.class, new ButtonRender());
+     ltsRepuesto = principaCtr.getAllRepuestoByIdRepuestoModelo(id_modelo);
+      
      AtomicReference<Boolean> validacion = new AtomicReference<>(false);
+     JButton btn = new JButton();
+     btn.setName("id_visualizar");
+     Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
+     ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+     btn.setIcon(mIcono);
+    btn.setOpaque(true);
     jt.setModel(repuestoT);
     repuestoT.addColumn("#");
     repuestoT.addColumn("Nombre");
     repuestoT.addColumn("Referencia");
-    repuestoT.addColumn("Descripcion");
     repuestoT.addColumn("Imagen");
+    repuestoT.addColumn("Descripcion");
     repuestoT.addColumn("Modelo");
     repuestoT.addColumn("Codigo");
-    
-    Object[] columna = new Object [7];
+     repuestoT.addColumn("visualizar");
+    Object[] columna = new Object [8];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsRepuesto.stream().forEach(obj ->{
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getReferencia();
-      columna[3] = obj.getDescripcion();
-      columna[4] = obj.getPathImagen();
+      columna[3] = obj.getPathImagen();
+      columna[4] = obj.getDescripcion();
       columna[5] = obj.getIdmodelo();
       columna[6] = obj.getIdRepuesto();
+      columna[7] = btn;
       counter.getAndUpdate(value -> value + 1);
       repuestoT.addRow(columna);
       validacion.set(Boolean.TRUE);

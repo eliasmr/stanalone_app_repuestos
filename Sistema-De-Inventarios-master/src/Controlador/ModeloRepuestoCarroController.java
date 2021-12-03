@@ -1,23 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controlador;
 
 import Modelo.TBLModeloVo;
+import Modelo.impl.DropBoxImpl;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -28,13 +27,16 @@ public class ModeloRepuestoCarroController {
  
     private  List<TBLModeloVo> ltsModelo;
     private final PrincipalController principaCtr;
+     private DropBoxImpl dropBoxImpl;
     public ModeloRepuestoCarroController() {
         this.ltsModelo = new ArrayList<>();
         this.principaCtr = new PrincipalController();
+        this.dropBoxImpl = new DropBoxImpl();
     }
     
     public void loadData(JTable jt,int id, String params){
      DefaultTableModel modeloT = new DefaultTableModel();
+     jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
@@ -50,7 +52,12 @@ public class ModeloRepuestoCarroController {
                                              registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
      }
-     
+     JButton btn = new JButton();
+     btn.setName("id_visualizar");
+     Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
+     ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+     btn.setIcon(mIcono);
+    btn.setOpaque(true);
     jt.setModel(modeloT);
     modeloT.addColumn("#");
     modeloT.addColumn("Nombre");
@@ -61,9 +68,10 @@ public class ModeloRepuestoCarroController {
     modeloT.addColumn("Año Modelo");
     modeloT.addColumn("Marca");
     modeloT.addColumn("Codigo");
+    modeloT.addColumn("Visualizar");
     
     
-    Object[] columna = new Object [9];
+    Object[] columna = new Object [10];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsTem.stream().forEach(obj ->{
       columna[0] = counter.get();
@@ -75,6 +83,7 @@ public class ModeloRepuestoCarroController {
       columna[6] = obj.getAnio();
       columna[7] = obj.getIdMarca().getNombre();
       columna[8] =obj.getId();
+      columna[9] =btn;
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });

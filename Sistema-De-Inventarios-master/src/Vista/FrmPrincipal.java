@@ -43,6 +43,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Toolkit toolkit=Toolkit.getDefaultToolkit();
         Image icon = toolkit.getImage(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG"));
         setIconImage(icon);
+        
        
       }
 
