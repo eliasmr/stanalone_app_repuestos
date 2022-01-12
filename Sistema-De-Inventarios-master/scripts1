@@ -1,0 +1,1 @@
+INSERT INTO `TBL_MODELO` (`ID_MODELO`, `NOMBRE`, `ANO`, `CILINDRAJE`, `ID_TIPO_COMBUSTIBLE`, `DESCRIPCION`, `RUTA_IMAGEN`, `ID_MARCA`) VALUES (141, 'prado tx', '2010', '3000', 5, 'prado tx diesel', '/AutopartesLeon/modelo/prado tx.png', 1);

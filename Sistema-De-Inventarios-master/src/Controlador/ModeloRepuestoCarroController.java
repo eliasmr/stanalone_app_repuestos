@@ -2,6 +2,7 @@
 package Controlador;
 
 import Modelo.TBLModeloVo;
+import Modelo.TBLModeloXRepuestoVo;
 import Modelo.impl.DropBoxImpl;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,6 +35,7 @@ public class ModeloRepuestoCarroController {
         this.dropBoxImpl = new DropBoxImpl();
     }
     
+  
     public void loadData(JTable jt,int id, String params){
      DefaultTableModel modeloT = new DefaultTableModel();
      jt.setDefaultRenderer(Object.class, new ButtonRender());
@@ -119,4 +121,65 @@ public class ModeloRepuestoCarroController {
         jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
    }
 
+    public void loadDataModeloXRepuesto(JTable jt, String params, List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo){
+     DefaultTableModel modeloT = new DefaultTableModel();
+     jt.setDefaultRenderer(Object.class, new ButtonRender());
+     List<TBLModeloXRepuestoVo> ltsTem = new ArrayList<>();
+     String param = params.toUpperCase();
+     if(!params.isEmpty()){
+         ltsTem =  ltsModeloXRepuestoVo.stream().filter(registro -> 
+                                     registro.getRepuesto().getNombre().toUpperCase().contains(param)||
+                                     registro.getModelo().getNombre().toUpperCase().contains(param) ||
+                                     registro.getModelo().getIdMarca().getNombre().toUpperCase().contains(param) 
+                                     ).collect(Collectors.toList());
+     }else{
+        ltsTem = ltsModeloXRepuestoVo;
+     }
+     
+     JButton btn = new JButton();
+     btn.setName("elimnar_btn");
+     Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/eliminar.png")).getImage();
+     ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+     btn.setIcon(mIcono);
+    btn.setOpaque(true);
+    jt.setModel(modeloT);
+    modeloT.addColumn("#");
+    modeloT.addColumn("Nombre Repuesto");
+    modeloT.addColumn("Nombre Modelo");
+    modeloT.addColumn("Marca");
+    modeloT.addColumn("Eliminar");
+    
+    
+    Object[] columna = new Object [5];
+    AtomicReference<Integer> counter = new AtomicReference<>(1);
+    ltsTem.stream().forEach(obj ->{
+      columna[0] = counter.get();
+      columna[1] = obj.getRepuesto().getNombre();
+      columna[2] = obj.getModelo().getNombre();
+      columna[3] = obj. getModelo().getIdMarca().getNombre();
+      columna[4] = btn;
+      counter.getAndUpdate(value -> value + 1);
+      modeloT.addRow(columna);
+    });
+    
+        TableColumnModel columnModel = jt.getColumnModel();
+        
+        columnModel.getColumn(0).setMaxWidth(30);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(200);
+         
+         
+         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        
+        jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
+        jt.getTableHeader().setBackground(new Color(209,37,29));
+        jt.getTableHeader().setForeground(Color.white);
+        jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
+   }
 }

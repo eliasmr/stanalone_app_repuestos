@@ -3,6 +3,7 @@ package Controlador;
 
 import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
+import Modelo.TBLModeloXRepuestoVo;
 import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLCombustibleImpl;
@@ -40,6 +41,7 @@ public class ModeloCarroController{
     private  List<TBLModeloVo> ltsModelo;
     private DropBoxImpl dropBoxImpl;
     
+    private Boolean[] isEditable = {false,false,false,false,false,false,false,false,true};
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
       this.combustible = new TBLCombustibleImpl();
@@ -154,7 +156,113 @@ public class ModeloCarroController{
         jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
    }
     
+public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo ){
+     //DefaultTableModel modeloT = new DefaultTableModel();
+     jt.setDefaultRenderer(Object.class, new ButtonRender());
+     List<TBLModeloVo> ltsTem = new ArrayList<>();
+     String param = params.toUpperCase();
+     if(params.isEmpty() && ltsModelo.isEmpty()){
+         ltsModelo = principaCtr.allListaModelo();
+         ltsTem = ltsModelo;
+     } else{
+       ltsTem =  ltsModelo.stream().filter(registro -> 
+                                             registro.getNombre().toUpperCase().contains(param)||
+                                             registro.getCilindraje().contains(param) ||
+                                             registro.getAnio().contains(param) ||
+                                             registro.getDescripcion().toUpperCase().contains(param) ||
+                                             registro.getIdMarca().getNombre().toUpperCase().contains(param)
+                                             ).collect(Collectors.toList());
+     }
+        DefaultTableModel modeloT = new DefaultTableModel() {
+       Class[] types = new Class[]{
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Object.class,
+           java.lang.Boolean.class};
 
+        @Override
+        public Class getColumnClass(int columnIndex) {
+            return types [columnIndex];
+        };
+       @Override
+        public boolean isCellEditable(int row, int column) {
+        return isEditable[column];
+    }
+    };
+    jt.setModel(modeloT);
+        
+    modeloT.addColumn("#");
+    modeloT.addColumn("Nombre");
+    modeloT.addColumn("Descripcion");
+    modeloT.addColumn("Imagen");
+    modeloT.addColumn("Cilindraje");
+    modeloT.addColumn("Año Modelo");
+    modeloT.addColumn("Marca");
+    modeloT.addColumn("Codigo");
+    modeloT.addColumn("check");
+
+    
+
+    Object[] columna = new Object [9];
+    AtomicReference<Integer> counter = new AtomicReference<>(1);
+    ltsTem.stream().forEach(obj ->{
+      columna[0] = counter.get();
+      columna[1] = obj.getNombre();
+      columna[2] = obj.getDescripcion();
+      columna[3] = obj.getPathImagen();
+      columna[4] = obj.getCilindraje();
+      columna[5] = obj.getAnio();
+      columna[6] = obj.getIdMarca().getNombre();
+      columna[7] =obj.getId();
+      
+      List<TBLModeloXRepuestoVo> ls = 
+          ltsModeloXRepuestoVo.stream().filter(objr -> objr.getModelo().getId() == obj.getId()).collect(Collectors.toList());
+      if(ls.isEmpty()){
+          columna[8] = false;
+      }else{
+      columna[8] = ls.get(0).getModelo().getIsCheck();
+      }
+      
+      counter.getAndUpdate(value -> value + 1);
+      modeloT.addRow(columna);
+    });
+    
+        TableColumnModel columnModel = jt.getColumnModel();
+        
+        columnModel.getColumn(0).setMaxWidth(30);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(100);
+        columnModel.getColumn(3).setPreferredWidth(200);
+         //columnModel.getColumn(4).setPreferredWidth(100);
+         columnModel.getColumn(4).setPreferredWidth(50);
+         columnModel.getColumn(5).setPreferredWidth(50);
+         columnModel.getColumn(6).setPreferredWidth(30);
+         columnModel.getColumn(7).setPreferredWidth(1);
+          columnModel.getColumn(8).setPreferredWidth(1);
+         
+         
+         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
+        jt.getColumnModel().getColumn(7).setCellRenderer( centerRenderer );
+        
+        jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
+        jt.getTableHeader().setBackground(new Color(209,37,29));
+        jt.getTableHeader().setForeground(Color.white);
+        jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
+   }
     public void updateModel(int id,String nombre,String ano,String cilindraje,TBLTipoCombustibleVo tipoCombustible,String descripcion,String img, TBLMarcaVo marca){
     impl.update(TBLModeloVo
                            .builder()

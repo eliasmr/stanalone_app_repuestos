@@ -32,7 +32,6 @@ public class TBLRepuestoImpl{
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
             pstmt.setString(4, rvo.getPathImagen());
-            pstmt.setInt(5, rvo.getIdmodelo().getId());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -48,8 +47,7 @@ public class TBLRepuestoImpl{
             pstmt.setString(2, rvo.getReferencia());
             pstmt.setString(3, rvo.getDescripcion());
             pstmt.setString(4, rvo.getPathImagen());
-            pstmt.setInt(5, rvo.getIdmodelo().getId());
-            pstmt.setInt(6, rvo.getIdRepuesto());
+            pstmt.setInt(5, rvo.getIdRepuesto());
             pstmt.execute();
             return true;
         } catch (Exception e) {
@@ -70,7 +68,6 @@ public class TBLRepuestoImpl{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
                       .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
             }
@@ -91,7 +88,27 @@ public class TBLRepuestoImpl{
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
                       .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))
+                      .idRepuesto(rs.getInt("ID_REPUESTO"))
+                      .build();
+            }
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("sl obtener repuesto por id ", e));
+        }
+        return null;
+    }
+        
+            public TBLRepuestoVo getRepuestoByIDRepuesto(final int param){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta del repuesto by id "));
+        try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_REPUESTO_BY_ID)){
+            pstmt.setInt(1, param);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+             return TBLRepuestoVo
+                      .builder()
+                      .nombre(rs.getString("NOMBRE"))
+                      .referencia(rs.getString("REFERENCIA"))
+                      .descripcion(rs.getString("DESCRIPCION"))
+                      .pathImagen(rs.getString("RUTA_IMAGEN"))
                       .idRepuesto(rs.getInt("ID_REPUESTO"))
                       .build();
             }
@@ -112,8 +129,7 @@ public class TBLRepuestoImpl{
                       .nombre(rs.getString("NOMBRE"))
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
-                      .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))         
+                      .pathImagen(rs.getString("RUTA_IMAGEN"))        
                       .build();
              lts.add(repuesto);
             }
@@ -122,11 +138,11 @@ public class TBLRepuestoImpl{
         }
         return lts;
     }
-          public List<TBLRepuestoVo> getAllRepuestoByIdModelo(int id_modelo){
+          public List<TBLRepuestoVo> getAllRepuestoByIdModelo(){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los repuestos "));
         List<TBLRepuestoVo> lts = new ArrayList<>();
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.ALL_REPUESTO)){
-           pstmt.setInt(1, id_modelo);
+           //pstmt.setInt(1, id_modelo);
             rs = pstmt.executeQuery();
             while(rs.next()){
              TBLRepuestoVo repuesto = TBLRepuestoVo
@@ -135,8 +151,7 @@ public class TBLRepuestoImpl{
                       .nombre(rs.getString("NOMBRE"))
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
-                      .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))         
+                      .pathImagen(rs.getString("RUTA_IMAGEN"))        
                       .build();
              lts.add(repuesto);
             }
@@ -159,8 +174,7 @@ public class TBLRepuestoImpl{
                       .nombre(rs.getString("NOMBRE"))
                       .referencia(rs.getString("REFERENCIA"))
                       .descripcion(rs.getString("DESCRIPCION"))
-                      .pathImagen(rs.getString("RUTA_IMAGEN"))
-                      .idmodelo(modeloImpl.getModeloById(rs.getInt("ID_MODELO")))         
+                      .pathImagen(rs.getString("RUTA_IMAGEN"))        
                       .build();
              lts.add(repuesto);
             }

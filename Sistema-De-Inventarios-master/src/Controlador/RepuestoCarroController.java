@@ -6,7 +6,6 @@ import Modelo.TBLRepuestoVo;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLModeloImpl;
 import Modelo.impl.TBLRepuestoImpl;
-import Vista.FrmCrearModeloCarrro;
 import Vista.FrmCrearRepuestoCarro;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -48,31 +47,29 @@ public class RepuestoCarroController{
     
     
 
-    public void save(String nombre,String referencia,String descripcion,String img, TBLModeloVo modelo) {      
+    public void save(String nombre,String referencia,String descripcion,String img) {      
         impl.insertarRepuesto(TBLRepuestoVo
                            .builder()
                            .nombre(nombre)          
                            .referencia(referencia)
                            .descripcion(descripcion)
                            .pathImagen(img)
-                           .idmodelo(modelo)
                            .build());
     }
     
-    public void loadData(JTable jt, int id_modelo,String params){
+    public void loadData(JTable jt,String params){
      DefaultTableModel repuestoT = new DefaultTableModel();
       jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
-         ltsRepuesto = principaCtr.getAllRepuesto(id_modelo);
+         ltsRepuesto = principaCtr.getAllRepuesto();
          ltsTem = ltsRepuesto;
      }else{
        ltsTem =  ltsRepuesto.stream().filter(registro -> 
                                              registro.getNombre().toUpperCase().contains(param)||
                                              registro.getReferencia().toUpperCase().contains(param) ||
-                                             registro.getDescripcion().toUpperCase().contains(param) ||
-                                             registro.getIdmodelo().getNombre().toUpperCase().contains(param) 
+                                             registro.getDescripcion().toUpperCase().contains(param) 
                                              ).collect(Collectors.toList());
      }
      JButton btn = new JButton();
@@ -87,10 +84,9 @@ public class RepuestoCarroController{
     repuestoT.addColumn("Referencia");
     repuestoT.addColumn("Imagen");
     repuestoT.addColumn("Descripcion");
-    repuestoT.addColumn("Modelo");
     repuestoT.addColumn("Codigo");
      repuestoT.addColumn("ver");
-    Object[] columna = new Object [8];
+    Object[] columna = new Object [7];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsTem.stream().forEach(obj ->{
       columna[0] = counter.get();
@@ -98,9 +94,8 @@ public class RepuestoCarroController{
       columna[2] = obj.getReferencia();
       columna[3] = obj.getPathImagen();
       columna[4] = obj.getDescripcion();
-      columna[5] = obj.getIdmodelo();
-      columna[6] = obj.getIdRepuesto();
-      columna[7] = btn;
+      columna[5] = obj.getIdRepuesto();
+      columna[6] = btn;
       counter.getAndUpdate(value -> value + 1);
       repuestoT.addRow(columna);
     });
@@ -112,8 +107,7 @@ public class RepuestoCarroController{
         columnModel.getColumn(3).setPreferredWidth(200);
          columnModel.getColumn(4).setPreferredWidth(200);
          columnModel.getColumn(5).setPreferredWidth(50);
-         columnModel.getColumn(6).setPreferredWidth(1);
-         columnModel.getColumn(7).setPreferredWidth(1);
+         //columnModel.getColumn(6).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -124,7 +118,7 @@ public class RepuestoCarroController{
         jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
         
         jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
         jt.getTableHeader().setBackground(new Color(209,37,29));
@@ -161,8 +155,7 @@ public class RepuestoCarroController{
       columna[2] = obj.getReferencia();
       columna[3] = obj.getPathImagen();
       columna[4] = obj.getDescripcion();
-      columna[5] = obj.getIdmodelo();
-      columna[6] = obj.getIdRepuesto();
+      columna[5] = obj.getIdRepuesto();
       columna[7] = btn;
       counter.getAndUpdate(value -> value + 1);
       repuestoT.addRow(columna);
@@ -176,8 +169,7 @@ public class RepuestoCarroController{
         columnModel.getColumn(2).setPreferredWidth(100);
         columnModel.getColumn(3).setPreferredWidth(200);
          columnModel.getColumn(4).setPreferredWidth(80);
-         columnModel.getColumn(5).setPreferredWidth(50);
-         columnModel.getColumn(6).setPreferredWidth(1);
+         columnModel.getColumn(5).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -188,7 +180,6 @@ public class RepuestoCarroController{
         jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
         
         jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
         jt.getTableHeader().setBackground(new Color(209,37,29));
@@ -197,7 +188,7 @@ public class RepuestoCarroController{
     return validacion.get();
    }
    
-    public void updateRepuesto(int id,String nombre,String referencia,String descripcion,String img, TBLModeloVo modelo){
+    public void updateRepuesto(int id,String nombre,String referencia,String descripcion,String img){
     impl.update(TBLRepuestoVo
                            .builder()
                            .idRepuesto(id)
@@ -205,7 +196,6 @@ public class RepuestoCarroController{
                            .referencia(referencia)
                            .descripcion(descripcion)                       
                            .pathImagen(img)
-                           .idmodelo(modelo)
                            .build());
     }
      public void deleteRepuesto(String text) {

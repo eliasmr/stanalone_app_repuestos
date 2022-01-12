@@ -23,7 +23,6 @@ public class TBLMarcaVo {
   private int idMarca;
   private String nombre;
   private String descripcion;
-  //private TBLModeloVo idModelo;
   
   
    @Override

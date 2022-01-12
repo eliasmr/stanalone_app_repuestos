@@ -9,14 +9,9 @@ package sistemaDeInventarios;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.ValidacionSessionImpl;
 import Vista.FrmPrincipal;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
-import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -28,8 +23,9 @@ public class SistemaDeInventarios {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         DropBoxImpl dropBoxImpl = new DropBoxImpl();
+        
         ValidacionSessionImpl valSession = new ValidacionSessionImpl();
+        
         if(valSession.validaSession()){
             FrmPrincipal frm = new FrmPrincipal();
             

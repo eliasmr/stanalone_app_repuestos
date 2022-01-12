@@ -104,7 +104,7 @@ public class TBLModeloImpl{
     public List<TBLModeloVo> allModelo(int id){
          LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda de todo los modelos de los carros "));
         List<TBLModeloVo>  lts = new ArrayList<>();
-        String consulta = ConsultasSQL.ALL_MODELO;
+        String consulta = ConsultasSQL.GET_MODELO_BY_ID;
          try(PreparedStatement pstmt = connection.prepareStatement(consulta)){  
              pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
@@ -130,6 +130,28 @@ public class TBLModeloImpl{
     public TBLModeloVo getModeloById(final int id){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda del modelo by id "));
         try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO_BY_ID)){
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                return TBLModeloVo.builder()
+                    .id(rs.getInt("ID_MODELO"))
+                    .nombre(rs.getString("NOMBRE"))
+                    .anio(rs.getString("ANO"))
+                    .cilindraje(rs.getString("CILINDRAJE"))
+                    .tipoCombustible(tipoCombustible.getTipoCombustibleByNombre(rs.getInt("ID_TIPO_COMBUSTIBLE")))
+                    .descripcion(rs.getString("DESCRIPCION"))
+                    .pathImagen(rs.getString("RUTA_IMAGEN"))
+                    .idMarca(marcaImpl.getMarcaById(rs.getInt("ID_MARCA")))
+                    .build();
+            }
+        } catch (Exception e) {
+            LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtener el modelo por id", e));
+        }
+        return null;
+    }
+        public TBLModeloVo getModeloByIdModelo(final int id){
+        LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda del modelo by id "));
+        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO_BY_ID_MODELO)){
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             if(rs.next()){

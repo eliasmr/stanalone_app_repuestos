@@ -68,14 +68,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         BotonToyota = new javax.swing.JButton();
         BotonDihatsu = new javax.swing.JButton();
         gestionarModelosToyotaBoton = new javax.swing.JButton();
-        gestionarRepuestosToyotaBoton = new javax.swing.JButton();
         BotonNissan = new javax.swing.JButton();
         gestionarModelosMitsubishiBoton = new javax.swing.JButton();
-        gestionarRepuestosMitsubishiBoton = new javax.swing.JButton();
         gestionarModelosDaihatsuBoton = new javax.swing.JButton();
-        gestionarRepuestosDaihatsuBoton = new javax.swing.JButton();
+        modeloXRepuestoBoton = new javax.swing.JButton();
         gestionarModelosNissanBoton = new javax.swing.JButton();
-        gestionarRepuestosNissanBoton = new javax.swing.JButton();
+        gestionarRepuestosBoton = new javax.swing.JButton();
         jPanel1 = new PanelImageLogo();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnuSalir = new javax.swing.JMenu();
@@ -99,7 +97,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         BotonMitsubitshi.setBackground(new java.awt.Color(255, 255, 255));
         BotonMitsubitshi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconmitsubishi.png"))); // NOI18N
-        BotonMitsubitshi.setText("jButton3");
         BotonMitsubitshi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonMitsubitshiActionPerformed(evt);
@@ -109,7 +106,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         BotonToyota.setBackground(new java.awt.Color(255, 255, 255));
         BotonToyota.setForeground(new java.awt.Color(255, 255, 255));
         BotonToyota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icontoyota.png"))); // NOI18N
-        BotonToyota.setText("jButton3");
         BotonToyota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonToyotaActionPerformed(evt);
@@ -118,7 +114,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         BotonDihatsu.setBackground(new java.awt.Color(255, 255, 255));
         BotonDihatsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icondaihatsu.png"))); // NOI18N
-        BotonDihatsu.setText("jButton1");
         BotonDihatsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonDihatsuActionPerformed(evt);
@@ -136,20 +131,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        gestionarRepuestosToyotaBoton.setBackground(new java.awt.Color(209, 37, 29));
-        gestionarRepuestosToyotaBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        gestionarRepuestosToyotaBoton.setForeground(new java.awt.Color(255, 255, 255));
-        gestionarRepuestosToyotaBoton.setText("Crear Repuestos");
-        gestionarRepuestosToyotaBoton.setToolTipText("");
-        gestionarRepuestosToyotaBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gestionarRepuestosToyotaBotonActionPerformed(evt);
-            }
-        });
-
         BotonNissan.setBackground(new java.awt.Color(255, 255, 255));
         BotonNissan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconnissan.jpg"))); // NOI18N
-        BotonNissan.setText("jButton1");
         BotonNissan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonNissanActionPerformed(evt);
@@ -167,17 +150,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        gestionarRepuestosMitsubishiBoton.setBackground(new java.awt.Color(209, 37, 29));
-        gestionarRepuestosMitsubishiBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        gestionarRepuestosMitsubishiBoton.setForeground(new java.awt.Color(255, 255, 255));
-        gestionarRepuestosMitsubishiBoton.setText("Crear Repuestos");
-        gestionarRepuestosMitsubishiBoton.setToolTipText("");
-        gestionarRepuestosMitsubishiBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gestionarRepuestosMitsubishiBotonActionPerformed(evt);
-            }
-        });
-
         gestionarModelosDaihatsuBoton.setBackground(new java.awt.Color(209, 37, 29));
         gestionarModelosDaihatsuBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         gestionarModelosDaihatsuBoton.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,14 +161,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        gestionarRepuestosDaihatsuBoton.setBackground(new java.awt.Color(209, 37, 29));
-        gestionarRepuestosDaihatsuBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        gestionarRepuestosDaihatsuBoton.setForeground(new java.awt.Color(255, 255, 255));
-        gestionarRepuestosDaihatsuBoton.setText("Crear Repuestos");
-        gestionarRepuestosDaihatsuBoton.setToolTipText("");
-        gestionarRepuestosDaihatsuBoton.addActionListener(new java.awt.event.ActionListener() {
+        modeloXRepuestoBoton.setBackground(new java.awt.Color(209, 37, 29));
+        modeloXRepuestoBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        modeloXRepuestoBoton.setForeground(new java.awt.Color(255, 255, 255));
+        modeloXRepuestoBoton.setText("Crear Repuestos x Modelos");
+        modeloXRepuestoBoton.setToolTipText("");
+        modeloXRepuestoBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gestionarRepuestosDaihatsuBotonActionPerformed(evt);
+                modeloXRepuestoBotonActionPerformed(evt);
             }
         });
 
@@ -211,14 +183,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        gestionarRepuestosNissanBoton.setBackground(new java.awt.Color(209, 37, 29));
-        gestionarRepuestosNissanBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        gestionarRepuestosNissanBoton.setForeground(new java.awt.Color(255, 255, 255));
-        gestionarRepuestosNissanBoton.setText("Crear Repuestos");
-        gestionarRepuestosNissanBoton.setToolTipText("");
-        gestionarRepuestosNissanBoton.addActionListener(new java.awt.event.ActionListener() {
+        gestionarRepuestosBoton.setBackground(new java.awt.Color(209, 37, 29));
+        gestionarRepuestosBoton.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        gestionarRepuestosBoton.setForeground(new java.awt.Color(255, 255, 255));
+        gestionarRepuestosBoton.setText("Crear Repuestos");
+        gestionarRepuestosBoton.setToolTipText("");
+        gestionarRepuestosBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gestionarRepuestosNissanBotonActionPerformed(evt);
+                gestionarRepuestosBotonActionPerformed(evt);
             }
         });
 
@@ -227,73 +199,66 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(BotonToyota, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(BotonMitsubitshi, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gestionarRepuestosToyotaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gestionarModelosToyotaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gestionarRepuestosMitsubishiBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gestionarModelosMitsubishiBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(52, 52, 52)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BotonDihatsu, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(gestionarRepuestosDaihatsuBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gestionarModelosDaihatsuBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotonNissan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(gestionarRepuestosNissanBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gestionarModelosNissanBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(BotonToyota, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BotonMitsubitshi, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(gestionarModelosToyotaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)
+                                .addComponent(gestionarModelosMitsubishiBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BotonDihatsu, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(gestionarModelosDaihatsuBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BotonNissan, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(gestionarModelosNissanBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(gestionarRepuestosBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(modeloXRepuestoBoton)))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonToyota, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonMitsubitshi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonDihatsu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonNissan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(gestionarModelosToyotaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(gestionarRepuestosToyotaBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(BotonNissan, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonDihatsu, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonMitsubitshi, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonToyota, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(gestionarModelosMitsubishiBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(gestionarRepuestosMitsubishiBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                        .addComponent(gestionarModelosToyotaBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gestionarModelosDaihatsuBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(gestionarModelosDaihatsuBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(gestionarRepuestosDaihatsuBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(gestionarModelosNissanBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(gestionarRepuestosNissanBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(6, 6, 6)
+                        .addComponent(gestionarModelosNissanBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modeloXRepuestoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gestionarRepuestosBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 242, Short.MAX_VALUE)
+            .addGap(0, 321, Short.MAX_VALUE)
         );
 
         MnuSalir.setText("Salir");
@@ -311,23 +276,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(330, Short.MAX_VALUE)
+                .addContainerGap(541, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(500, 500, 500))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(293, 293, 293))))
+                        .addGap(434, 434, 434))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(659, 659, 659))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(199, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(179, 179, 179))
         );
 
         pack();
@@ -339,7 +304,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void BotonToyotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonToyotaActionPerformed
         TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.TOYOTA.getId());
-        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        JFrame frm = new FrmListarModelosxRepuestos(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
@@ -348,7 +313,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     private void BotonMitsubitshiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMitsubitshiActionPerformed
         TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.MITSUBISHI.getId());
-        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        JFrame frm = new FrmListarModelosxRepuestos(marcas);
         frm.setResizable(false);
         frm.setLocationRelativeTo(null);
         frm.setVisible(true); 
@@ -356,7 +321,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void BotonDihatsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDihatsuActionPerformed
       TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.DAIHATSU.getId());
-        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        JFrame frm = new FrmListarModelosxRepuestos(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
@@ -370,19 +335,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_gestionarModelosToyotaBotonActionPerformed
 
-    private void gestionarRepuestosToyotaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosToyotaBotonActionPerformed
-       TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.TOYOTA.getId());
-        JFrame frm = new FrmCrearRepuestoCarro(marcas);
-        frm.setLocationRelativeTo(null);
-        frm.setResizable(false);
-        frm.setVisible(true);   
-
-    }//GEN-LAST:event_gestionarRepuestosToyotaBotonActionPerformed
-
     
     private void BotonNissanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNissanActionPerformed
        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());
-        JFrame frm = new FrmListarModelosRepuestos(marcas);
+        JFrame frm = new FrmListarModelosxRepuestos(marcas);
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
@@ -395,14 +351,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setResizable(false);
         frm.setVisible(true);    }//GEN-LAST:event_gestionarModelosMitsubishiBotonActionPerformed
 
-    private void gestionarRepuestosMitsubishiBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosMitsubishiBotonActionPerformed
-        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.MITSUBISHI.getId());
-        JFrame frm = new FrmCrearRepuestoCarro(marcas);
-        frm.setLocationRelativeTo(null);
-        frm.setResizable(false);
-        frm.setVisible(true); 
-    }//GEN-LAST:event_gestionarRepuestosMitsubishiBotonActionPerformed
-
     private void gestionarModelosDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosDaihatsuBotonActionPerformed
         TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.DAIHATSU.getId());
         JFrame frm = new FrmCrearModeloCarrro(marcas);
@@ -412,13 +360,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_gestionarModelosDaihatsuBotonActionPerformed
 
-    private void gestionarRepuestosDaihatsuBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosDaihatsuBotonActionPerformed
-         TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.DAIHATSU.getId());
-        JFrame frm = new FrmCrearRepuestoCarro(marcas);
+    private void modeloXRepuestoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloXRepuestoBotonActionPerformed
+         //TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.DAIHATSU.getId());
+        JFrame frm = new FrmCrearRepuestoxRepuestoCarro();
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
-    }//GEN-LAST:event_gestionarRepuestosDaihatsuBotonActionPerformed
+    }//GEN-LAST:event_modeloXRepuestoBotonActionPerformed
 
     private void gestionarModelosNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosNissanBotonActionPerformed
        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());
@@ -429,13 +377,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_gestionarModelosNissanBotonActionPerformed
 
-    private void gestionarRepuestosNissanBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosNissanBotonActionPerformed
-        TBLMarcaVo marcas = controller.marcasCarros(MarcasCarros.NISSAN.getId());      
-        JFrame frm = new FrmCrearRepuestoCarro(marcas);
+    private void gestionarRepuestosBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarRepuestosBotonActionPerformed
+        JFrame frm = new FrmCrearRepuestoCarro();
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
-        frm.setVisible(true); 
-    }//GEN-LAST:event_gestionarRepuestosNissanBotonActionPerformed
+        frm.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_gestionarRepuestosBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,10 +429,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton gestionarModelosMitsubishiBoton;
     public javax.swing.JButton gestionarModelosNissanBoton;
     public javax.swing.JButton gestionarModelosToyotaBoton;
-    private javax.swing.JButton gestionarRepuestosDaihatsuBoton;
-    private javax.swing.JButton gestionarRepuestosMitsubishiBoton;
-    private javax.swing.JButton gestionarRepuestosNissanBoton;
-    private javax.swing.JButton gestionarRepuestosToyotaBoton;
+    private javax.swing.JButton gestionarRepuestosBoton;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -496,5 +440,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton modeloXRepuestoBoton;
     // End of variables declaration//GEN-END:variables
 }

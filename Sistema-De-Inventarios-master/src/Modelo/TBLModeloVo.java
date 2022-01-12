@@ -28,6 +28,7 @@ public class TBLModeloVo {
     private String descripcion;
     private String pathImagen;
     private TBLMarcaVo idMarca;
+    private Boolean isCheck;
     
      @Override
     public String toString() {

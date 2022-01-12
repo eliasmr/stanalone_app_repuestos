@@ -40,8 +40,11 @@ public class PrincipalController {
      return impl.allModelo(id);
     }
     
-    public List<TBLRepuestoVo> getAllRepuesto(int id_modelo){
-     return repuesto.getAllRepuestoByIdModelo(id_modelo);
+    public List<TBLModeloVo> allListaModelo(){
+     return impl.allModelos();
+    } 
+    public List<TBLRepuestoVo> getAllRepuesto(){
+     return repuesto.getAllRepuestoByIdModelo();
     }
     public List<TBLRepuestoVo> getAllRepuestoByIdRepuestoModelo(int id_modelo){
      return repuesto.getAllRepuestoByIdRepuestoModelo(id_modelo);
