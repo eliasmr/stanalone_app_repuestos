@@ -37,7 +37,7 @@ public class ModeloRepuestoCarroController {
     
   
     public void loadData(JTable jt,int id, String params){
-     DefaultTableModel modeloT = new DefaultTableModel();
+      Boolean[] isEditable = {false,false,false,false,false,false,false,false,false};
      jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
@@ -54,6 +54,13 @@ public class ModeloRepuestoCarroController {
                                              registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
      }
+  DefaultTableModel modeloT = new DefaultTableModel() {
+
+       @Override
+        public boolean isCellEditable(int row, int column) {
+        return isEditable[column];
+    }
+    };
      JButton btn = new JButton();
      btn.setName("id_visualizar");
      Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
@@ -122,7 +129,7 @@ public class ModeloRepuestoCarroController {
    }
 
     public void loadDataModeloXRepuesto(JTable jt, String params, List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo){
-     DefaultTableModel modeloT = new DefaultTableModel();
+       Boolean[] isEditable = {false,false,false,false,false};
      jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloXRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
@@ -135,7 +142,13 @@ public class ModeloRepuestoCarroController {
      }else{
         ltsTem = ltsModeloXRepuestoVo;
      }
-     
+      DefaultTableModel modeloT = new DefaultTableModel() {
+
+       @Override
+        public boolean isCellEditable(int row, int column) {
+        return isEditable[column];
+    }
+    };
      JButton btn = new JButton();
      btn.setName("elimnar_btn");
      Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/eliminar.png")).getImage();

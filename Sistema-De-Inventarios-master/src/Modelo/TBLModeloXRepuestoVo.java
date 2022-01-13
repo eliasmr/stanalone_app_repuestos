@@ -23,5 +23,12 @@ public class TBLModeloXRepuestoVo {
     private int id;
     private TBLModeloVo modelo;
     private TBLRepuestoVo repuesto;
+
+    @Override
+    public String toString() {
+        return "TBLModeloXRepuestoVo{" + "id=" + id + ", modelo=" + modelo + ", repuesto=" + repuesto + '}';
+    }
+    
+    
     
 }

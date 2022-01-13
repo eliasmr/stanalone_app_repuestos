@@ -41,7 +41,7 @@ public class ModeloCarroController{
     private  List<TBLModeloVo> ltsModelo;
     private DropBoxImpl dropBoxImpl;
     
-    private Boolean[] isEditable = {false,false,false,false,false,false,false,false,true};
+    
     public ModeloCarroController(){
       this.impl = new TBLModeloImpl();
       this.combustible = new TBLCombustibleImpl();
@@ -70,8 +70,8 @@ public class ModeloCarroController{
  
 
     
-    public void loadData(JTable jt,int id, String params){
-     DefaultTableModel modeloT = new DefaultTableModel();
+public void loadData(JTable jt,int id, String params){
+     Boolean[] isEditable = {false,false,false,false,false,false,false,false,false,false};
      jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
@@ -88,6 +88,13 @@ public class ModeloCarroController{
                                              registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
      }
+      DefaultTableModel modeloT = new DefaultTableModel() {
+
+       @Override
+        public boolean isCellEditable(int row, int column) {
+        return isEditable[column];
+    }
+    };
      JButton btn = new JButton();
      btn.setName("id_visualizar");
      Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
@@ -104,7 +111,7 @@ public class ModeloCarroController{
     modeloT.addColumn("Año Modelo");
     modeloT.addColumn("Marca");
     modeloT.addColumn("Codigo");
-    modeloT.addColumn("ver");
+    modeloT.addColumn("Ver Imagen");
 
     
     Object[] columna = new Object [10];
@@ -129,13 +136,13 @@ public class ModeloCarroController{
         columnModel.getColumn(0).setMaxWidth(30);
         columnModel.getColumn(1).setPreferredWidth(100);
         columnModel.getColumn(2).setPreferredWidth(100);
-        columnModel.getColumn(3).setPreferredWidth(200);
-         columnModel.getColumn(4).setPreferredWidth(100);
-         columnModel.getColumn(5).setPreferredWidth(50);
-         columnModel.getColumn(6).setPreferredWidth(50);
-         columnModel.getColumn(7).setPreferredWidth(30);
-         columnModel.getColumn(8).setPreferredWidth(1);
-          columnModel.getColumn(9).setPreferredWidth(1);
+       // columnModel.getColumn(3).setPreferredWidth(200);
+        columnModel.getColumn(4).setPreferredWidth(100);
+        columnModel.getColumn(5).setPreferredWidth(50);
+        columnModel.getColumn(6).setPreferredWidth(50);
+        columnModel.getColumn(7).setPreferredWidth(30);
+        columnModel.getColumn(8).setPreferredWidth(1);
+        columnModel.getColumn(9).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -143,12 +150,22 @@ public class ModeloCarroController{
         jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(7).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(8).setCellRenderer( centerRenderer );
+        
+        
+        //ocultos
+        jt.getColumnModel().getColumn(3).setMaxWidth(0);
+        jt.getColumnModel().getColumn(3).setMinWidth(0);
+        jt.getColumnModel().getColumn(3).setPreferredWidth(0);
+        
+        jt.getColumnModel().getColumn(8).setMaxWidth(0);
+        jt.getColumnModel().getColumn(8).setMinWidth(0);
+        jt.getColumnModel().getColumn(8).setPreferredWidth(0);
         
         jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
         jt.getTableHeader().setBackground(new Color(209,37,29));
@@ -157,7 +174,7 @@ public class ModeloCarroController{
    }
     
 public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo ){
-     //DefaultTableModel modeloT = new DefaultTableModel();
+    Boolean[] isEditable = {false,false,false,false,false,false,false,false,true,false};
      jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
@@ -183,7 +200,10 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
            java.lang.Object.class,
            java.lang.Object.class,
            java.lang.Object.class,
-           java.lang.Boolean.class};
+           java.lang.Boolean.class,
+           java.lang.Object.class,
+       };
+       
 
         @Override
         public Class getColumnClass(int columnIndex) {
@@ -194,6 +214,13 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
         return isEditable[column];
     }
     };
+    JButton btn = new JButton();
+     btn.setName("id_visualizar_modelo");
+     Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
+     ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+     btn.setIcon(mIcono);
+    btn.setOpaque(true);
+    
     jt.setModel(modeloT);
         
     modeloT.addColumn("#");
@@ -204,11 +231,12 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
     modeloT.addColumn("Año Modelo");
     modeloT.addColumn("Marca");
     modeloT.addColumn("Codigo");
-    modeloT.addColumn("check");
+    modeloT.addColumn("Check");
+    modeloT.addColumn("Ver Imagen");
 
     
 
-    Object[] columna = new Object [9];
+    Object[] columna = new Object [10];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsTem.stream().forEach(obj ->{
       columna[0] = counter.get();
@@ -227,7 +255,7 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
       }else{
       columna[8] = ls.get(0).getModelo().getIsCheck();
       }
-      
+      columna[9] = btn;
       counter.getAndUpdate(value -> value + 1);
       modeloT.addRow(columna);
     });
@@ -237,13 +265,11 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
         columnModel.getColumn(0).setMaxWidth(30);
         columnModel.getColumn(1).setPreferredWidth(100);
         columnModel.getColumn(2).setPreferredWidth(100);
-        columnModel.getColumn(3).setPreferredWidth(200);
-         //columnModel.getColumn(4).setPreferredWidth(100);
-         columnModel.getColumn(4).setPreferredWidth(50);
-         columnModel.getColumn(5).setPreferredWidth(50);
-         columnModel.getColumn(6).setPreferredWidth(30);
-         columnModel.getColumn(7).setPreferredWidth(1);
-          columnModel.getColumn(8).setPreferredWidth(1);
+        columnModel.getColumn(4).setPreferredWidth(50);
+        columnModel.getColumn(5).setPreferredWidth(50);
+        
+        columnModel.getColumn(7).setPreferredWidth(1);
+        columnModel.getColumn(8).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -251,12 +277,19 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
         jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
-        //jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
+      
         jt.getColumnModel().getColumn(7).setCellRenderer( centerRenderer );
+        
+          //ocultos
+        jt.getColumnModel().getColumn(3).setMaxWidth(0);
+        jt.getColumnModel().getColumn(3).setMinWidth(0);
+        jt.getColumnModel().getColumn(3).setPreferredWidth(0);
+        
+        jt.getColumnModel().getColumn(7).setMaxWidth(0);
+        jt.getColumnModel().getColumn(7).setMinWidth(0);
+        jt.getColumnModel().getColumn(7).setPreferredWidth(0);
         
         jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
         jt.getTableHeader().setBackground(new Color(209,37,29));

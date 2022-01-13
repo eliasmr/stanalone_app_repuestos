@@ -58,7 +58,7 @@ public class RepuestoCarroController{
     }
     
     public void loadData(JTable jt,String params){
-     DefaultTableModel repuestoT = new DefaultTableModel();
+       Boolean[] isEditable = {false,false,false,false,false,false,false,false,false,false};
       jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
@@ -72,6 +72,13 @@ public class RepuestoCarroController{
                                              registro.getDescripcion().toUpperCase().contains(param) 
                                              ).collect(Collectors.toList());
      }
+      DefaultTableModel repuestoT = new DefaultTableModel() {
+
+       @Override
+        public boolean isCellEditable(int row, int column) {
+        return isEditable[column];
+    }
+    };
      JButton btn = new JButton();
      btn.setName("id_visualizar");
      Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
@@ -85,7 +92,7 @@ public class RepuestoCarroController{
     repuestoT.addColumn("Imagen");
     repuestoT.addColumn("Descripcion");
     repuestoT.addColumn("Codigo");
-     repuestoT.addColumn("ver");
+     repuestoT.addColumn("ver Imagen");
     Object[] columna = new Object [7];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
     ltsTem.stream().forEach(obj ->{
@@ -104,9 +111,9 @@ public class RepuestoCarroController{
         columnModel.getColumn(0).setMaxWidth(30);
         columnModel.getColumn(1).setPreferredWidth(100);
         columnModel.getColumn(2).setPreferredWidth(50);
-        columnModel.getColumn(3).setPreferredWidth(200);
+        //columnModel.getColumn(3).setPreferredWidth(200);
          columnModel.getColumn(4).setPreferredWidth(200);
-         columnModel.getColumn(5).setPreferredWidth(50);
+         //columnModel.getColumn(5).setPreferredWidth(50);
          //columnModel.getColumn(6).setPreferredWidth(1);
          
          
@@ -115,10 +122,20 @@ public class RepuestoCarroController{
         jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
         //jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
+        
+                //ocultos
+        jt.getColumnModel().getColumn(3).setMaxWidth(0);
+        jt.getColumnModel().getColumn(3).setMinWidth(0);
+        jt.getColumnModel().getColumn(3).setPreferredWidth(0);
+        
+        jt.getColumnModel().getColumn(5).setMaxWidth(0);
+        jt.getColumnModel().getColumn(5).setMinWidth(0);
+        jt.getColumnModel().getColumn(5).setPreferredWidth(0);
+        
         
         jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
         jt.getTableHeader().setBackground(new Color(209,37,29));
@@ -126,12 +143,28 @@ public class RepuestoCarroController{
         jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
    }
     
-    public boolean loadDataModeloXrepuesto(JTable jt, int id_modelo,String param){
-     DefaultTableModel repuestoT = new DefaultTableModel();
-     jt.setDefaultRenderer(Object.class, new ButtonRender());
-     ltsRepuesto = principaCtr.getAllRepuestoByIdRepuestoModelo(id_modelo);
-      
-     AtomicReference<Boolean> validacion = new AtomicReference<>(false);
+    public void loadDataModeloXrepuesto(JTable jt,String params){
+      Boolean[] isEditable = {false,false,false,false,false,false,false};
+      jt.setDefaultRenderer(Object.class, new ButtonRender());
+     List<TBLRepuestoVo> ltsTem = new ArrayList<>();
+     String param = params.toUpperCase();
+     if(params.isEmpty() && ltsRepuesto.isEmpty()){
+         ltsRepuesto = principaCtr.getAllRepuesto();
+         ltsTem = ltsRepuesto;
+     }else{
+       ltsTem =  ltsRepuesto.stream().filter(registro -> 
+                                             registro.getNombre().toUpperCase().contains(param)||
+                                             registro.getReferencia().toUpperCase().contains(param) ||
+                                             registro.getDescripcion().toUpperCase().contains(param) 
+                                             ).collect(Collectors.toList());
+     }
+    DefaultTableModel repuestoT = new DefaultTableModel() {
+
+       @Override
+        public boolean isCellEditable(int row, int column) {
+        return isEditable[column];
+    }
+    };
      JButton btn = new JButton();
      btn.setName("id_visualizar");
      Image mImagen = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/visualizar.png")).getImage();
@@ -144,32 +177,30 @@ public class RepuestoCarroController{
     repuestoT.addColumn("Referencia");
     repuestoT.addColumn("Imagen");
     repuestoT.addColumn("Descripcion");
-    repuestoT.addColumn("Modelo");
     repuestoT.addColumn("Codigo");
-     repuestoT.addColumn("visualizar");
-    Object[] columna = new Object [8];
+     repuestoT.addColumn("ver Imagen");
+    Object[] columna = new Object [7];
     AtomicReference<Integer> counter = new AtomicReference<>(1);
-    ltsRepuesto.stream().forEach(obj ->{
+    ltsTem.stream().forEach(obj ->{
       columna[0] = counter.get();
       columna[1] = obj.getNombre();
       columna[2] = obj.getReferencia();
       columna[3] = obj.getPathImagen();
       columna[4] = obj.getDescripcion();
       columna[5] = obj.getIdRepuesto();
-      columna[7] = btn;
+      columna[6] = btn;
       counter.getAndUpdate(value -> value + 1);
       repuestoT.addRow(columna);
-      validacion.set(Boolean.TRUE);
     });
-    
-        TableColumnModel columnModel = jt.getColumnModel();
+            TableColumnModel columnModel = jt.getColumnModel();
         
         columnModel.getColumn(0).setMaxWidth(30);
         columnModel.getColumn(1).setPreferredWidth(100);
-        columnModel.getColumn(2).setPreferredWidth(100);
-        columnModel.getColumn(3).setPreferredWidth(200);
-         columnModel.getColumn(4).setPreferredWidth(80);
-         columnModel.getColumn(5).setPreferredWidth(1);
+        columnModel.getColumn(2).setPreferredWidth(50);
+        //columnModel.getColumn(3).setPreferredWidth(200);
+         columnModel.getColumn(4).setPreferredWidth(200);
+         //columnModel.getColumn(5).setPreferredWidth(50);
+         //columnModel.getColumn(6).setPreferredWidth(1);
          
          
          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -177,19 +208,29 @@ public class RepuestoCarroController{
         jt.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
         jt.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
-        jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
+        //jt.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
+        
+        //ocultos
+        jt.getColumnModel().getColumn(3).setMaxWidth(0);
+        jt.getColumnModel().getColumn(3).setMinWidth(0);
+        jt.getColumnModel().getColumn(3).setPreferredWidth(0);
+        
+        jt.getColumnModel().getColumn(5).setMaxWidth(0);
+        jt.getColumnModel().getColumn(5).setMinWidth(0);
+        jt.getColumnModel().getColumn(5).setPreferredWidth(0);
+        
         
         jt.getTableHeader().setFont(new Font("Cooper Black", 1, 14));
         jt.getTableHeader().setBackground(new Color(209,37,29));
         jt.getTableHeader().setForeground(Color.white);
         jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
-    return validacion.get();
    }
    
-    public void updateRepuesto(int id,String nombre,String referencia,String descripcion,String img){
-    impl.update(TBLRepuestoVo
+    public Boolean updateRepuesto(int id,String nombre,String referencia,String descripcion,String img){
+   return impl.update(TBLRepuestoVo
                            .builder()
                            .idRepuesto(id)
                            .nombre(nombre)
@@ -198,8 +239,8 @@ public class RepuestoCarroController{
                            .pathImagen(img)
                            .build());
     }
-     public void deleteRepuesto(String text) {
-        impl.delete(Integer.parseInt(text));
+     public Boolean deleteRepuesto(String text) {
+        return impl.delete(Integer.parseInt(text));
     }
      public List<TBLModeloVo> ltsModelos(int id_marca){
       return modelo.allModelo(id_marca);

@@ -5,6 +5,8 @@ import Controlador.ModeloRepuestoCarroController;
 import Controlador.RepuestoCarroController;
 import Controlador.RepuestoXModeloController;
 import Modelo.TBLMarcaVo;
+import Modelo.TBLModeloXRepuestoVo;
+import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +16,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -139,6 +142,15 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
         tbrepuestoxmodelo.setRowMargin(10);
         tbrepuestoxmodelo.setSelectionBackground(new java.awt.Color(102, 204, 255));
         tbrepuestoxmodelo.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tbrepuestoxmodelo.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                tbrepuestoxmodeloAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         tbrepuestoxmodelo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbrepuestoxmodeloMouseClicked(evt);
@@ -270,10 +282,50 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
             ((JButton) value).doClick();
             JButton btn = (JButton) value;
             if (btn.getName().equals("elimnar_btn")) {
-                if(control.delete(Integer.parseInt(tbrepuestoxmodelo.getValueAt(fila, 4).toString()))){
+                if(control.delete(Integer.parseInt(tbrepuestoxmodelo.getValueAt(fila, 7).toString()))){
                 JOptionPane.showMessageDialog(null, "Registro Eliminado Exitoso", "Registro Eliminado Exitoso", JOptionPane.INFORMATION_MESSAGE);
                 control.loadDataAllModeloXRepuesto(tbrepuestoxmodelo, "", marcas.getIdMarca());
                 };
+            }else if (btn.getName().equals("id_btn_ver_rep_img")) {
+
+                Ruta = tbrepuestoxmodelo.getValueAt(fila, 9).toString();
+                String imagen = dropBoxImpl.getFileDrobox(Ruta);
+                Image img3 = new ImageIcon(imagen).getImage();
+                Dimension size = new Dimension(img3.getWidth(null), img3.getHeight(null));
+                ImageIcon img2 = new ImageIcon(img3);
+
+                FramImagen.getContentPane().setLayout(new BorderLayout());
+
+                Labelimagenes.setIcon(img2);
+                FramImagen.getContentPane().add(Labelimagenes, BorderLayout.CENTER);
+
+                FramImagen.getContentPane().setBackground(Color.WHITE);
+                FramImagen.setSize(new Dimension(img3.getWidth(this) + 50, img3.getWidth(this) + 50));
+                FramImagen.setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
+                FramImagen.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(209, 37, 29)));
+                FramImagen.setVisible(true);
+                FramImagen.setLocationRelativeTo(null);
+                FramImagen.setResizable(false);
+            }else if (btn.getName().equals("btn_ver_mod_img")) {
+
+                Ruta = tbrepuestoxmodelo.getValueAt(fila, 10).toString();
+                String imagen = dropBoxImpl.getFileDrobox(Ruta);
+                Image img3 = new ImageIcon(imagen).getImage();
+                Dimension size = new Dimension(img3.getWidth(null), img3.getHeight(null));
+                ImageIcon img2 = new ImageIcon(img3);
+
+                FramImagen.getContentPane().setLayout(new BorderLayout());
+
+                Labelimagenes.setIcon(img2);
+                FramImagen.getContentPane().add(Labelimagenes, BorderLayout.CENTER);
+
+                FramImagen.getContentPane().setBackground(Color.WHITE);
+                FramImagen.setSize(new Dimension(img3.getWidth(this) + 50, img3.getWidth(this) + 50));
+                FramImagen.setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
+                FramImagen.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(209, 37, 29)));
+                FramImagen.setVisible(true);
+                FramImagen.setLocationRelativeTo(null);
+                FramImagen.setResizable(false);
             }
          }
     }//GEN-LAST:event_tbrepuestoxmodeloMouseClicked
@@ -281,6 +333,10 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
     private void BotonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFiltrarActionPerformed
          control.loadDataAllModeloXRepuesto(tbrepuestoxmodelo, txtFilterTable.getText(), marcas.getIdMarca());
     }//GEN-LAST:event_BotonFiltrarActionPerformed
+
+    private void tbrepuestoxmodeloAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tbrepuestoxmodeloAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbrepuestoxmodeloAncestorAdded
 
  
     
@@ -334,49 +390,6 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
         });
     }
     
-    public void modificar(java.awt.event.MouseEvent evt, JTable jt) {
-        int fila = jt.rowAtPoint(evt.getPoint());
-        int colunm = jt.getColumnModel().getColumnIndexAtX(evt.getX());
-
-        
-        if (fila >= 0) {
-            Ruta = "";
-            Ruta = jt.getValueAt(fila, 3).toString();
-
-            //imagen
-            String img = dropBoxImpl.getFileDrobox(Ruta);
-            Image mImagen = new ImageIcon(img).getImage();
-            ImageIcon mIcono = new ImageIcon(mImagen.getScaledInstance(this.imgProducto.getWidth(), this.imgProducto.getHeight(), Image.SCALE_SMOOTH));
-            imgProducto.setIcon(mIcono);
-        }
-       Object value = jt.getValueAt(fila, colunm);
-        if (value instanceof JButton) {
-            ((JButton) value).doClick();
-            JButton btn = (JButton) value;
-            if (btn.getName().equals("id_visualizar")) {
-
-                    Ruta = jt.getValueAt(fila, 3).toString();
-                    String imagen = dropBoxImpl.getFileDrobox(Ruta);
-                    Image img3 = new ImageIcon(imagen).getImage();
-                    Dimension size = new Dimension(img3.getWidth(null), img3.getHeight(null));
-                    ImageIcon img2 = new ImageIcon(img3);
-
-                    FramImagen.getContentPane().setLayout(new BorderLayout());
-
-                    Labelimagenes.setIcon(img2);
-                    FramImagen.getContentPane().add(Labelimagenes, BorderLayout.CENTER);
-
-                    FramImagen.getContentPane().setBackground(Color.WHITE);
-                    FramImagen.setSize(new Dimension(img3.getWidth(this) + 50, img3.getWidth(this) + 50));
-                    FramImagen.setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
-                    FramImagen.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(209, 37, 29)));
-                    FramImagen.setVisible(true);
-                    FramImagen.setLocationRelativeTo(null);
-                    FramImagen.setResizable(false);
-            }
-        }
-    }
-
 
  public String splitPAthImg(String pathImg){
        pathImg = pathImg.replace("\\", "1000001").replace("/", "1000001");
@@ -398,7 +411,7 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanelModeloCarro;
     private javax.swing.ButtonGroup rdbGrupoEliminar_Actualizar;
-    public javax.swing.JTable tbrepuestoxmodelo;
+    private javax.swing.JTable tbrepuestoxmodelo;
     private javax.swing.JTextField txtFilterTable;
     // End of variables declaration//GEN-END:variables
 

@@ -7,35 +7,22 @@ import Modelo.TBLTipoCombustibleVo;
 import Modelo.impl.DropBoxImpl;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.TableColumn;
-import jdk.internal.org.jline.terminal.spi.JansiSupport;
 import util.MarcasCarros;
 
 /**
@@ -52,7 +39,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private static ModeloCarroController model;
     private TBLMarcaVo marcas;
     private DropBoxImpl dropBoxImpl;
-    private int id;
+    private String id = "";
     DefaultTableModel modelo;
 
     public FrmCrearModeloCarrro(TBLMarcaVo marcas) {
@@ -72,8 +59,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         
         setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
         
-        this.listAno(0);
-        this.ltsTipoCombustible();
+        this.listAno();
+        this.ltsTipoCombustible(new ArrayList<>());
       
         iconDefault();
 
@@ -110,7 +97,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         tbGetDatosModelo = new javax.swing.JTable();
         txtFilterTable = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        labelIdRegistro = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         ListTipoCombistible = new javax.swing.JComboBox<>();
         labelRutaImagen = new javax.swing.JLabel();
@@ -276,8 +262,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Filtro");
 
-        labelIdRegistro.setEnabled(false);
-
         jLabel9.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel9.setText("Tipo de Combustible");
 
@@ -320,10 +304,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
-                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                        .addGap(722, 722, 722)
-                        .addComponent(labelIdRegistro)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
@@ -399,8 +379,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                                 .addComponent(ExaminarImagen))
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelIdRegistro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(imgProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -493,11 +471,12 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     }
   
     private void btnEliminarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarModeloActionPerformed
-           if (!labelIdRegistro.getText().isEmpty()) {
+           
+        if (!id.isEmpty()) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
                         "¿Esta seguro de que desea borrar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                    try {
-                       if(!model.deleteModelo(labelIdRegistro.getText())){
+                       if(!model.deleteModelo(id)){
                             JOptionPane.showMessageDialog(this,"El modelo no se puede eliminar.. tiene repuestos asociados", "Advertencia",JOptionPane.ERROR_MESSAGE);
                        }else{
                        JOptionPane.showMessageDialog(this,"Modelo eliminado correctamente", "Modelo Eliminado",JOptionPane.INFORMATION_MESSAGE);
@@ -508,6 +487,8 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                    
                 }
                     model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
+                    this.limpiarCampos();
+                    id = "";
             }else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para eliminar", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -517,7 +498,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private void btnActualizarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarModeloActionPerformed
         TBLTipoCombustibleVo tipoCombustible = (TBLTipoCombustibleVo) ListTipoCombistible.getSelectedItem();
         String anio = (String) listAnio.getSelectedItem();
-        if (!labelIdRegistro.getText().isEmpty()) {
+        if (!id.isEmpty()) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this,
                     "¿Esta seguro de que desea actualizar este modelo?", "Pregunta", JOptionPane.YES_NO_OPTION)) {
                 try {
@@ -526,13 +507,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                         path = dropBoxImpl.uploadFIleDropbox("modelo", Ruta);
                     }
 
-                    model.updateModel(Integer.parseInt(labelIdRegistro.getText()), txtNombre.getText(), anio, txtCilindraje.getText(), tipoCombustible, txtDescripcion.getText(), path, marcas);
+                    model.updateModel(Integer.parseInt(id), txtNombre.getText(), anio, txtCilindraje.getText(), tipoCombustible, txtDescripcion.getText(), path, marcas);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un modelo", JOptionPane.ERROR_MESSAGE);
                 }
                 JOptionPane.showMessageDialog(this, "Modelo actualizado correctamente", "Modelo Actualizado", JOptionPane.INFORMATION_MESSAGE);
             }
-
+            id = "";
         } else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -666,7 +647,9 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     public void modificar(java.awt.event.MouseEvent evt) {
         int fila = tbGetDatosModelo.rowAtPoint(evt.getPoint());
         int colunm = tbGetDatosModelo.getColumnModel().getColumnIndexAtX(evt.getX());
-        String anio = (String) listAnio.getSelectedItem();
+        String anio = tbGetDatosModelo.getValueAt(fila, 6).toString();
+        String tipoCombustible = tbGetDatosModelo.getValueAt(fila, 4).toString();
+         
         if (fila >= 0) {
             btnGuardarModelo.setEnabled(false);
             btnGuardarModelo.setBackground(Color.GRAY);
@@ -676,11 +659,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             txtDescripcion.setText(tbGetDatosModelo.getValueAt(fila, 2).toString());
             Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
             labelRutaImagen.setText(splitPAthImg(Ruta));
-            this.ltsTipoCombustible();
             txtCilindraje.setText(tbGetDatosModelo.getValueAt(fila, 5).toString());
-            this.listAno(Integer.parseInt(anio));
+            
+            
+            listAnio.setSelectedItem(anio);
+            List<TBLTipoCombustibleVo> lts = model.ltsTipoCombustible().stream().filter(obj -> obj.getNombre().equals(tipoCombustible)).collect(Collectors.toList());
+            ltsTipoCombustible(lts);
+            
             //marcas
-            labelIdRegistro.setText(tbGetDatosModelo.getValueAt(fila, 8).toString());
+            id = tbGetDatosModelo.getValueAt(fila, 8).toString();
 
             //imagen
             String img = dropBoxImpl.getFileDrobox(Ruta);
@@ -717,13 +704,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 
         }
     }
- public void listDias(int dia){
-  for(int i=1; i<=31;i++){
-    if(dia != i){
-     //listDia.addItem(String.valueOf(i));
-    }
-  }
- }
  public void listMes(String mesP){
  String meses[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
   for(String mes: meses)
@@ -731,24 +711,22 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
 //          ListMes.addItem(mes);
       }
     }
- public void listAno(int ano){     
+ public void listAno(){   
      for(int i=1900;i<=3000;i++){
-       if(ano != i){
-       listAnio.addItem(String.valueOf(i));
-       }
+        listAnio.addItem(String.valueOf(i));
        
      }
  }
- public void ltsTipoCombustible(){
+ public void ltsTipoCombustible(List<TBLTipoCombustibleVo> lts){
      model.ltsTipoCombustible().forEach(obj->{
-        ListTipoCombistible.addItem(obj);
+         ListTipoCombistible.addItem(obj);
+         if(!lts.isEmpty() && obj.getNombre().equals(lts.get(0).getNombre())){
+           ListTipoCombistible.setSelectedItem(obj);
+         }
+        
      });
+     
  }  
-    public void ltsMarca(){
-     model.ltsMarca().forEach(obj->{
-        //ListMarca.addItem(obj);
-     });
- }
  public String splitPAthImg(String pathImg){
        pathImg = pathImg.replace("\\", "1000001").replace("/", "1000001");
             String spl[] = pathImg.split("1000001");
@@ -780,7 +758,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpanelModeloCarro;
-    public javax.swing.JLabel labelIdRegistro;
     private javax.swing.JLabel labelRutaImagen;
     private javax.swing.JComboBox<String> listAnio;
     private javax.swing.ButtonGroup rdbGrupoEliminar_Actualizar;

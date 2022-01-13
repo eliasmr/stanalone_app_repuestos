@@ -11,7 +11,10 @@ import Modelo.TBLModeloVo;
 import Modelo.TBLModeloXRepuestoVo;
 import Modelo.TBLRepuestoVo;
 import Modelo.impl.DropBoxImpl;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +59,7 @@ public class FrmCrearRepuestoxRepuestoCarro extends javax.swing.JFrame {
         
         this.jLabel6.setText("FORMULARIO PARA GESTIONAR REPUESTOS ");
         setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
-       repuesto.loadData(tbGetDatosRepuesto,"");  
+       repuesto.loadDataModeloXrepuesto(tbGetDatosRepuesto,"");  
        
        
         //oculta modelos
@@ -460,29 +463,54 @@ public class FrmCrearRepuestoxRepuestoCarro extends javax.swing.JFrame {
 
     private void tbGetDatosRepuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosRepuestoMousePressed
         dtoRepuesto = new TBLRepuestoVo();
-        
-        
-       
-        
-        tbGetDatosModelo.setVisible(true);
-        tbGetDatosModelo.getTableHeader().setVisible(true);
-        jScrollPane3.setVisible(true);
-        jLabel9.setVisible(true);
-        txtFilterTable1.setVisible(true);
-        BotonBuscarModelo.setVisible(true);
-        txtFilterTable1.setVisible(true);
-        jLabel8.setVisible(true);
-        
+
 
                 
         int fila = tbGetDatosRepuesto.rowAtPoint(evt.getPoint());
-        Integer id = Integer.parseInt(tbGetDatosRepuesto.getValueAt(fila, 5).toString());
-        dtoRepuesto.setNombre(tbGetDatosRepuesto.getValueAt(fila, 1).toString());
-        dtoRepuesto.setIdRepuesto(id);
-        
+        int colunm = tbGetDatosRepuesto.getColumnModel().getColumnIndexAtX(evt.getX());
 
-        model.loadDataModelXRepuesto(tbGetDatosModelo,"", ltsModeloXRepuestoVo);
-        labelselecionDelRepuesto.setText("Selecione los modelos para el repuesto de: "+dtoRepuesto.getNombre());
+        
+        Object value = tbGetDatosRepuesto.getValueAt(fila, colunm);
+        if (value instanceof JButton) {
+            ((JButton) value).doClick();
+            JButton btn = (JButton) value;
+            if (btn.getName().equals("id_visualizar")) {
+
+                Ruta = tbGetDatosRepuesto.getValueAt(fila, 3).toString();
+                String imagen = dropBoxImpl.getFileDrobox(Ruta);
+                Image img3 = new ImageIcon(imagen).getImage();
+                Dimension size = new Dimension(img3.getWidth(null), img3.getHeight(null));
+                ImageIcon img2 = new ImageIcon(img3);
+
+                FramImagen.getContentPane().setLayout(new BorderLayout());
+
+                Labelimagenes.setIcon(img2);
+                FramImagen.getContentPane().add(Labelimagenes, BorderLayout.CENTER);
+
+                FramImagen.getContentPane().setBackground(Color.WHITE);
+                FramImagen.setSize(new Dimension(img3.getWidth(this) + 50, img3.getWidth(this) + 50));
+                FramImagen.setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
+                FramImagen.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(209, 37, 29)));
+                FramImagen.setVisible(true);
+                FramImagen.setLocationRelativeTo(null);
+                FramImagen.setResizable(false);
+            }
+        }else{
+        
+            tbGetDatosModelo.setVisible(true);
+            tbGetDatosModelo.getTableHeader().setVisible(true);
+            jScrollPane3.setVisible(true);
+            jLabel9.setVisible(true);
+            txtFilterTable1.setVisible(true);
+            BotonBuscarModelo.setVisible(true);
+            txtFilterTable1.setVisible(true);
+            jLabel8.setVisible(true);
+            Integer id = Integer.parseInt(tbGetDatosRepuesto.getValueAt(fila, 5).toString());
+            dtoRepuesto.setNombre(tbGetDatosRepuesto.getValueAt(fila, 1).toString());
+            dtoRepuesto.setIdRepuesto(id);
+            labelselecionDelRepuesto.setText("Selecione los modelos para el repuesto de: "+dtoRepuesto.getNombre());
+            model.loadDataModelXRepuesto(tbGetDatosModelo,"", ltsModeloXRepuestoVo);
+        }
 
     }//GEN-LAST:event_tbGetDatosRepuestoMousePressed
 
@@ -526,7 +554,34 @@ public class FrmCrearRepuestoxRepuestoCarro extends javax.swing.JFrame {
               }else{
               ltt.removeIf(obj -> obj.getModelo().getNombre().equals(mr.getModelo().getNombre()) && 
                                   obj.getRepuesto().getNombre().equals(mr.getRepuesto().getNombre()));
-              }    
+              }   
+              
+              Object valueModelo = tbGetDatosModelo.getValueAt(fila, colunm);
+               if (valueModelo instanceof JButton) {
+                   ((JButton) valueModelo).doClick();
+                   JButton btn = (JButton) valueModelo;
+                   if (btn.getName().equals("id_visualizar_modelo")) {
+
+                       Ruta = tbGetDatosModelo.getValueAt(fila, 3).toString();
+                       String imagen = dropBoxImpl.getFileDrobox(Ruta);
+                       Image img3 = new ImageIcon(imagen).getImage();
+                       Dimension size = new Dimension(img3.getWidth(null), img3.getHeight(null));
+                       ImageIcon img2 = new ImageIcon(img3);
+
+                       FramImagen.getContentPane().setLayout(new BorderLayout());
+
+                       Labelimagenes.setIcon(img2);
+                       FramImagen.getContentPane().add(Labelimagenes, BorderLayout.CENTER);
+
+                       FramImagen.getContentPane().setBackground(Color.WHITE);
+                       FramImagen.setSize(new Dimension(img3.getWidth(this) + 50, img3.getWidth(this) + 50));
+                       FramImagen.setIconImage(new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/logoAutopartes.PNG")).getImage());
+                       FramImagen.getRootPane().setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(209, 37, 29)));
+                       FramImagen.setVisible(true);
+                       FramImagen.setLocationRelativeTo(null);
+                       FramImagen.setResizable(false);
+                   }
+               }
         }
         
           if(!ltt.isEmpty()){

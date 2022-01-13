@@ -191,7 +191,7 @@ public class TBLRepuestoImpl{
             pstmt.execute();
             return true;
         } catch (Exception e) {
-        LOGGER.severe(TraceInfoSistem.getTraceInfoError("al borrar el modelo del carro", e));
+        LOGGER.severe(TraceInfoSistem.getTraceInfoError("al borrar el repuesto del carro", e));
         }
         return false;
     }
