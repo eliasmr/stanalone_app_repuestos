@@ -40,11 +40,12 @@ public class ConsultasSQL {
     
     /** repuesto x modelo **/
     public final static String INSERT_REPUESTO_X_MODELO = "INSERT INTO TBL_REPUESTO_X_MODELO(ID_REPUESTO, ID_MODELO) VALUES(?,?)";
-    public final static String ALL_REPUESTO_X_MODELO_BY_ID_MARCA = "SELECT * FROM TBL_REPUESTO_X_MODELO rm JOIN  TBL_MODELO  md ON rm.ID_MODELO = md.ID_MODELO JOIN TBL_REPUESTO rp ON rp.ID_REPUESTO = rm.ID_REPUESTO WHERE md.ID_MARCA = ?";
+    public final static String ALL_REPUESTO_X_MODELO_BY_ID_MARCA = "SELECT * FROM TBL_REPUESTO_X_MODELO rm JOIN  TBL_MODELO  md ON rm.ID_MODELO = md.ID_MODELO WHERE md.ID_MARCA = ?";
     public final static String ALL_REPUESTO_X_MODELO = "SELECT * FROM TBL_REPUESTO_X_MODELO";
     public final static String ALL_REPUESTO_MODELO_BY_IDMODELO_IDREPUESTO = "SELECT * FROM TBL_REPUESTO_X_MODELO rm  WHERE rm.ID_MODELO = ? AND rm.ID_REPUESTO = ?";
     public final static String DELETE_REPUESTO_X_MODELO = "DELETE FROM TBL_REPUESTO_X_MODELO WHERE ID_REPUESTO_X_MODELO = ? ";
+    public final static String ALL_REPUESTO_X_MODELO_BY_MODELO = "SELECT * FROM TBL_REPUESTO_X_MODELO rm  WHERE rm.ID_MODELO = ?";
     /** Session */
     
-    public final static String GET_SESSION = "SELECT *FROM TBL_SESSION WHERE NOMBRE = ?";
+    public final static String GET_SESSION = "SELECT * FROM TBL_SESSION WHERE NOMBRE = ? and USER_HABILITADO = true";
 }

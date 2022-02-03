@@ -3,6 +3,7 @@ package Modelo.impl;
 import Modelo.Conexion;
 import Modelo.ConsultasSQL;
 import Modelo.TBLModeloXRepuestoVo;
+import Modelo.TBLRepuestoVo;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

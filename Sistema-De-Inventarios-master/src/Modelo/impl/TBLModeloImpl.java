@@ -129,7 +129,7 @@ public class TBLModeloImpl{
     
     public TBLModeloVo getModeloById(final int id){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia la busqueda del modelo by id "));
-        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO_BY_ID)){
+        try (PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_MODELO_BY_ID_MODELO)){
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             if(rs.next()){

@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\Elias\Documents\proyectos\stanalone_app_repuestos\Sistema-De-Inventarios-master\autopartesLeon\autopartesLeon.jar</jar>
-  <outfile>C:\Users\Elias\Documents\proyectos\stanalone_app_repuestos\Sistema-De-Inventarios-master\autopartesLeon\AutopartesLeon.exe</outfile>
+  <outfile>C:\Users\Elias\Documents\proyectos\stanalone_app_repuestos\Sistema-De-Inventarios-master\autopartesLeon\autopartesLeon.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>

@@ -6,6 +6,7 @@ package Modelo.impl;
 
 import Modelo.Conexion;
 import Modelo.ConsultasSQL;
+import Modelo.TBLSession;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,21 +23,27 @@ public class ValidacionSessionImpl {
     private final Connection connection = Conexion.getInstance().getConexion();
     private ResultSet rs = null;
     
-    public boolean validaSession(){
+    public  TBLSession validaSession(TBLSession session){
     LOGGER.info(TraceInfoSistem.getTraceInfo("inicia validacion de segudad "));
     String userName = System.getProperty("user.name");
-    Boolean  valSession = false;
     try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_SESSION)) {
         pstmt.setString(1, userName);
         rs = pstmt.executeQuery();
             if(rs.next()){
-             valSession =  !rs.getString("NOMBRE").isEmpty();
+                session.setUserName(rs.getString("NOMBRE"));
+                session.setDescripcion(rs.getString("DESCRIPCION"));
+                session.setDropbox(rs.getBoolean("DROPBOX"));
+                session.setPathFolderRecursos(rs.getString("PATH_FOLDER_RECURSOS"));
+                session.setUserHabilitado(rs.getBoolean("USER_HABILITADO"));
+                session.setAutorizado(Boolean.TRUE);
+            }else{
+             session.setAutorizado(Boolean.FALSE);
             }
-           return valSession;
+           return session;
     } catch (Exception e) {
         LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtner datos de la session", e));
     }
-    return valSession;
+    return session;
     }
     
     

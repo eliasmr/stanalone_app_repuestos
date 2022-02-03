@@ -10,8 +10,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.Date;
 import java.util.logging.Logger;
+import sistemaDeInventarios.SistemaDeInventarios;
 import util.TraceInfoSistem;
 
 /**
@@ -30,16 +33,23 @@ public class DropBoxImpl {
     
     public String uploadFIleDropbox(final String directorio,final String paramFile){
     LOGGER.info(TraceInfoSistem.getTraceInfo("Inicia cargue archivo al dropbox "));
+    String rutaFile = "";
         try {
-            FullAccount acount =  client.users().getCurrentAccount(); 
             File file =new File(paramFile);
-            InputStream in = new FileInputStream(file);
-            String rutaFile = "/AutopartesLeon/"+directorio+"/"+file.getName();
-            UploadBuilder upload = client.files().uploadBuilder(rutaFile);
-            upload.withClientModified(new Date(file.lastModified()));
-            upload.withMode(WriteMode.ADD);
-            upload.withAutorename(Boolean.TRUE);
-            upload.uploadAndFinish(in);
+            rutaFile = "/AutopartesLeon/"+directorio+"/"+file.getName();
+            if(SistemaDeInventarios.seesion.getDropbox()){
+                  FullAccount acount =  client.users().getCurrentAccount(); 
+                  InputStream in = new FileInputStream(file);
+                  UploadBuilder upload = client.files().uploadBuilder(rutaFile);
+                  upload.withClientModified(new Date(file.lastModified()));
+                  upload.withMode(WriteMode.ADD);
+                  upload.withAutorename(Boolean.TRUE);
+                  upload.uploadAndFinish(in);
+              }else{
+                String path = SistemaDeInventarios.seesion.getPathFolderRecursos()+"/AutopartesLeon/"+directorio+"/"+file.getName();
+                Files.copy(file.toPath(), new File(path).toPath(), REPLACE_EXISTING);
+              }
+            
             return rutaFile;
         } catch (DbxException | IOException e) {
             LOGGER.severe(TraceInfoSistem.getTraceInfoError("Cargando archivo al dropbox", e));
@@ -49,7 +59,7 @@ public class DropBoxImpl {
     
         public String getFileDrobox(String path){
             try {
-             String dropbox = System.getenv("dropbox");
+             String dropbox = SistemaDeInventarios.seesion.getPathFolderRecursos();
              dropbox = dropbox.concat(path);
              return dropbox;
             } catch ( Exception e) {
@@ -58,3 +68,4 @@ public class DropBoxImpl {
             return "";
         }
 }
+

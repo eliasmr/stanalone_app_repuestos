@@ -12,7 +12,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
@@ -22,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import util.ColumnsJTable;
 
 /**
  *
@@ -57,7 +61,7 @@ public class RepuestoCarroController{
                            .build());
     }
     
-    public void loadData(JTable jt,String params){
+        public void loadData(JTable jt,String params){
        Boolean[] isEditable = {false,false,false,false,false,false,false,false,false,false};
       jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();

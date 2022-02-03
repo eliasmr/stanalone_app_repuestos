@@ -97,7 +97,7 @@ public class TBLRepuestoImpl{
         return null;
     }
         
-            public TBLRepuestoVo getRepuestoByIDRepuesto(final int param){
+      public TBLRepuestoVo getRepuestoByIDRepuesto(final int param){
         LOGGER.info(TraceInfoSistem.getTraceInfo("inicia consulta del repuesto by id "));
         try(PreparedStatement pstmt = connection.prepareStatement(ConsultasSQL.GET_REPUESTO_BY_ID)){
             pstmt.setInt(1, param);

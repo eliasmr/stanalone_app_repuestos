@@ -6,8 +6,9 @@
 package sistemaDeInventarios;
 
 
-import Modelo.impl.DropBoxImpl;
+import Modelo.TBLSession;
 import Modelo.impl.ValidacionSessionImpl;
+import Profile.Ambientes;
 import Vista.FrmPrincipal;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import javax.swing.JLabel;
@@ -15,18 +16,17 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ialonzo
+ * @author emedina
  */
-public class SistemaDeInventarios {
+public class SistemaDeInventarios{
 
-    /**
-     * @param args the command line arguments
-     */
+    public static TBLSession seesion;
+    
+
     public static void main(String[] args) {
-        
-        ValidacionSessionImpl valSession = new ValidacionSessionImpl();
-        
-        if(valSession.validaSession()){
+        seesion = Ambientes.getEnviromentDba("prod");
+        seesion = new ValidacionSessionImpl().validaSession(seesion);
+        if(seesion.getAutorizado()){
             FrmPrincipal frm = new FrmPrincipal();
             
                 //ImageIcon loading = new ImageIcon(dropBoxImpl.getFileDrobox("/AutopartesLeon/recusos_app/cargando.gif"));
