@@ -37,7 +37,6 @@ public class ModeloCarroController{
     private FrmCrearModeloCarrro frm;
     private final TBLCombustibleImpl combustible;
     private final TBLMarcaImpl marca;
-    private final PrincipalController principaCtr;
     private  List<TBLModeloVo> ltsModelo;
     private DropBoxImpl dropBoxImpl;
     
@@ -46,9 +45,8 @@ public class ModeloCarroController{
       this.impl = new TBLModeloImpl();
       this.combustible = new TBLCombustibleImpl();
       this.marca = new TBLMarcaImpl();
-      this.principaCtr = new PrincipalController();
-      this.ltsModelo = new ArrayList<>();
       this.dropBoxImpl = new DropBoxImpl();
+      ltsModelo = PrincipalController.ltsModelo;
     }
 
     
@@ -76,8 +74,7 @@ public void loadData(JTable jt,int id, String params){
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
-         ltsModelo = principaCtr.listaModelo(id);
-         ltsTem = ltsModelo;
+         ltsTem = ltsModelo.stream().filter(obj -> obj.getIdMarca().getIdMarca() == id).collect(Collectors.toList());
      } else{
        ltsTem =  ltsModelo.stream().filter(registro -> 
                                              registro.getNombre().toUpperCase().contains(param)||
@@ -179,7 +176,6 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty() && ltsModelo.isEmpty()){
-         ltsModelo = principaCtr.allListaModelo();
          ltsTem = ltsModelo;
      } else{
        ltsTem =  ltsModelo.stream().filter(registro -> 

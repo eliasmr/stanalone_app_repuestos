@@ -27,6 +27,8 @@ public class TBLSession {
     private Boolean autorizado;
     private Boolean userHabilitado;
     
+    private Boolean errorConectandoDba;
+     
     private String nombreDba;
     private String nombreUsuarioDba;
     private String contraseniaDba;

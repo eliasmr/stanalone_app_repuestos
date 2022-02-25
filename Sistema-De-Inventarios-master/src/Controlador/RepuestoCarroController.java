@@ -37,13 +37,11 @@ public class RepuestoCarroController{
     private TBLRepuestoVo repuesto;
     private FrmCrearRepuestoCarro frm;
     private TBLModeloImpl modelo;
-    private final PrincipalController principaCtr;
     private  List<TBLRepuestoVo> ltsRepuesto;
     private DropBoxImpl dropBoxImpl;
     public RepuestoCarroController(){
         this.modelo = new TBLModeloImpl();
         this.impl = new TBLRepuestoImpl();
-        this.principaCtr = new PrincipalController();
         this.ltsRepuesto = new ArrayList<>();
         this.dropBoxImpl = new DropBoxImpl();
     }
@@ -67,7 +65,7 @@ public class RepuestoCarroController{
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
-         ltsRepuesto = principaCtr.getAllRepuesto();
+         ltsRepuesto = impl.getAllRepuestoByIdModelo();
          ltsTem = ltsRepuesto;
      }else{
        ltsTem =  ltsRepuesto.stream().filter(registro -> 
@@ -153,7 +151,7 @@ public class RepuestoCarroController{
      List<TBLRepuestoVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty() && ltsRepuesto.isEmpty()){
-         ltsRepuesto = principaCtr.getAllRepuesto();
+         ltsRepuesto = impl.getAllRepuestoByIdModelo();
          ltsTem = ltsRepuesto;
      }else{
        ltsTem =  ltsRepuesto.stream().filter(registro -> 

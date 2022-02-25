@@ -9,12 +9,18 @@ package Vista;
 import Controlador.PrincipalController;
 import Modelo.TBLMarcaVo;
 import Modelo.impl.DropBoxImpl;
+import Modelo.impl.TBLMarcaImpl;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import util.FRMJFrame;
+import util.LoadingThread;
 import util.MarcasCarros;
 
 
@@ -36,7 +42,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         dropBoxImpl = new DropBoxImpl();
+        // cargas listas
         controller = new PrincipalController();
+       
         this.setContentPane(fondo);
         initComponents();
         setTitle("BIENVENIDOS A REPUESTOS AUTOPARTES LEON");
@@ -308,6 +316,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true); 
+       
     }//GEN-LAST:event_BotonToyotaActionPerformed
 
     
@@ -418,7 +427,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonDihatsu;
     private javax.swing.JButton BotonMitsubitshi;

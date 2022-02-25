@@ -39,8 +39,10 @@ public class ValidacionSessionImpl {
             }else{
              session.setAutorizado(Boolean.FALSE);
             }
+            session.setErrorConectandoDba(Boolean.FALSE);
            return session;
     } catch (Exception e) {
+        session.setErrorConectandoDba(Boolean.TRUE);
         LOGGER.severe(TraceInfoSistem.getTraceInfoError("al obtner datos de la session", e));
     }
     return session;

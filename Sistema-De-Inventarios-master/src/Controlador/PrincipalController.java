@@ -6,47 +6,38 @@ package Controlador;
 
 import Modelo.TBLMarcaVo;
 import Modelo.TBLModeloVo;
+import Modelo.TBLModeloXRepuestoVo;
 import Modelo.TBLRepuestoVo;
 import Modelo.impl.DropBoxImpl;
 import Modelo.impl.TBLMarcaImpl;
 import Modelo.impl.TBLModeloImpl;
+import Modelo.impl.TBLModeloXRepuestoImpl;
 import Modelo.impl.TBLRepuestoImpl;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 /**
  *
  * @author Elias
  */
 public class PrincipalController {
     
-    private final TBLMarcaImpl marcas;
-    
-    //carga listas
-    private final TBLModeloImpl impl;
-    private TBLRepuestoImpl repuesto;
-    private DropBoxImpl drb;
+    public static List<TBLModeloXRepuestoVo> ltsTBLModeloXRepuestoVo;
+    public static List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo;
+    public static List<TBLModeloVo> ltsModelo;
+    private List<TBLMarcaVo> ltsTBLMarcaVo;
+    private TBLMarcaImpl marcas;
+
     public PrincipalController(){
-     this.marcas = new TBLMarcaImpl();
-     this.impl = new TBLModeloImpl();
-     this.repuesto = new TBLRepuestoImpl();
-     this.drb = new DropBoxImpl();
+     ltsTBLModeloXRepuestoVo = new TBLModeloXRepuestoImpl().getAllBy();
+     ltsModeloXRepuestoVo = new TBLModeloXRepuestoImpl().getAllBy();
+     ltsModelo = new TBLModeloImpl().allModelos();
+     ltsTBLMarcaVo = new TBLMarcaImpl().getMarcaAll();
     }
+    
     
     public TBLMarcaVo marcasCarros(final int id){
-        return marcas.getMarcaById(id);
-    }
-    
-    public List<TBLModeloVo> listaModelo(int id){
-     return impl.allModelo(id);
-    }
-    
-    public List<TBLModeloVo> allListaModelo(){
-     return impl.allModelos();
-    } 
-    public List<TBLRepuestoVo> getAllRepuesto(){
-     return repuesto.getAllRepuestoByIdModelo();
-    }
-    public List<TBLRepuestoVo> getAllRepuestoByIdRepuestoModelo(int id_modelo){
-     return repuesto.getAllRepuestoByIdRepuestoModelo(id_modelo);
+        return ltsTBLMarcaVo.stream().filter(obj -> obj.getIdMarca() == id).collect(Collectors.toList()).get(0);
     }
 }

@@ -4,6 +4,7 @@ package Controlador;
 import Modelo.TBLModeloVo;
 import Modelo.TBLModeloXRepuestoVo;
 import Modelo.impl.DropBoxImpl;
+import Modelo.impl.TBLModeloImpl;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,12 +28,13 @@ import javax.swing.table.TableColumnModel;
 public class ModeloRepuestoCarroController {
  
     private  List<TBLModeloVo> ltsModelo;
-    private final PrincipalController principaCtr;
      private DropBoxImpl dropBoxImpl;
+    private final TBLModeloImpl impl;
+    
     public ModeloRepuestoCarroController() {
         this.ltsModelo = new ArrayList<>();
-        this.principaCtr = new PrincipalController();
         this.dropBoxImpl = new DropBoxImpl();
+        this.impl = new TBLModeloImpl();
     }
     
   
@@ -42,7 +44,7 @@ public class ModeloRepuestoCarroController {
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
      if(params.isEmpty()){
-         ltsModelo = principaCtr.listaModelo(id);
+         ltsModelo = impl.allModelo(id);
          ltsTem = ltsModelo;
      } else{
        ltsTem =  ltsModelo.stream().filter(registro -> 

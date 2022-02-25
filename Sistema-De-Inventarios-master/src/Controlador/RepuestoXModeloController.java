@@ -33,12 +33,12 @@ public class RepuestoXModeloController {
     private TBLModeloXRepuestoImpl impl;
     private DropBoxImpl dropBoxImpl;
     public List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo;
+    public PrincipalController principalController;
    
     public RepuestoXModeloController(){
      impl = new TBLModeloXRepuestoImpl();
      dropBoxImpl = new DropBoxImpl();
-     ltsModeloXRepuestoVo = new ArrayList<>();
-     ltsModeloXRepuestoVo = impl.getAllBy();
+     ltsModeloXRepuestoVo = PrincipalController.ltsModeloXRepuestoVo;
     }
     
     public Boolean insert(List<TBLModeloXRepuestoVo> ltsModeloXRepuestoVo){

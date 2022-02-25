@@ -11,15 +11,20 @@ import Modelo.impl.DropBoxImpl;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -42,13 +47,14 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
     private RepuestoCarroController controlRepuesto;
     private int idModelo;
     DefaultTableModel modelo;
-    private static RepuestoCarroController repuesto;
     
     
     private RepuestoXModeloController control;
-    
+    public FrmListarModelosxRepuestos(){
+        initComponents();
+        dropBoxImpl = new DropBoxImpl();
+    }
     public FrmListarModelosxRepuestos(TBLMarcaVo marcas) {
-        repuesto = new RepuestoCarroController();
         model = new ModeloRepuestoCarroController();
         dropBoxImpl = new DropBoxImpl();
         control = new RepuestoXModeloController();
@@ -516,6 +522,8 @@ public class FrmListarModelosxRepuestos extends javax.swing.JFrame {
             }
             return spl[cont-1];
  }
+ 
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonFiltrar;
     private javax.swing.JButton BotonFiltrarRepuesto;
