@@ -37,6 +37,11 @@ public class PrincipalController {
     }
     
     
+    public static List<TBLModeloVo> ltsModelo(){
+     return ltsModelo = new TBLModeloImpl().allModelos();
+    }
+    
+    
     public TBLMarcaVo marcasCarros(final int id){
         return ltsTBLMarcaVo.stream().filter(obj -> obj.getIdMarca() == id).collect(Collectors.toList()).get(0);
     }

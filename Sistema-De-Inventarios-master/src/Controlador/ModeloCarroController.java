@@ -38,6 +38,8 @@ public class ModeloCarroController{
     private final TBLCombustibleImpl combustible;
     private final TBLMarcaImpl marca;
     private  List<TBLModeloVo> ltsModelo;
+
+
     private DropBoxImpl dropBoxImpl;
     
     
@@ -46,14 +48,14 @@ public class ModeloCarroController{
       this.combustible = new TBLCombustibleImpl();
       this.marca = new TBLMarcaImpl();
       this.dropBoxImpl = new DropBoxImpl();
-      ltsModelo = PrincipalController.ltsModelo;
+      this.ltsModelo = PrincipalController.ltsModelo;
     }
 
     
     
 
     public void save(String nombre,String ano,String cilindraje,TBLTipoCombustibleVo tipoCombustible,String descripcion,String img, TBLMarcaVo marca) {      
-        impl.insertaModelo(TBLModeloVo
+       Boolean save = impl.insertaModelo(TBLModeloVo
                            .builder()
                            .nombre(nombre)
                            .anio(ano)
@@ -63,6 +65,11 @@ public class ModeloCarroController{
                            .pathImagen(img)
                            .idMarca(marca)
                            .build());
+       if(save){
+         // actualiza modelo
+        ltsModelo.clear();
+        ltsModelo.addAll(PrincipalController.ltsModelo());
+       }
     }
    
  
@@ -73,10 +80,10 @@ public void loadData(JTable jt,int id, String params){
      jt.setDefaultRenderer(Object.class, new ButtonRender());
      List<TBLModeloVo> ltsTem = new ArrayList<>();
      String param = params.toUpperCase();
-     if(params.isEmpty()){
-         ltsTem = ltsModelo.stream().filter(obj -> obj.getIdMarca().getIdMarca() == id).collect(Collectors.toList());
-     } else{
-       ltsTem =  ltsModelo.stream().filter(registro -> 
+     ltsTem = ltsModelo.stream().filter(obj -> obj.getIdMarca().getIdMarca() == id).collect(Collectors.toList());
+     
+     if(!params.isEmpty()){
+                ltsTem =  ltsTem.stream().filter(registro -> 
                                              registro.getNombre().toUpperCase().contains(param)||
                                              registro.getCilindraje().contains(param) ||
                                              registro.getAnio().contains(param) ||
@@ -84,7 +91,7 @@ public void loadData(JTable jt,int id, String params){
                                              registro.getIdMarca().getNombre().toUpperCase().contains(param) ||
                                              registro.getTipoCombustible().getNombre().toUpperCase().contains(param)
                                              ).collect(Collectors.toList());
-     }
+     } 
       DefaultTableModel modeloT = new DefaultTableModel() {
 
        @Override
@@ -293,7 +300,7 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
         jt.getTableHeader().setPreferredSize(new Dimension(100, 50));
    }
     public void updateModel(int id,String nombre,String ano,String cilindraje,TBLTipoCombustibleVo tipoCombustible,String descripcion,String img, TBLMarcaVo marca){
-    impl.update(TBLModeloVo
+    Boolean update = impl.update(TBLModeloVo
                            .builder()
                            .id(id)
                            .nombre(nombre)
@@ -304,9 +311,22 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
                            .pathImagen(img)
                            .idMarca(marca)
                            .build());
+        if(update){
+               // actualiza lista
+               ltsModelo.clear();
+               ltsModelo.addAll(PrincipalController.ltsModelo());
+              //new PrincipalController("modelo");
+        }
     }
      public boolean deleteModelo(String text) {
-        return impl.delete(Integer.parseInt(text));
+         if(impl.delete(Integer.parseInt(text))){
+             // actualiza lista
+               ltsModelo.clear();
+               ltsModelo.addAll(PrincipalController.ltsModelo());
+            return true;
+         }
+                 
+       return false;
     }
      public List<TBLTipoCombustibleVo> ltsTipoCombustible(){
       return combustible.getAllTipoCpmbustible();
@@ -315,5 +335,11 @@ public void loadDataModelXRepuesto(JTable jt, String params,List<TBLModeloXRepue
       public List<TBLMarcaVo> ltsMarca(){
       return marca.getMarcaAll();
      }
- 
+     public List<TBLModeloVo> getLtsModelo() {
+        return ltsModelo;
+    }
+
+    public void setLtsModelo(List<TBLModeloVo> ltsModelo) {
+        this.ltsModelo = ltsModelo;
+    }
 }

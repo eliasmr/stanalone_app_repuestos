@@ -103,6 +103,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         listAnio = new javax.swing.JComboBox<>();
         BotonBuscarModelo = new javax.swing.JButton();
+        BotonBuscarModelo1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout FramImagenLayout = new javax.swing.GroupLayout(FramImagen.getContentPane());
@@ -296,6 +297,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
             }
         });
 
+        BotonBuscarModelo1.setBackground(new java.awt.Color(209, 37, 29));
+        BotonBuscarModelo1.setForeground(new java.awt.Color(255, 255, 255));
+        BotonBuscarModelo1.setText("Refress");
+        BotonBuscarModelo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonRefressModelo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpanelModeloCarroLayout = new javax.swing.GroupLayout(jpanelModeloCarro);
         jpanelModeloCarro.setLayout(jpanelModeloCarroLayout);
         jpanelModeloCarroLayout.setHorizontalGroup(
@@ -330,12 +340,6 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                             .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                 .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(BotonBuscarModelo))
-                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(18, 18, 18)
                                         .addComponent(ListTipoCombistible, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,7 +352,15 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                                         .addGap(8, 8, 8)
                                         .addComponent(ExaminarImagen)
                                         .addGap(36, 36, 36)
-                                        .addComponent(labelRutaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(labelRutaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jpanelModeloCarroLayout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BotonBuscarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(BotonBuscarModelo1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -384,6 +396,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                         .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jpanelModeloCarroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtFilterTable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BotonBuscarModelo1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(BotonBuscarModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18))
@@ -486,7 +499,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     }             
                    
                 }
-                    model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
+                    
                     this.limpiarCampos();
                     id = "";
             }else {
@@ -512,13 +525,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Ocurrio un error al actualizar un modelo", JOptionPane.ERROR_MESSAGE);
                 }
                 JOptionPane.showMessageDialog(this, "Modelo actualizado correctamente", "Modelo Actualizado", JOptionPane.INFORMATION_MESSAGE);
-            }
+             }
             id = "";
         } else {
             JOptionPane.showMessageDialog(this, "No se ha seleccionado un modelo para actualizar", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-        model.loadData(tbGetDatosModelo, this.marcas.getIdMarca(),"");
+        
         limpiarCampos();
 
     }//GEN-LAST:event_btnActualizarModeloActionPerformed
@@ -543,7 +556,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
         if(modeloEsValido(txtNombre.getText(), txtCilindraje.getText(),tipoCombustible.getNombre(),anio, labelRutaImagen.getText(),txtDescripcion.getText())){
             String path = dropBoxImpl.uploadFIleDropbox("modelo", Ruta);
             model.save(txtNombre.getText(),anio,txtCilindraje.getText(),tipoCombustible, txtDescripcion.getText(), path,marcas);
-            model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
+           
             
         JOptionPane.showMessageDialog(null,"Modelo creado correctamente", "Modelo creado",JOptionPane.INFORMATION_MESSAGE); 
         limpiarCampos();
@@ -593,8 +606,13 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
     private void tbGetDatosModeloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGetDatosModeloMousePressed
         //FramImagen.setSize(600, 600);
 
-       
     }//GEN-LAST:event_tbGetDatosModeloMousePressed
+
+    private void BotonRefressModelo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRefressModelo1ActionPerformed
+     //this.update(this.getGraphics());
+        //this.tbGetDatosModelo.revalidate();
+      model.loadData(tbGetDatosModelo,this.marcas.getIdMarca(),"");
+    }//GEN-LAST:event_BotonRefressModelo1ActionPerformed
 
     
         private byte[] getImagen(String ruta) {
@@ -738,6 +756,7 @@ public class FrmCrearModeloCarrro extends javax.swing.JFrame {
  }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonBuscarModelo;
+    private javax.swing.JButton BotonBuscarModelo1;
     private javax.swing.JButton ExaminarImagen;
     private javax.swing.JFrame FramImagen;
     private javax.swing.JLabel Labelimagenes;
